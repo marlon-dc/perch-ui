@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/cn';
 import { resolveSize } from '../../lib/size';
+import { CheckIcon } from '../Icon';
 import type { Responsive, Size } from '../../lib/size';
 
 export type ListRowProps = {
@@ -10,8 +11,10 @@ export type ListRowProps = {
   value?: ReactNode;
   valueSubtitle?: ReactNode;
   /**
-   * Done state. Not colour-only: a visually hidden `doneLabel` is added to the row's text,
-   * and in forced-colors mode a Highlight left border replaces the tint.
+   * Done state. Not colour-only: a visible check icon is shown at the end of the row, a visually
+   * hidden `doneLabel` is added to the row's text, and in forced-colors mode a Highlight left
+   * border replaces the tint. When a `trailing` element is given (typically a pressed
+   * ConfirmToggle), the row's own check is omitted and the trailing control carries the visible cue.
    */
   done?: boolean;
   /** Visually hidden text announced when `done`. Defaults to "Done". */
@@ -69,6 +72,9 @@ export function ListRow({
             <span className={cn('font-num text-xs tabular-nums', mutedClass)}>{valueSubtitle}</span>
           ) : null}
         </span>
+      ) : null}
+      {done && !trailing ? (
+        <CheckIcon data-slot="done-icon" className={cn('shrink-0', inkClass)} />
       ) : null}
     </>
   );

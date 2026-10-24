@@ -9,6 +9,7 @@ import {
   type TableHTMLAttributes,
 } from 'react';
 import { cn } from '../../lib/cn';
+import { CheckIcon } from '../Icon';
 
 type Variant = 'default' | 'group' | 'summary' | 'total';
 type Tint = 'earn' | 'ded' | 'inflow' | 'exp';
@@ -127,7 +128,7 @@ export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement> & {
   sticky?: boolean;
   numeric?: boolean;
   tone?: 'done' | 'partial';
-  /** Visually hidden text added to `done` cells so the state is not colour-only. */
+  /** Visually hidden text added to `done` cells; with the visible check icon the state is not colour-only. */
   doneLabel?: string;
   /** Visually hidden text added to `partial` cells so the state is not colour/bar-only. */
   partialLabel?: string;
@@ -160,6 +161,10 @@ export function TableCell({
         className,
       )}
     >
+      {tone === 'done' ? (
+        // Visible, non-colour cue for sighted users; the sr-only label below carries it for AT.
+        <CheckIcon data-slot="done-icon" size={12} className="mr-1 inline-block align-[-1px]" />
+      ) : null}
       {children}
       {tone === 'done' && doneLabel ? <span className="sr-only"> ({doneLabel})</span> : null}
       {tone === 'partial' && partialLabel ? (

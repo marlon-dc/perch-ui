@@ -54,9 +54,10 @@ export const Sizes: Story = {
 };
 
 /**
- * Done state is never colour-only: `done` adds a visually hidden "(Done)" (override with
- * `doneLabel`) to the title, and in forced-colors mode a Highlight left border replaces the tint.
- * A trailing ConfirmToggle additionally exposes `aria-pressed`.
+ * Done state is never colour-only: `done` shows a visible check at the end of the row, adds a
+ * visually hidden "(Done)" (override with `doneLabel`) to the title, and in forced-colors mode a
+ * Highlight left border replaces the tint. When the row has a `trailing` ConfirmToggle, the
+ * pressed toggle carries the visible check instead (and exposes `aria-pressed`).
  */
 export const States: Story = {
   render: () => (
@@ -78,6 +79,14 @@ export const States: Story = {
     await expect(canvas.getByText('(Done)')).toBeInTheDocument();
     await expect(canvas.getByText('(Paid)')).toBeInTheDocument();
     await expect(canvas.queryAllByText('(Done)')).toHaveLength(1);
+    const row = (name: string) => canvas.getByText(name).closest('[role="listitem"]')!;
+    const doneIcon = (name: string) => row(name).querySelector('[data-slot="done-icon"]');
+    // A done row without a trailing control shows a visible check.
+    await expect(doneIcon('Streaming')).toBeVisible();
+    await expect(doneIcon('Streaming')).toHaveAttribute('aria-hidden', 'true');
+    // With a trailing ConfirmToggle, the pressed toggle carries the visible check instead.
+    await expect(doneIcon('Electricity')).toBeNull();
+    await expect(doneIcon('Rent')).toBeNull();
   },
 };
 

@@ -189,6 +189,15 @@ export const MonthGrid: Story = {
       await expect(getComputedStyle(cell).backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
     }
     await expect(canvas.getByRole('cell', { name: /₱500\.00 \(Partly paid\)/ })).toBeVisible();
+    // Done is not colour-only: every done cell shows a visible (aria-hidden) check.
+    const doneCells = canvas.getAllByRole('cell', { name: /\(Paid\)$/ });
+    await expect(doneCells).toHaveLength(2);
+    for (const cell of doneCells) {
+      const icon = cell.querySelector('[data-slot="done-icon"]');
+      await expect(icon).not.toBeNull();
+      await expect(icon).toBeVisible();
+      await expect(icon).toHaveAttribute('aria-hidden', 'true');
+    }
     await userEvent.click(canvas.getByRole('button', { name: /^₱0\.00\s*, edit Rent, Week 2$/ }));
     await expect(onEdit).toHaveBeenCalled();
   },
