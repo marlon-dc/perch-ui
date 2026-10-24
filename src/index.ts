@@ -26,3 +26,5 @@ export * from './components/Table';
 export * from './components/Sheet';
 export * from './components/Toggletip';
 export * from './components/Toast';
+export { contrastRatio, parseThemeBlocks, CONTRAST_PAIRS } from './tokens/contrast';
+export type { ContrastPair } from './tokens/contrast';

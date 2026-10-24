@@ -31,6 +31,11 @@ const preview: Preview = {
   },
   parameters: {
     a11y: { test: 'error' },
+    options: {
+      storySort: {
+        order: ['Introduction', 'Foundations', 'Components', 'Patterns', 'Internals'],
+      },
+    },
   },
 };
 

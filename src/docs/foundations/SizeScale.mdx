@@ -1,0 +1,66 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as SizeScaleStories from './SizeScale.stories';
+
+<Meta of={SizeScaleStories} />
+
+# Size scale
+
+The size scale is the core of Perch UI. There are three sizes on a 4px base unit. At a given size, every
+sized control has exactly the same height, so mixed rows line up.
+
+| Size        | Control height | Horizontal padding | Font size | Radius | List row min-height |
+| ----------- | -------------- | ------------------ | --------- | ------ | ------------------- |
+| S           | 28px           | 10px               | 12px      | 8px    | 40px                |
+| M (default) | 36px           | 14px               | 14px      | 10px   | 48px                |
+| L           | 44px           | 18px               | 15px      | 12px   | 56px                |
+
+Pills and chips use a full radius. Containers (Card, List, Sheet) use 16px at every size. Components
+read these values from CSS variables (`--pu-ctl-h`, `--pu-ctl-px`, `--pu-ctl-fs`, `--pu-ctl-r`,
+`--pu-row-h`) and never hard-code them.
+
+## Aligned row
+
+A Button, TextField, Select, Chip and SegmentedControl at each size. The story's play function measures
+the outer visible box of each control and asserts they are 28, 36 and 44px tall.
+
+<Canvas of={SizeScaleStories.AlignedRow} />
+
+## The responsive `size` prop
+
+There is no separate "touch" size. Every sized component takes either a single size or an object keyed by
+breakpoint: `base` (0), `m` (768px and up) and `l` (1024px and up).
+
+```tsx
+<Button size="m" />
+<Button size={{ base: 'l', m: 'm' }} /> // large on phones, medium from tablet width up
+```
+
+## Touch targets
+
+On touch devices (`@media (pointer: coarse)`), any interactive control smaller than 44 by 44px gets an
+invisible hit area that extends it to at least 44 by 44px, without changing how it looks. WCAG 2.1 AA sets
+no minimum target size, so this goes beyond the standard. The `hit-area` utility provides it.
+
+## The 16px input exception
+
+iOS Safari zooms the page when a focused input's font is under 16px. So on coarse pointers, text inside
+TextField, Select and other text-entry controls renders at `max(var(--pu-ctl-fs), 16px)`
+(`--pu-input-font-min-touch`). Height, padding and radius still follow S, M and L. This is the one
+documented exception to "values scale together".
+
+## Floating Add button
+
+A large floating action is a `Button size="l"` fixed to the bottom-right corner, kept clear of device
+notches and home indicators with safe-area insets:
+
+```tsx
+<Button
+  size="l"
+  icon={<PlusIcon />}
+  className="fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] shadow-soft"
+>
+  Add
+</Button>
+```
+
+Because it has a visible label, its accessible name matches what people see.

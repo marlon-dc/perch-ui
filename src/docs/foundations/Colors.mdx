@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorSwatches, ContrastTable } from './ColorSwatches';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+Color is a set of CSS custom properties (`--pu-*`) declared once for light and once for dark. Tailwind's
+theme points at the same variables, so `bg-surface`, `text-muted` and `border-line-strong` switch with
+the theme automatically. The "soft and warm" direction pairs paper-toned neutrals with a deep green accent.
+
+## Tokens
+
+Each panel below is painted from that theme's own values, so you can compare both at once.
+
+<ColorSwatches />
+
+## Contrast, measured live
+
+This table is computed in the browser from `tokens.css` using the same `contrastRatio` helper and
+`CONTRAST_PAIRS` list that the unit tests enforce. If a token change breaks a pair, the build fails
+and this table shows it.
+
+<ContrastTable />
+
+## Rules of use
+
+- Text is at least 4.5:1 against its background. Control borders, focus rings and meaningful icons are at least 3:1.
+- `line` is decorative (dividers) and has no contrast requirement. Anything that marks a control's edge uses `line-strong`.
+- Color is never the only signal: done rows also carry a check and hidden "Done" text, and negative money also carries a minus sign (U+2212).

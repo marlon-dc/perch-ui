@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Perch UI
+
+Perch UI is a small React design system for dense, calm, money-focused screens. It is written in
+TypeScript with Tailwind CSS v4, ships in a warm light theme and a matching dark theme, and meets
+WCAG 2.1 AA in both.
+
+This Storybook is the documentation and the test suite at once: every story is also an automated
+check, and the accessibility checker (axe) runs on each of them.
+
+## Why density
+
+Perch UI borrows one idea from systems like Reshaped: **density control**. Every sized control comes
+in three sizes, **S**, **M** and **L**, and each size moves height, horizontal padding, font size and
+radius together on a 4px grid. A small button sits flush beside a small input, a small chip and a
+small segmented control, so screens line up without hand-tuning.
+
+There is no separate "touch" size. Any sized component takes a single size or a per-breakpoint
+object, so a phone can get large controls while a desktop gets medium ones:
+
+```tsx
+<Button size="m" />
+<Button size={{ base: 'l', m: 'm' }} />
+```
+
+## What is in the box
+
+- **Foundations**: color tokens with live contrast ratios, typography, spacing, radius and shadow,
+  the size scale, theming and the accessibility approach.
+- **Components**: primitives, actions, inputs, navigation, display and overlays. Each page shows
+  every size, variant and state, in both themes.
+- **Patterns**: small compositions (a payday checklist, a month summary) that show the pieces
+  working together. Sample data is invented.
+
+## Using it
+
+```tsx
+import { Button, Card, KeyValue, Money, PlusIcon } from 'perch-ui';
+
+<Card>
+  <KeyValue items={[{ label: 'Rent', value: <Money amount={12000} symbol /> }]} />
+  <Button size="l" icon={<PlusIcon />}>
+    Add
+  </Button>
+</Card>;
+```
+
+Use the **Theme** toolbar control to flip between light and dark on any page.
