@@ -190,4 +190,20 @@ export const HitArea: Story = {
   },
 };
 
+/** `disabled` disables the row's select button. */
+export const Disabled: Story = {
+  render: () => (
+    <List aria-label="Disabled">
+      <ListRow title="Rent" selectLabel="Edit Rent" onSelect={onSelectSpy} disabled />
+    </List>
+  ),
+  play: async ({ canvasElement }) => {
+    onSelectSpy.mockClear();
+    const edit = within(canvasElement).getByRole('button', { name: 'Edit Rent' });
+    await expect(edit).toBeDisabled();
+    await userEvent.click(edit);
+    await expect(onSelectSpy).not.toHaveBeenCalled();
+  },
+};
+
 export const Dark: Story = { ...States, globals: { theme: 'dark' } };

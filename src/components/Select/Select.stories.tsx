@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { Select } from './Select';
@@ -91,6 +92,28 @@ export const HitArea: Story = {
     } finally {
       delete document.documentElement.dataset.pointer;
     }
+  },
+};
+
+/** `ref` reaches the trigger button; `name` submits the value with a native form. */
+export const RefAndName: Story = {
+  render: function Render(args) {
+    const ref = useRef<HTMLButtonElement>(null);
+    return (
+      <form aria-label="Budget form" onSubmit={(event) => event.preventDefault()}>
+        <Select {...args} ref={ref} name="category" defaultValue="rent" />
+        <button type="button" onClick={() => ref.current?.focus()}>
+          Focus category
+        </button>
+      </form>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Focus category' }));
+    await expect(canvas.getByRole('combobox', { name: 'Category' })).toHaveFocus();
+    const form = canvas.getByRole('form', { name: 'Budget form' }) as HTMLFormElement;
+    await expect(new FormData(form).get('category')).toBe('rent');
   },
 };
 

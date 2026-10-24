@@ -108,6 +108,27 @@ export const Keyboard: Story = {
   },
 };
 
+/** An option can be disabled: it cannot be chosen by click or arrow keys. */
+export const DisabledOption: Story = {
+  args: {
+    value: 'month',
+    onValueChange: spy,
+    options: [
+      { value: 'week', label: 'Week' },
+      { value: 'month', label: 'Month' },
+      { value: 'year', label: 'Year', disabled: true },
+    ],
+  },
+  play: async ({ canvasElement, args }) => {
+    spy.mockClear();
+    const canvas = within(canvasElement);
+    const year = canvas.getByRole('tab', { name: 'Year' });
+    await expect(year).toBeDisabled();
+    await userEvent.click(year);
+    await expect(args.onValueChange).not.toHaveBeenCalled();
+  },
+};
+
 export const Dark: Story = { ...Sizes, globals: { theme: 'dark' } };
 
 export const TouchTarget: Story = {

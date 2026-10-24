@@ -83,4 +83,15 @@ export const HitArea: Story = {
   },
 };
 
+/** `disabled` blocks toggling; the button reports itself disabled. */
+export const Disabled: Story = {
+  args: { disabled: true },
+  play: async ({ canvasElement, args }) => {
+    const btn = within(canvasElement).getByRole('button', { name: 'Mark Rent paid' });
+    await expect(btn).toBeDisabled();
+    await userEvent.click(btn);
+    await expect(args.onPressedChange).not.toHaveBeenCalled();
+  },
+};
+
 export const Dark: Story = { ...States, globals: { theme: 'dark' } };

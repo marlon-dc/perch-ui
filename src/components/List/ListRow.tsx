@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 import { cn } from '../../lib/cn';
 import { resolveSize } from '../../lib/size';
 import { CheckIcon } from '../Icon';
@@ -29,6 +29,11 @@ export type ListRowProps = {
    */
   selectLabel?: string;
   trailing?: ReactNode;
+  /** Disables the select button (`onSelect`). A `trailing` control is disabled separately. */
+  disabled?: boolean;
+  className?: string;
+  /** Ref to the row's root (listitem) element. */
+  ref?: Ref<HTMLDivElement>;
 };
 
 export function ListRow({
@@ -42,6 +47,9 @@ export function ListRow({
   onSelect,
   selectLabel,
   trailing,
+  disabled,
+  className,
+  ref,
 }: ListRowProps) {
   const inkClass = done ? 'text-done-ink' : 'text-ink';
   const mutedClass = done ? 'text-done-ink' : 'text-muted';
@@ -81,6 +89,7 @@ export function ListRow({
   const body = 'flex min-w-0 flex-1 items-center gap-3 px-4 py-2 text-left';
   return (
     <div
+      ref={ref}
       role="listitem"
       className={cn(
         resolveSize(size),
@@ -89,11 +98,13 @@ export function ListRow({
         done
           ? 'bg-done-bg text-done-ink forced-colors:border-l-[Highlight]'
           : 'bg-surface text-ink',
+        className,
       )}
     >
       {onSelect ? (
         <button
           type="button"
+          disabled={disabled}
           aria-label={
             selectLabel && done && doneLabel ? `${selectLabel} (${doneLabel})` : selectLabel
           }
@@ -101,7 +112,7 @@ export function ListRow({
           className={cn(
             body,
             // hit-area: an S row is 40px tall; coarse pointers get at least 44px.
-            'hit-area cursor-pointer self-stretch',
+            'hit-area cursor-pointer self-stretch disabled:cursor-not-allowed disabled:opacity-50',
             'focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent',
           )}
         >

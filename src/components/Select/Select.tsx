@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 import * as RadixSelect from '@radix-ui/react-select';
 import { cn } from '../../lib/cn';
 import { resolveSize, type Responsive, type Size } from '../../lib/size';
@@ -19,6 +19,12 @@ export type SelectProps = {
   options: SelectOption[];
   disabled?: boolean;
   required?: boolean;
+  /** Form field name. Radix renders a hidden native select, so the value submits with the form. */
+  name?: string;
+  /** Ref to the trigger button (e.g. to focus it). */
+  ref?: Ref<HTMLButtonElement>;
+  /** Class names for the outer wrapper. */
+  className?: string;
 };
 
 export function Select({
@@ -33,9 +39,12 @@ export function Select({
   options,
   disabled,
   required,
+  name,
+  ref,
+  className,
 }: SelectProps) {
   return (
-    <div className={resolveSize(size)}>
+    <div className={cn(resolveSize(size), className)}>
       <Field label={label} hint={hint} error={error} required={required}>
         {({ id, describedBy, invalid }) => (
           <RadixSelect.Root
@@ -44,8 +53,10 @@ export function Select({
             onValueChange={onValueChange}
             disabled={disabled}
             required={required}
+            name={name}
           >
             <RadixSelect.Trigger
+              ref={ref}
               id={id}
               aria-describedby={describedBy}
               aria-invalid={invalid ? 'true' : undefined}

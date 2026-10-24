@@ -3,7 +3,7 @@ import * as RadixTabs from '@radix-ui/react-tabs';
 import { cn } from '../../lib/cn';
 import { resolveSize, type Responsive, type Size } from '../../lib/size';
 
-export type SegmentedControlOption = { value: string; label: ReactNode };
+export type SegmentedControlOption = { value: string; label: ReactNode; disabled?: boolean };
 
 export type SegmentedControlProps = {
   value: string;
@@ -47,6 +47,7 @@ export function SegmentedControl({
           <RadixTabs.Trigger
             key={o.value}
             value={o.value}
+            disabled={o.disabled}
             aria-controls={undefined}
             className={cn(
               'hit-area inline-flex h-[calc(var(--pu-ctl-h)-8px)] cursor-pointer items-center justify-center whitespace-nowrap',
@@ -55,6 +56,7 @@ export function SegmentedControl({
               'border border-transparent forced-colors:border-[Canvas]',
               'rounded-[calc(var(--pu-ctl-r)-3px)] px-(--pu-ctl-px) text-(length:--pu-ctl-fs) font-medium text-muted',
               'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+              'disabled:cursor-not-allowed disabled:opacity-50',
               'data-[state=active]:border-line-strong data-[state=active]:bg-surface data-[state=active]:text-ink data-[state=active]:shadow-soft',
               'forced-colors:data-[state=active]:bg-[Highlight] forced-colors:data-[state=active]:text-[HighlightText]',
               'forced-colors:data-[state=active]:[forced-color-adjust:none]',

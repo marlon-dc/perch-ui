@@ -1,3 +1,4 @@
+import type { Ref } from 'react';
 import { cn } from '../../lib/cn';
 import type { Breakpoint, Responsive, Size } from '../../lib/size';
 import { CheckIcon } from '../Icon';
@@ -25,22 +26,37 @@ export type ConfirmToggleProps = {
   onPressedChange: (next: boolean) => void;
   label: string;
   size?: Responsive<Size>;
+  disabled?: boolean;
+  className?: string;
+  ref?: Ref<HTMLButtonElement>;
 };
 
-export function ConfirmToggle({ pressed, onPressedChange, label, size }: ConfirmToggleProps) {
+export function ConfirmToggle({
+  pressed,
+  onPressedChange,
+  label,
+  size,
+  disabled,
+  className,
+  ref,
+}: ConfirmToggleProps) {
   return (
     <button
+      ref={ref}
       type="button"
+      disabled={disabled}
       aria-pressed={pressed}
       aria-label={label}
       onClick={() => onPressedChange(!pressed)}
       className={cn(
         'hit-area inline-flex shrink-0 items-center justify-center rounded-full border-[1.6px] transition-colors',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+        'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
         ringSize(size),
         pressed
           ? 'border-done-ink bg-done-ink forced-colors:border-[Highlight] forced-colors:bg-[Highlight]'
           : 'border-muted bg-transparent forced-colors:border-[CanvasText]',
+        className,
       )}
     >
       <CheckIcon
