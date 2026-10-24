@@ -31,16 +31,19 @@ function blockAfter(css: string, opener: string): string {
   return css.slice(start + opener.length, end);
 }
 
-/** Reads the `:root` (light) and `:root[data-theme="dark"]` (dark) token blocks. */
+/**
+ * Reads the light (`:root, [data-theme="light"]`) and dark (`:root[data-theme="dark"],
+ * [data-theme="dark"]`) token blocks.
+ */
 export function parseThemeBlocks(source: string): {
   light: Record<string, string>;
   dark: Record<string, string>;
 } {
-  // Attribute-selector quote style is a formatting choice; compare with double quotes.
-  const css = source.replaceAll("'", '"');
+  // Quote style and line breaks in selector lists are formatting choices; normalise both.
+  const css = source.replaceAll("'", '"').replace(/\s+/g, ' ');
   return {
-    light: declarations(blockAfter(css, ':root {')),
-    dark: declarations(blockAfter(css, ':root[data-theme="dark"] {')),
+    light: declarations(blockAfter(css, ':root, [data-theme="light"] {')),
+    dark: declarations(blockAfter(css, ':root[data-theme="dark"], [data-theme="dark"] {')),
   };
 }
 

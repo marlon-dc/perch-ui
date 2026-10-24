@@ -13,6 +13,10 @@ Tokens are CSS custom properties on `:root`. Dark mode follows the operating sys
 | `<html data-theme="light">` | always light                  |
 | `<html data-theme="dark">`  | always dark                   |
 
+`data-theme` also works on any element: `<section data-theme="dark">` themes just that subtree
+(its background still needs `bg-bg` or `bg-surface`). Portalled overlays such as Select, Sheet and
+Toast render at the end of `<body>`, so they follow the theme on `<html>`, not on a subtree.
+
 ```ts
 // Force a theme
 document.documentElement.dataset.theme = 'dark';

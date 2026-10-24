@@ -1,5 +1,10 @@
-/* Perch UI color tokens. Light and dark blocks declare identical names. */
-:root {
+/*
+ * Perch UI color tokens. Light and dark blocks declare identical names.
+ * The theme follows the OS by default, can be forced on <html> with data-theme, and can be set
+ * on any element (data-theme="light" | "dark") to theme just that subtree.
+ */
+:root,
+[data-theme='light'] {
   --pu-bg: #f5f1ea;
   --pu-surface: #fffdf9;
   --pu-surface-2: #f7f2ea;
@@ -59,7 +64,8 @@
   }
 }
 
-:root[data-theme='dark'] {
+:root[data-theme='dark'],
+[data-theme='dark'] {
   --pu-bg: #171310;
   --pu-surface: #211c18;
   --pu-surface-2: #2a241f;

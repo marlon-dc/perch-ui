@@ -26,3 +26,11 @@ test('dark media block cannot override an explicit light theme', () => {
   );
   expect(css).toContain(':root[data-theme="dark"]');
 });
+
+test('themes can be applied to any element, not only the root', () => {
+  const css = readFileSync('src/tokens/tokens.css', 'utf8')
+    .replaceAll("'", '"')
+    .replace(/\s+/g, ' ');
+  expect(css).toContain(':root, [data-theme="light"] {');
+  expect(css).toContain(':root[data-theme="dark"], [data-theme="dark"] {');
+});
