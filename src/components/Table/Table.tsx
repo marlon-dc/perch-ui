@@ -1,0 +1,179 @@
+import {
+  createContext,
+  useContext,
+  type ButtonHTMLAttributes,
+  type HTMLAttributes,
+  type ReactNode,
+  type TdHTMLAttributes,
+  type ThHTMLAttributes,
+  type TableHTMLAttributes,
+} from 'react';
+import { cn } from '../../lib/cn';
+
+type Variant = 'default' | 'group' | 'summary' | 'total';
+type Tint = 'earn' | 'ded' | 'inflow' | 'exp';
+
+const TINT_BG: Record<Tint, string> = {
+  earn: 'bg-tint-earn',
+  ded: 'bg-tint-ded',
+  inflow: 'bg-tint-inflow',
+  exp: 'bg-tint-exp',
+};
+
+/** Opaque row background; sticky cells reuse it so scrolled cells never show through. */
+function rowBg(variant: Variant, tint?: Tint): string {
+  if (tint) return TINT_BG[tint];
+  return variant === 'default' ? 'bg-surface' : 'bg-surface-2';
+}
+
+const RowContext = createContext<string>('bg-surface');
+
+export type TableContainerProps = {
+  'aria-label': string;
+  children: ReactNode;
+  className?: string;
+};
+
+/** Scrollable region: focusable so keyboard users can scroll it. */
+export function TableContainer({ 'aria-label': ariaLabel, children, className }: TableContainerProps) {
+  return (
+    // tabIndex is required (axe scrollable-region-focusable): keyboard users must be able to scroll.
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+    <div
+      role="region"
+      aria-label={ariaLabel}
+      tabIndex={0}
+      className={cn(
+        'overflow-x-auto rounded-(--pu-radius-container) border border-line bg-surface',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function Table({ className, ...rest }: TableHTMLAttributes<HTMLTableElement>) {
+  return (
+    <table
+      {...rest}
+      className={cn('w-full border-separate border-spacing-0 text-sm text-ink', className)}
+    />
+  );
+}
+
+export function TableHead(props: HTMLAttributes<HTMLTableSectionElement>) {
+  return <thead {...props} />;
+}
+
+export function TableBody(props: HTMLAttributes<HTMLTableSectionElement>) {
+  return <tbody {...props} />;
+}
+
+export type TableRowProps = HTMLAttributes<HTMLTableRowElement> & {
+  variant?: Variant;
+  tint?: Tint;
+};
+
+export function TableRow({ variant = 'default', tint, className, ...rest }: TableRowProps) {
+  const bg = rowBg(variant, tint);
+  return (
+    <RowContext.Provider value={bg}>
+      <tr
+        {...rest}
+        className={cn(
+          bg,
+          variant === 'group' && 'font-semibold',
+          variant === 'summary' && 'font-semibold',
+          variant === 'total' && 'font-bold',
+          className,
+        )}
+      />
+    </RowContext.Provider>
+  );
+}
+
+const STICKY = 'sticky left-0 z-1 border-r border-r-line';
+const BORDER_B = 'border-b border-b-line';
+
+export type TableHeaderCellProps = ThHTMLAttributes<HTMLTableCellElement> & {
+  sticky?: boolean;
+};
+
+export function TableHeaderCell({ sticky, scope, className, ...rest }: TableHeaderCellProps) {
+  const bg = useContext(RowContext);
+  return (
+    <th
+      scope={scope}
+      {...rest}
+      className={cn(
+        'px-3 py-2 text-left text-xs font-semibold whitespace-nowrap text-muted',
+        BORDER_B,
+        bg,
+        sticky && STICKY,
+        scope === 'row' && 'text-sm text-ink',
+        className,
+      )}
+    />
+  );
+}
+
+export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement> & {
+  sticky?: boolean;
+  numeric?: boolean;
+  tone?: 'done' | 'partial';
+  /** Visually hidden text added to `done` cells so the state is not colour-only. */
+  doneLabel?: string;
+};
+
+export function TableCell({
+  sticky,
+  numeric,
+  tone,
+  doneLabel = 'Paid',
+  className,
+  children,
+  ...rest
+}: TableCellProps) {
+  const bg = useContext(RowContext);
+  return (
+    <td
+      {...rest}
+      className={cn(
+        // Same 3px left border on every cell: `partial` shows an accent bar without layout shift.
+        'border-l-[3px] border-l-transparent px-3 py-2 whitespace-nowrap',
+        BORDER_B,
+        bg,
+        sticky && STICKY,
+        numeric && 'font-num text-right tabular-nums',
+        tone === 'done' &&
+          'bg-done-bg text-done-ink forced-colors:border-b-[3px] forced-colors:border-b-[Highlight]',
+        tone === 'partial' && 'border-l-accent forced-colors:border-l-[Highlight]',
+        className,
+      )}
+    >
+      {children}
+      {tone === 'done' && doneLabel ? <span className="sr-only"> ({doneLabel})</span> : null}
+    </td>
+  );
+}
+
+export function TableCellButton({
+  className,
+  type = 'button',
+  ...rest
+}: ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      type={type}
+      {...rest}
+      className={cn(
+        '-mx-3 -my-2 block w-[calc(100%+1.5rem)] cursor-pointer px-3 py-2 text-right',
+        'hover:outline-2 hover:-outline-offset-2 hover:outline-accent',
+        'focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent',
+        className,
+      )}
+    />
+  );
+}

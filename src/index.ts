@@ -21,3 +21,8 @@ export * from './components/SegmentedControl';
 export * from './components/Chip';
 export * from './components/Tabs';
 export * from './components/SideNav';
+export * from './components/Disclosure';
+export * from './components/Table';
+export * from './components/Sheet';
+export * from './components/Toggletip';
+export * from './components/Toast';

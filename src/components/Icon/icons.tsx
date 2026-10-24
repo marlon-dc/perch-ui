@@ -175,3 +175,11 @@ export const PlusIcon = createIcon({
   strokeWidth: 2.2,
   children: <path d="M9 3v12M3 9h12" />,
 });
+
+export const CloseIcon = createIcon({
+  name: 'CloseIcon',
+  viewBox: 20,
+  defaultSize: 20,
+  strokeWidth: 1.8,
+  children: <path d="M5 5l10 10M15 5 5 15" />,
+});

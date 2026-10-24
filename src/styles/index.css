@@ -96,3 +96,16 @@
     font-size: max(var(--pu-ctl-fs), var(--pu-input-font-min-touch));
   }
 }
+
+@keyframes pu-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pu-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes pu-slide-up {
+  from { transform: translateY(16px); }
+  to { transform: translateY(0); }
+}

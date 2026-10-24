@@ -12,5 +12,6 @@ export {
   DotsIcon,
   CheckIcon,
   PlusIcon,
+  CloseIcon,
 } from './icons';
 export type { IconProps } from './icons';
