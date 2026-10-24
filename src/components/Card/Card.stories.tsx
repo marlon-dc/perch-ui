@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Display/Card',
   component: Card,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A bordered surface that groups related content, with 16px container radius and a soft shadow. \`padding\` is none, s (12px) or m (16px); \`as\` renders a div, section or article.
+
+**Keyboard:** none; a Card is not focusable. Interactive content inside it keeps its own focus order.
+
+**Semantics:** a plain container. Use \`as="section"\` with a heading inside (and \`aria-labelledby\`) when it should be a landmark-like region.
+
+**Do** put a heading at the top of a Card that stands alone. **Don't** make the whole Card clickable; put a Button or link inside it.`,
+      },
+    },
+  },
 } satisfies Meta<typeof Card>;
 
 export default meta;

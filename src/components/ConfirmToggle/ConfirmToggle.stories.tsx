@@ -7,6 +7,19 @@ const meta = {
   title: 'Components/Inputs/ConfirmToggle',
   component: ConfirmToggle,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A round check button for marking an item done, such as a bill as paid. Sizes are S, M and L; \`disabled\` blocks toggling.
+
+**Keyboard:** Tab to focus, Enter or Space to toggle.
+
+**Semantics:** a \`<button>\` with \`aria-pressed\` and a required \`label\` as its accessible name (include the item, e.g. "Mark Rent paid"). The check is visible only when pressed, and the ring and fill keep 3:1 on surface and done backgrounds. On coarse pointers it gets a 44px hit area.
+
+**Do** name the item in \`label\`. **Don't** use a generic label like "Done" when several toggles share a screen.`,
+      },
+    },
+  },
   args: { label: 'Mark Rent paid', pressed: false, onPressedChange: fn() },
 } satisfies Meta<typeof ConfirmToggle>;
 

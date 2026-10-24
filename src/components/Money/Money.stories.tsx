@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Primitives/Money',
   component: Money,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Formats an amount with the tabular number font and a real minus sign (U+2212). Defaults to ₱ and \`en-PH\`; \`currency\` and \`locale\` are configurable, \`symbol\` shows the currency sign and \`colored\` tints positive and negative amounts.
+
+**Keyboard:** none; Money is text.
+
+**Semantics:** a plain \`<span>\` with the formatted text, so screen readers read the number and sign. Color is never the only signal: negatives always carry the minus sign.
+
+**Do** use it for every money value so columns line up. **Don't** pass preformatted strings; pass the number.`,
+      },
+    },
+  },
   args: { amount: 1234.5 },
 } satisfies Meta<typeof Money>;
 

@@ -15,6 +15,19 @@ const meta = {
   title: 'Components/Navigation/SegmentedControl',
   component: SegmentedControl,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A compact single-choice switcher, such as Week, Month and Year. Controlled through \`value\` and \`onValueChange\`; options can be \`disabled\`; sizes follow S, M and L; \`fullWidth\` stretches it.
+
+**Keyboard:** Tab moves focus to the selected segment; Left and Right arrows move between segments and select them; disabled segments are skipped.
+
+**Semantics:** a \`tablist\` (named by \`aria-label\`) of \`tab\` elements with \`aria-selected\`, without panels, so the dangling \`aria-controls\` is removed. The selected segment has a line-strong border as well as a fill, and a Highlight fill in forced colors.
+
+**Do** use it for two to four short, mutually exclusive views. **Don't** use it for actions; use Buttons.`,
+      },
+    },
+  },
   args: { value: 'month', onValueChange: () => {}, options, 'aria-label': 'Period' },
 } satisfies Meta<typeof SegmentedControl>;
 

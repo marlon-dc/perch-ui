@@ -35,6 +35,19 @@ const all = {
 const meta = {
   title: 'Components/Primitives/Icon',
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A set of small stroke icons drawn with \`currentColor\`, so they follow the text color, forced colors included. \`size\` sets the edge in px.
+
+**Keyboard:** none; icons are not focusable.
+
+**Semantics:** decorative by default (\`aria-hidden\`). Pass \`title\` to make an icon meaningful: it then gets \`role="img"\` and that accessible name.
+
+**Do** keep icons decorative next to visible text. **Don't** ship an icon-only control without a name; use IconButton with a \`label\`.`,
+      },
+    },
+  },
 } satisfies Meta;
 
 export default meta;

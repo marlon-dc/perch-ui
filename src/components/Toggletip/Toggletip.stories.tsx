@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Overlays/Toggletip',
   component: Toggletip,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `An info button that shows a short explanation on click, for terms such as "Forecast". The tip is a Radix Popover positioned beside the button.
+
+**Keyboard:** Tab to the button, Enter or Space to open or close; Escape closes and returns focus to the button.
+
+**Semantics:** an IconButton named by \`label\` (e.g. "What does Forecast mean?") that controls a non-modal \`dialog\` with the same name. Content is shown on demand, not on hover.
+
+**Do** keep tips to one or two sentences. **Don't** put links or form controls inside a toggletip.`,
+      },
+    },
+  },
   args: {
     label: 'What does Forecast mean?',
     children: 'Forecast is what we expect to spend based on past months.',

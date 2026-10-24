@@ -14,6 +14,19 @@ const meta = {
   component: List,
   subcomponents: { ListRow, ListSectionHeader },
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A bordered list of rows. ListRow shows a title, subtitle, value and an optional trailing control; it can be selectable (\`onSelect\`), \`disabled\` and \`done\`. ListSectionHeader groups rows under a label.
+
+**Keyboard:** a selectable row is a single button (Tab, Enter or Space). A trailing control is a separate tab stop, never nested inside the row button.
+
+**Semantics:** \`role="list"\` with \`role="listitem"\` rows (section headers are list items too). Done rows show a visible check, add hidden "(Done)" text and, in forced colors, a Highlight left border; with a trailing ConfirmToggle the toggle carries the visible check.
+
+**Do** let the row content name a selectable row, or give a \`selectLabel\` that contains the visible title ("Edit Rent"). **Don't** put a button inside \`value\`; use \`trailing\`.`,
+      },
+    },
+  },
 } satisfies Meta<typeof List>;
 
 export default meta;

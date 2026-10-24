@@ -13,6 +13,19 @@ const meta = {
   title: 'Components/Overlays/Toast',
   component: ToastProvider,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Brief, non-blocking confirmations such as "Expense saved". Wrap the app in ToastProvider and call \`useToast().show(message)\`; each toast closes after \`durationMs\` (4 seconds by default) and can be swiped down to dismiss.
+
+**Keyboard:** F8 moves focus to the toast region; Escape dismisses the focused toast. Toasts pause while hovered or focused.
+
+**Semantics:** Radix Toast with \`type="background"\`, announced politely through a live region. The region sits at the bottom and lets taps pass through to the page around the toasts.
+
+**Do** keep messages short and past tense. **Don't** put the only copy of important information in a toast; it disappears.`,
+      },
+    },
+  },
   args: { children: null },
   render: () => (
     <ToastProvider>

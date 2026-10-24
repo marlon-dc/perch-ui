@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Display/Badge',
   component: Badge,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A small, non-interactive label for a status such as "Due soon" or "Over budget". Tones are neutral, accent, warning, positive and negative, and each pairs text and fill at 4.5:1 or better.
+
+**Keyboard:** none; a Badge is not focusable.
+
+**Semantics:** a plain \`<span>\`; the text is the meaning, so screen readers read it inline. In forced colors it keeps a CanvasText border.
+
+**Do** write the status in words. **Don't** rely on tone alone (for example a red Badge with only an amount).`,
+      },
+    },
+  },
   args: { children: 'Due soon' },
 } satisfies Meta<typeof Badge>;
 

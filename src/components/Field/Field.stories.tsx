@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Inputs/Field',
   component: Field,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `The label, hint and error wrapper used by TextField and Select. It generates ids and passes them to its render-prop child, so any custom control gets the same labelling.
+
+**Keyboard:** none of its own; clicking the label focuses the control.
+
+**Semantics:** a \`<label htmlFor>\` bound to the control; hint and error are linked through \`aria-describedby\`, and \`invalid\` tells the control to set \`aria-invalid\`. The required asterisk is decorative; pass \`required\` to the control too.
+
+**Do** write errors that say how to fix the value. **Don't** use the hint for text the user must read before typing; put it in the label.`,
+      },
+    },
+  },
   args: { label: 'Category', children: () => null },
 } satisfies Meta<typeof Field>;
 

@@ -10,6 +10,19 @@ const meta = {
   component: SideNav,
   subcomponents: { SideNavItem, SideNavSeparator },
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Vertical app navigation: a \`nav\` landmark of SideNavItems (links with \`href\`, otherwise buttons), with optional header and separators.
+
+**Keyboard:** Tab through the items; Enter activates (Space too for button items). Disabled link items are skipped.
+
+**Semantics:** a \`<nav>\` named by \`aria-label\`. The current item has \`aria-current="page"\` and an accent left border that becomes Highlight in forced colors. Items are at least 44px tall.
+
+**Do** mark exactly one item \`current\`. **Don't** use SideNav for in-page actions; use Buttons.`,
+      },
+    },
+  },
   args: { 'aria-label': 'Main', children: null },
 } satisfies Meta<typeof SideNav>;
 

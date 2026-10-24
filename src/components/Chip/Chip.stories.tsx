@@ -8,6 +8,19 @@ const meta = {
   title: 'Components/Navigation/Chip',
   component: Chip,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A compact pill button, typically for filtering a list by category. Pass \`pressed\` to make it a toggle; sizes follow S, M and L.
+
+**Keyboard:** Tab to focus, Enter or Space to activate (or toggle).
+
+**Semantics:** a native \`<button>\`. When \`pressed\` is given it becomes a toggle button with \`aria-pressed\`; the pressed state is also shown by an inverted fill and, in forced colors, a Highlight fill.
+
+**Do** keep chip labels to one or two words. **Don't** use a row of chips as single-choice navigation; use SegmentedControl or Tabs.`,
+      },
+    },
+  },
   args: { children: 'Groceries' },
 } satisfies Meta<typeof Chip>;
 

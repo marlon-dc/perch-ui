@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Inputs/Switch',
   component: Switch,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `An on/off control for a setting that applies immediately. It is a styled native checkbox; sizes follow S, M and L, and on coarse pointers the label row gets a hit area at least 44px tall.
+
+**Keyboard:** Tab to focus, Space to toggle.
+
+**Semantics:** \`<input type="checkbox" role="switch">\` inside its label, so it is announced as a switch with its on/off state. The thumb is muted on the track when off and surface on accent when on (both 3:1), and stays distinct in forced colors.
+
+**Do** label it with the setting, not the state ("Show empty items"). **Don't** use it for choices that wait for a Save button; use Checkbox.`,
+      },
+    },
+  },
   args: { label: 'Show empty items' },
 } satisfies Meta<typeof Switch>;
 

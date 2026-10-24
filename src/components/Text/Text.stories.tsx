@@ -7,6 +7,19 @@ const meta = {
   title: 'Components/Primitives/Text',
   component: Text,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Body text and headings. Text has sizes xs to l, tones (ink, muted, positive, negative), weights and an eyebrow variant; \`as\` renders p, span, div or label. Heading sets the visual \`level\` 1 to 4 and can render a different element with \`as\`.
+
+**Keyboard:** none; text is not focusable.
+
+**Semantics:** plain elements. Heading renders \`h1\` to \`h4\` by default, so the visual size and the outline level can be set separately when needed.
+
+**Do** keep heading levels in order on a page. **Don't** use a positive or negative tone as the only signal of a value's meaning.`,
+      },
+    },
+  },
   args: { children: 'Groceries this week' },
 } satisfies Meta<typeof Text>;
 

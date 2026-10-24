@@ -9,6 +9,19 @@ const meta = {
   title: 'Components/Overlays/Sheet',
   component: Sheet,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A modal panel for focused tasks such as editing an item: a bottom sheet below 700px and a centered dialog from 700px. It is controlled with \`open\` and \`onOpenChange\`, and takes a \`title\`, optional \`description\` and \`footer\`.
+
+**Keyboard:** focus moves into the sheet when it opens and is trapped there; Escape or the Close button closes it, and focus returns to the element that opened it.
+
+**Semantics:** a Radix \`dialog\` with \`aria-modal\`, named by its title and described by its description when given. The overlay hides the rest of the page from assistive tech.
+
+**Do** keep the primary action in \`footer\`. **Don't** stack one Sheet on top of another.`,
+      },
+    },
+  },
   args: { open: false, onOpenChange: () => {}, title: 'Edit item', children: null },
 } satisfies Meta<typeof Sheet>;
 

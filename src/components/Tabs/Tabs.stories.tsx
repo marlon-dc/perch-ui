@@ -7,6 +7,19 @@ const meta = {
   component: Tabs,
   subcomponents: { TabsList, TabsTrigger, TabsContent },
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Switches between panels of related content. Built on Radix Tabs: Tabs, TabsList (sized S, M or L), TabsTrigger and TabsContent.
+
+**Keyboard:** Tab moves focus into the tab list and then to the active panel; Left and Right arrows move between tabs and activate them.
+
+**Semantics:** \`tablist\`, \`tab\` and \`tabpanel\` roles with \`aria-selected\` and \`aria-controls\`. The active tab has a 2px accent bottom border that becomes Highlight in forced colors.
+
+**Do** name the TabsList with \`aria-label\`. **Don't** use Tabs for a filter that keeps the same panel; use SegmentedControl.`,
+      },
+    },
+  },
 } satisfies Meta<typeof Tabs>;
 
 export default meta;

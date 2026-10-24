@@ -14,6 +14,19 @@ const meta = {
   title: 'Components/Inputs/Select',
   component: Select,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A single-choice dropdown built on Radix Select, with the same label, hint and error as TextField. Sizes follow S, M and L; \`name\` submits the value with a native form, and \`ref\` reaches the trigger.
+
+**Keyboard:** Tab to the trigger; Enter, Space or the arrow keys open the list; arrows move the highlight; Enter selects; Escape closes; typing jumps to a matching option.
+
+**Semantics:** a \`combobox\` trigger labelled by its Field, with \`aria-invalid\` and \`aria-describedby\` for hint and error; options are a \`listbox\` of \`option\`s. The highlighted option has an accent outline (Highlight in forced colors), and the chosen one a check.
+
+**Do** use it for five or more options. **Don't** use it for two or three; show them as a SegmentedControl or radio-style Chips.`,
+      },
+    },
+  },
   args: { label: 'Category', options, placeholder: 'Choose one', onValueChange: fn() },
 } satisfies Meta<typeof Select>;
 

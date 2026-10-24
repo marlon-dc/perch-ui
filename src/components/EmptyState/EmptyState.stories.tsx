@@ -7,6 +7,19 @@ const meta = {
   title: 'Components/Display/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A centered message for a list or screen with nothing to show yet: a title, an optional description and an optional action.
+
+**Keyboard:** none of its own; the optional \`action\` (usually a Button) is focusable.
+
+**Semantics:** plain text; the title is a paragraph, not a heading, so it does not change the page outline.
+
+**Do** say what will appear here and how to add it. **Don't** show an EmptyState while data is still loading.`,
+      },
+    },
+  },
   args: {
     title: 'No bills yet',
     description: 'Add your first bill to start tracking what is due this month.',

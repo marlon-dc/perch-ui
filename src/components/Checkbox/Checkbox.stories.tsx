@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Inputs/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A native checkbox with a custom box. The whole label row is the click target, and on coarse pointers it gets a hit area at least 44px tall.
+
+**Keyboard:** Tab to focus, Space to toggle.
+
+**Semantics:** a real \`<input type="checkbox">\` inside its \`<label>\`, so checked, disabled and form submission work natively. The check mark is drawn over the box and hidden with opacity when unchecked.
+
+**Do** use it for an independent yes/no choice that takes effect on save. **Don't** use it for an immediate on/off setting; use Switch.`,
+      },
+    },
+  },
   args: { label: 'Include in budget' },
 } satisfies Meta<typeof Checkbox>;
 

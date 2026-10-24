@@ -7,6 +7,19 @@ const meta = {
   title: 'Components/Display/Disclosure',
   component: Disclosure,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A collapsible section with a heading button that shows or hides its content. Works controlled (\`open\`, \`onOpenChange\`) or uncontrolled (\`defaultOpen\`, open by default). \`meta\` and \`trailing\` add secondary text and a total to the header.
+
+**Keyboard:** Tab to the header button, Enter or Space to expand or collapse.
+
+**Semantics:** a \`<button>\` inside a heading (\`headingLevel\` 2 to 4) with \`aria-expanded\` and \`aria-controls\`; collapsed content is \`hidden\`. The chevron is decorative.
+
+**Do** pick a \`headingLevel\` that fits the page outline. **Don't** put interactive controls in \`trailing\`; it is part of the button's name.`,
+      },
+    },
+  },
   args: { title: 'Fixed bills', children: null },
 } satisfies Meta<typeof Disclosure>;
 

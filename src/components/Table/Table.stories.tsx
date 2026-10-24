@@ -25,6 +25,19 @@ const meta = {
     TableCellButton,
   },
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A dense, horizontally scrollable grid for month-by-week figures. TableContainer is a focusable, named region; rows support group, summary and total variants and category tints; cells support sticky row headers, numeric alignment and done or partial tones. TableCellButton makes a cell editable.
+
+**Keyboard:** Tab to the region and scroll it with the arrow keys; Tab again reaches cell buttons, which activate with Enter or Space.
+
+**Semantics:** a native \`<table>\` with \`th scope\` headers. Done cells show a visible check plus hidden "(Paid)" text, and partial cells an accent bar plus hidden "(Partly paid)". A cell button's name keeps the visible amount and appends an \`actionLabel\` such as "edit Rent, Week 2".
+
+**Do** give every row a row header. **Don't** rely on row tint to convey meaning; it is grouping only.`,
+      },
+    },
+  },
   args: { 'aria-label': 'Month grid', children: null },
 } satisfies Meta<typeof TableContainer>;
 

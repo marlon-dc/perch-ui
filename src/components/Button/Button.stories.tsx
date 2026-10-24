@@ -9,6 +9,19 @@ const meta = {
   title: 'Components/Actions/Button',
   component: Button,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Triggers an action. Variants are primary, secondary, ghost and danger; \`size\` is S, M or L (or per breakpoint). \`loading\` shows a spinner and blocks clicks; \`confirm\` makes a destructive action two-step. IconButton (icon only, with a required \`label\`) and LinkButton (inline, link-styled) share the same base.
+
+**Keyboard:** Tab to focus, Enter or Space to activate. With \`confirm\`, the first press arms the button and the second runs the action; blurring or waiting disarms it.
+
+**Semantics:** a native \`<button type="button">\`. Loading sets \`aria-busy\` and \`aria-disabled\`; the armed confirm label is announced through a polite status region. On coarse pointers small buttons get a 44px hit area.
+
+**Do** use one primary button per view. **Don't** use a Button to navigate to another page; use a link.`,
+      },
+    },
+  },
   args: { onClick: fn(), children: 'Add expense' },
 } satisfies Meta<typeof Button>;
 

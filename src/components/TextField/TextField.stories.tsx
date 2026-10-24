@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Inputs/TextField',
   component: TextField,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A labelled text input with hint, error, optional prefix (such as ₱) and a \`numeric\` mode that right-aligns digits and opens the decimal keypad. Sizes follow S, M and L.
+
+**Keyboard:** Tab to focus; standard text editing.
+
+**Semantics:** a native \`<input>\` labelled by its Field, with \`aria-invalid\` and \`aria-describedby\` for hint and error. The prefix is decorative. On coarse pointers the text is at least 16px so iOS does not zoom; the bordered box itself is the touch target (a documented exception to the 44px hit area).
+
+**Do** put the unit in \`prefix\`, not in the value. **Don't** use the placeholder as the label.`,
+      },
+    },
+  },
   args: { label: 'Description' },
 } satisfies Meta<typeof TextField>;
 

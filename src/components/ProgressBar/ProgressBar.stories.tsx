@@ -6,6 +6,19 @@ const meta = {
   title: 'Components/Display/ProgressBar',
   component: ProgressBar,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `A thin bar showing progress toward a goal, such as a savings target. \`value\` is clamped between 0 and \`max\` (default 100); sizes are s and m.
+
+**Keyboard:** none; it is not focusable.
+
+**Semantics:** \`role="progressbar"\` with \`aria-valuemin\`, \`aria-valuemax\`, \`aria-valuenow\` and a required \`label\` as its name. The track border is line-strong (3:1) and the fill turns Highlight in forced colors.
+
+**Do** show the amounts as text nearby. **Don't** use it for loading states with no known end.`,
+      },
+    },
+  },
   args: { value: 40, label: 'Vacation fund' },
 } satisfies Meta<typeof ProgressBar>;
 
