@@ -11,7 +11,6 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
-    // Add further projects (e.g. `browser`) to this array.
     projects: [
       {
         extends: true,
@@ -33,6 +32,30 @@ export default defineConfig({
             instances: [{ browser: 'chromium' }],
           },
           setupFiles: ['./.storybook/vitest.setup.ts'],
+        },
+      },
+      {
+        extends: true,
+        optimizeDeps: {
+          include: [
+            'class-variance-authority',
+            'clsx',
+            'tailwind-merge',
+            'vitest-browser-react',
+            '@storybook/react-vite',
+            'storybook/test',
+          ],
+        },
+        test: {
+          name: 'browser',
+          include: ['src/**/*.viewport.test.tsx'],
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright(),
+            instances: [{ browser: 'chromium' }],
+          },
+          setupFiles: ['./.storybook/vitest.browser.setup.ts'],
         },
       },
     ],
