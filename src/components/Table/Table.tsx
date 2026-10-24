@@ -38,10 +38,10 @@ export type TableContainerProps = {
 export function TableContainer({ 'aria-label': ariaLabel, children, className }: TableContainerProps) {
   return (
     // tabIndex is required (axe scrollable-region-focusable): keyboard users must be able to scroll.
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     <div
       role="region"
       aria-label={ariaLabel}
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex={0}
       className={cn(
         'overflow-x-auto rounded-(--pu-radius-container) border border-line bg-surface',
