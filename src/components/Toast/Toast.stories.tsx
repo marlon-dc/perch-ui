@@ -50,6 +50,15 @@ export const Show: Story = {
     const visible = await body.findByText('Saved');
     await expect(visible).toBeVisible();
     await expect(visible.closest('[role="region"]')).not.toBeNull();
+    // The full-width viewport must not swallow taps on the page around the toast.
+    const toast = visible.closest('li')!;
+    await expect(getComputedStyle(toast.parentElement!).pointerEvents).toBe('none');
+    await expect(getComputedStyle(toast).pointerEvents).toBe('auto');
+    // swipeDirection="down": the toast follows the finger while swiping (Radix sets data-swipe).
+    toast.style.setProperty('--radix-toast-swipe-move-y', '20px');
+    toast.setAttribute('data-swipe', 'move');
+    await expect(getComputedStyle(toast).translate).toBe('0px 20px');
+    toast.removeAttribute('data-swipe');
     // Radix also renders a visually hidden polite live region that announces "<label> Saved".
     await waitFor(() =>
       expect(document.querySelector('[role="status"][aria-live="polite"]')?.textContent).toMatch(
