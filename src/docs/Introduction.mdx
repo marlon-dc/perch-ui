@@ -13,13 +13,11 @@ check, and the accessibility checker (axe) runs on each of them.
 
 ## Why density
 
-Perch UI borrows one idea from systems like Reshaped: **density control**. Every sized control comes
-in three sizes, **S**, **M** and **L**, and each size moves height, horizontal padding, font size and
-radius together on a 4px grid. A small button sits flush beside a small input, a small chip and a
-small segmented control, so screens line up without hand-tuning.
+In money apps, rows of inputs, chips and buttons drift out of alignment because each one was tuned separately. Perch UI makes height, padding, font size and radius move together, so compact desktop versus thumb-friendly mobile is one `size` prop, not a restyle.
 
-There is no separate "touch" size. Any sized component takes a single size or a per-breakpoint
-object, so a phone can get large controls while a desktop gets medium ones:
+Perch UI is a portfolio project; a budget app will be its first consumer. See Foundations, Size scale for the aligned-row demo, which is the proof: every control at S, M and L is the same height.
+
+Sized controls come in three sizes, **S**, **M** and **L**, on a 4px grid. There is no separate "touch" size. Any sized component takes a single size or a per-breakpoint object:
 
 ```tsx
 <Button size="m" />
@@ -37,8 +35,11 @@ object, so a phone can get large controls while a desktop gets medium ones:
 
 ## Using it
 
+Perch UI is not on npm yet. Inside this repo, import from `src/index.ts`; the budget app will consume it later as a workspace or git dependency.
+
 ```tsx
-import { Button, Card, KeyValue, Money, PlusIcon } from 'perch-ui';
+// path is relative to a file inside this repo
+import { Button, Card, KeyValue, Money, PlusIcon } from '../src/index';
 
 <Card>
   <KeyValue items={[{ label: 'Rent', value: <Money amount={12000} symbol /> }]} />
