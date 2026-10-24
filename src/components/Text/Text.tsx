@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, Ref } from 'react';
 import { cn } from '../../lib/cn';
 
 export interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -8,6 +8,7 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
   weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   variant?: 'body' | 'eyebrow';
   htmlFor?: string;
+  ref?: Ref<HTMLElement>;
 }
 
 const sizes = { xs: 'text-[12px]', s: 'text-[13px]', m: 'text-[14px]', l: 'text-[16px]' };
@@ -31,11 +32,14 @@ export function Text({
   weight = 'regular',
   variant = 'body',
   className,
+  ref,
   ...rest
 }: TextProps) {
   return (
     <Tag
       {...rest}
+      // Tag is a union of elements; every one of them is an HTMLElement.
+      ref={ref as Ref<HTMLParagraphElement & HTMLSpanElement & HTMLDivElement & HTMLLabelElement>}
       className={cn(
         variant === 'eyebrow'
           ? 'text-[11px] font-semibold uppercase tracking-[0.06em] text-muted'

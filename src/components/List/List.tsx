@@ -1,7 +1,7 @@
-import type { HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { cn } from '../../lib/cn';
 
-export type ListProps = HTMLAttributes<HTMLDivElement>;
+export type ListProps = ComponentPropsWithRef<'div'>;
 
 /** Bordered container for ListRow / ListSectionHeader children. */
 export function List({ className, ...rest }: ListProps) {

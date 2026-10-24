@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from 'react';
+import { useId, useState, type ReactNode, type Ref } from 'react';
 import { cn } from '../../lib/cn';
 import { ChevronDownIcon } from '../Icon';
 
@@ -13,6 +13,10 @@ export type DisclosureProps = {
   onOpenChange?: (open: boolean) => void;
   headingLevel?: 2 | 3 | 4;
   children: ReactNode;
+  /** Class names for the outer container. */
+  className?: string;
+  /** Ref to the header button (the interactive element). */
+  ref?: Ref<HTMLButtonElement>;
 };
 
 export function Disclosure({
@@ -24,6 +28,8 @@ export function Disclosure({
   onOpenChange,
   headingLevel = 2,
   children,
+  className,
+  ref,
 }: DisclosureProps) {
   const [inner, setInner] = useState(defaultOpen);
   const open = openProp ?? inner;
@@ -36,9 +42,15 @@ export function Disclosure({
   };
 
   return (
-    <div className="rounded-(--pu-radius-container) border border-line bg-surface text-ink">
+    <div
+      className={cn(
+        'rounded-(--pu-radius-container) border border-line bg-surface text-ink',
+        className,
+      )}
+    >
       <Heading className="m-0">
         <button
+          ref={ref}
           type="button"
           aria-expanded={open}
           aria-controls={contentId}

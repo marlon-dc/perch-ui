@@ -1,7 +1,7 @@
-import type { HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { cn } from '../../lib/cn';
 
-export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps extends ComponentPropsWithRef<'h1'> {
   level: 1 | 2 | 3 | 4;
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }

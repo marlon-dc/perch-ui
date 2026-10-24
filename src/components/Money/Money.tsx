@@ -1,10 +1,10 @@
-import type { HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { cn } from '../../lib/cn';
 import { formatMoney, roundCents } from './formatMoney';
 
 export type MoneySize = 'xs' | 's' | 'm' | 'l' | 'xl';
 
-export interface MoneyProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
+export interface MoneyProps extends Omit<ComponentPropsWithRef<'span'>, 'children'> {
   amount: number;
   symbol?: boolean;
   /** Tint positive amounts green and negative amounts red. */

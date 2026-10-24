@@ -1,4 +1,4 @@
-import type { MouseEventHandler, ReactNode } from 'react';
+import type { MouseEventHandler, ReactNode, Ref } from 'react';
 import { cn } from '../../lib/cn';
 
 export type SideNavProps = {
@@ -25,6 +25,8 @@ export type SideNavItemProps = {
   href?: string;
   children?: ReactNode;
   className?: string;
+  /** Ref to the rendered element: an `<a>` with `href`, otherwise a `<button>` (a `<span>` when a link is disabled). */
+  ref?: Ref<HTMLElement>;
 };
 
 export function SideNavItem({
@@ -35,6 +37,7 @@ export function SideNavItem({
   href,
   children,
   className,
+  ref,
 }: SideNavItemProps) {
   const classes = cn(
     'box-border flex min-h-11 w-full items-center gap-3 rounded-(--pu-ctl-r) border-l-[3px] border-transparent px-3',
@@ -58,20 +61,27 @@ export function SideNavItem({
   const ariaCurrent = current ? ('page' as const) : undefined;
   if (href && disabled) {
     return (
-      <span aria-disabled="true" aria-current={ariaCurrent} className={classes}>
+      <span ref={ref} aria-disabled="true" aria-current={ariaCurrent} className={classes}>
         {content}
       </span>
     );
   }
   if (href) {
     return (
-      <a href={href} onClick={onClick} aria-current={ariaCurrent} className={classes}>
+      <a
+        ref={ref as Ref<HTMLAnchorElement>}
+        href={href}
+        onClick={onClick}
+        aria-current={ariaCurrent}
+        className={classes}
+      >
         {content}
       </a>
     );
   }
   return (
     <button
+      ref={ref as Ref<HTMLButtonElement>}
       type="button"
       disabled={disabled}
       onClick={onClick}

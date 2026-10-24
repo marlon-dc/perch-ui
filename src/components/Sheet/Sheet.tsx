@@ -1,5 +1,6 @@
 import { useRef, type ReactNode } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
+import { cn } from '../../lib/cn';
 import { IconButton } from '../Button';
 import { CloseIcon } from '../Icon';
 
@@ -10,9 +11,19 @@ export type SheetProps = {
   description?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
+  /** Class names for the sheet panel (Dialog content). */
+  className?: string;
 };
 
-export function Sheet({ open, onOpenChange, title, description, children, footer }: SheetProps) {
+export function Sheet({
+  open,
+  onOpenChange,
+  title,
+  description,
+  children,
+  footer,
+  className,
+}: SheetProps) {
   // Sheet is controlled and has no Dialog.Trigger, so remember the opener ourselves.
   const opener = useRef<HTMLElement | null>(null);
   return (
@@ -33,7 +44,7 @@ export function Sheet({ open, onOpenChange, title, description, children, footer
             }
           }}
           {...(description ? {} : { 'aria-describedby': undefined })}
-          className={[
+          className={cn(
             'fixed z-50 flex max-h-[90dvh] flex-col bg-surface font-ui text-ink shadow-soft',
             // Bottom sheet below 700px
             'inset-x-0 bottom-0 rounded-t-[18px] border-t border-line pb-[env(safe-area-inset-bottom)]',
@@ -42,7 +53,8 @@ export function Sheet({ open, onOpenChange, title, description, children, footer
             'min-[700px]:inset-x-auto min-[700px]:bottom-auto min-[700px]:top-1/2 min-[700px]:left-1/2',
             'min-[700px]:w-[min(32rem,calc(100vw-2rem))] min-[700px]:-translate-x-1/2 min-[700px]:-translate-y-1/2',
             'min-[700px]:rounded-(--pu-radius-container) min-[700px]:border min-[700px]:pb-0',
-          ].join(' ')}
+            className,
+          )}
         >
           <div
             aria-hidden="true"

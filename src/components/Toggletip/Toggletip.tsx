@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import * as Popover from '@radix-ui/react-popover';
+import { cn } from '../../lib/cn';
 import { IconButton } from '../Button';
 import { InfoIcon } from '../Icon';
 
@@ -8,9 +9,11 @@ export type ToggletipProps = {
   label: string;
   /** Tip text. */
   children: ReactNode;
+  /** Class names for the tip bubble (Popover content). */
+  className?: string;
 };
 
-export function Toggletip({ label, children }: ToggletipProps) {
+export function Toggletip({ label, children, className }: ToggletipProps) {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -21,7 +24,10 @@ export function Toggletip({ label, children }: ToggletipProps) {
           aria-label={label}
           sideOffset={6}
           collisionPadding={8}
-          className="z-50 max-w-[min(18rem,calc(100vw-1rem))] rounded-lg bg-ink px-3 py-2 font-ui text-[13px] leading-snug text-bg shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className={cn(
+            'z-50 max-w-[min(18rem,calc(100vw-1rem))] rounded-lg bg-ink px-3 py-2 font-ui text-[13px] leading-snug text-bg shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+            className,
+          )}
         >
           {children}
         </Popover.Content>

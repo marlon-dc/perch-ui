@@ -1,7 +1,7 @@
-import type { HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { cn } from '../../lib/cn';
 
-export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends ComponentPropsWithRef<'span'> {
   tone?: 'neutral' | 'accent' | 'warning' | 'positive' | 'negative';
 }
 

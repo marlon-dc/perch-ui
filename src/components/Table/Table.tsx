@@ -1,12 +1,9 @@
 import {
   createContext,
   useContext,
-  type ButtonHTMLAttributes,
-  type HTMLAttributes,
+  type ComponentPropsWithRef,
   type ReactNode,
-  type TdHTMLAttributes,
-  type ThHTMLAttributes,
-  type TableHTMLAttributes,
+  type Ref,
 } from 'react';
 import { cn } from '../../lib/cn';
 import { CheckIcon } from '../Icon';
@@ -33,6 +30,7 @@ export type TableContainerProps = {
   'aria-label': string;
   children: ReactNode;
   className?: string;
+  ref?: Ref<HTMLDivElement>;
 };
 
 /** Scrollable region: focusable so keyboard users can scroll it. */
@@ -40,10 +38,12 @@ export function TableContainer({
   'aria-label': ariaLabel,
   children,
   className,
+  ref,
 }: TableContainerProps) {
   return (
     // tabIndex is required (axe scrollable-region-focusable): keyboard users must be able to scroll.
     <div
+      ref={ref}
       role="region"
       aria-label={ariaLabel}
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
@@ -59,7 +59,7 @@ export function TableContainer({
   );
 }
 
-export function Table({ className, ...rest }: TableHTMLAttributes<HTMLTableElement>) {
+export function Table({ className, ...rest }: ComponentPropsWithRef<'table'>) {
   return (
     <table
       {...rest}
@@ -68,15 +68,15 @@ export function Table({ className, ...rest }: TableHTMLAttributes<HTMLTableEleme
   );
 }
 
-export function TableHead(props: HTMLAttributes<HTMLTableSectionElement>) {
+export function TableHead(props: ComponentPropsWithRef<'thead'>) {
   return <thead {...props} />;
 }
 
-export function TableBody(props: HTMLAttributes<HTMLTableSectionElement>) {
+export function TableBody(props: ComponentPropsWithRef<'tbody'>) {
   return <tbody {...props} />;
 }
 
-export type TableRowProps = HTMLAttributes<HTMLTableRowElement> & {
+export type TableRowProps = ComponentPropsWithRef<'tr'> & {
   variant?: Variant;
   tint?: Tint;
 };
@@ -102,7 +102,7 @@ export function TableRow({ variant = 'default', tint, className, ...rest }: Tabl
 const STICKY = 'sticky left-0 z-1 border-r border-r-line';
 const BORDER_B = 'border-b border-b-line';
 
-export type TableHeaderCellProps = ThHTMLAttributes<HTMLTableCellElement> & {
+export type TableHeaderCellProps = ComponentPropsWithRef<'th'> & {
   sticky?: boolean;
 };
 
@@ -124,7 +124,7 @@ export function TableHeaderCell({ sticky, scope, className, ...rest }: TableHead
   );
 }
 
-export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement> & {
+export type TableCellProps = ComponentPropsWithRef<'td'> & {
   sticky?: boolean;
   numeric?: boolean;
   tone?: 'done' | 'partial';
@@ -175,7 +175,7 @@ export function TableCell({
   );
 }
 
-export type TableCellButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type TableCellButtonProps = ComponentPropsWithRef<'button'> & {
   /**
    * Action text appended (visually hidden) to the visible content to form the accessible name,
    * e.g. "edit Rent, Week 2" gives "12,000.00, edit Rent, Week 2". Keeps the visible text in the name (WCAG 2.5.3).

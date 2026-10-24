@@ -1,7 +1,7 @@
-import type { HTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { cn } from '../../lib/cn';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends ComponentPropsWithRef<'div'> {
   as?: 'div' | 'section' | 'article';
   /** Inner padding: none, s (12px) or m (16px). */
   padding?: 'none' | 's' | 'm';

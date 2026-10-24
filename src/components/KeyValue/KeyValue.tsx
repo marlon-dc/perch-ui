@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ComponentPropsWithRef, ReactNode } from 'react';
 import { cn } from '../../lib/cn';
 
 export interface KeyValueItem {
@@ -8,13 +8,13 @@ export interface KeyValueItem {
   emphasis?: 'total';
 }
 
-export interface KeyValueProps {
+export interface KeyValueProps extends Omit<ComponentPropsWithRef<'dl'>, 'children'> {
   items: KeyValueItem[];
 }
 
-export function KeyValue({ items }: KeyValueProps) {
+export function KeyValue({ items, className, ...rest }: KeyValueProps) {
   return (
-    <dl className="m-0 flex flex-col">
+    <dl {...rest} className={cn('m-0 flex flex-col', className)}>
       {items.map((item, i) => {
         const total = item.emphasis === 'total';
         return (
