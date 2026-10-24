@@ -5,7 +5,8 @@
 Perch UI is a small React design system for dense, calm, money-focused screens. It is written in
 TypeScript with Tailwind CSS v4, ships a warm light theme and a matching dark theme, and targets
 WCAG 2.1 AA in both. The Storybook is the documentation and the test suite at once: every story is also
-an automated check, with axe running on each one.
+an automated check, with axe running on every story in the light theme and on one representative Dark
+story per component.
 
 The idea is density control. Height, padding, font size and radius move together on a 4px grid, so
 compact desktop versus thumb-friendly mobile is one `size` prop rather than a restyle.
@@ -48,8 +49,10 @@ and states, and color never the only signal.
 
 What is checked automatically:
 
-- **axe on every story, in both themes.** The Storybook a11y addon runs axe on each story and the tests
-  fail on any violation. Every component has a `Dark` story, so both themes are covered.
+- **axe on every story in light, and on one representative Dark story per component.** The Storybook
+  a11y addon runs axe on each story and the tests fail on any violation. Every component has one `Dark`
+  story (usually its States or Variants story), so the dark theme is checked on each component, not on
+  every story.
 - **Contrast unit tests** for every documented foreground and background token pair, in both themes.
 - **Play functions** for keyboard interaction, roles and states.
 - **Browser viewport tests** for responsive `size` on Button and a Sheet that changes layout by width,

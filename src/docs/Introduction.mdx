@@ -5,17 +5,18 @@ import { Meta } from '@storybook/addon-docs/blocks';
 # Perch UI
 
 Perch UI is a small React design system for dense, calm, money-focused screens. It is written in
-TypeScript with Tailwind CSS v4, ships in a warm light theme and a matching dark theme, and meets
+TypeScript with Tailwind CSS v4, ships in a warm light theme and a matching dark theme, and targets
 WCAG 2.1 AA in both.
 
 This Storybook is the documentation and the test suite at once: every story is also an automated
-check, and the accessibility checker (axe) runs on each of them.
+check. The accessibility checker (axe) runs on every story in the light theme and on one
+representative Dark story per component.
 
 ## Why density
 
 In money apps, rows of inputs, chips and buttons drift out of alignment because each one was tuned separately. Perch UI makes height, padding, font size and radius move together, so compact desktop versus thumb-friendly mobile is one `size` prop, not a restyle.
 
-Perch UI is a portfolio project; a budget app will be its first consumer. See Foundations, Size scale for the aligned-row demo, which is the proof: every control at S, M and L is the same height.
+Perch UI is a portfolio project; a budget app will be its first consumer. See Foundations, Size scale for the aligned-row demo, which is the proof: within each size, every control is the same height.
 
 Sized controls come in three sizes, **S**, **M** and **L**, on a 4px grid. There is no separate "touch" size. Any sized component takes a single size or a per-breakpoint object:
 
@@ -29,7 +30,7 @@ Sized controls come in three sizes, **S**, **M** and **L**, on a 4px grid. There
 - **Foundations**: color tokens with live contrast ratios, typography, spacing, radius and shadow,
   the size scale, theming and the accessibility approach.
 - **Components**: primitives, actions, inputs, navigation, display and overlays. Each page shows
-  every size, variant and state, in both themes.
+  every size, variant and state, plus a representative story in the dark theme.
 - **Patterns**: small compositions (a payday checklist, a month summary) that show the pieces
   working together. Sample data is invented.
 

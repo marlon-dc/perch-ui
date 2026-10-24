@@ -19,7 +19,7 @@ Every component targets **WCAG 2.1 level AA in both themes**.
 
 ## How it is enforced
 
-- **axe on every story, in both themes.** The Storybook a11y addon runs axe on each story and the test runner fails on any violation (`a11y.test = 'error'`). Because every component has a `Dark` story, both themes are covered.
+- **axe on every story in light, and on one representative Dark story per component.** The Storybook a11y addon runs axe on each story and the test runner fails on any violation (`a11y.test = 'error'`). Every component has one `Dark` story (usually its States or Variants story), so the dark theme is checked on each component, not on every story.
 - **Contrast unit tests.** Every documented foreground and background token pair is checked in both themes. The Colors page shows the same numbers live.
 - **Play functions** exercise keyboard interaction, roles and states.
 - **Browser viewport tests** cover: responsive `size` on Button and a Sheet that changes layout by width; the 320px ListRow check above; and forced-colors state visibility for Switch, ConfirmToggle, SegmentedControl, Tabs, SideNav and Table.

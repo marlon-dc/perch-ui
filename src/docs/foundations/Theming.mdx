@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Theming
 
-Tokens are CSS custom properties on `:root`. Dark mode follows the operating system's
+Tokens are CSS custom properties on `:root` (and on any element with `data-theme`). Dark mode follows the operating system's
 `prefers-color-scheme` unless you override it with a `data-theme` attribute on `<html>`.
 
 | Setting                     | Result                        |
@@ -27,8 +27,9 @@ delete document.documentElement.dataset.theme;
 Both themes declare identical token names, so components never branch on the theme; they only use
 `bg-surface`, `text-ink`, `border-line-strong` and friends. Tailwind's theme maps to the same variables.
 
-In this Storybook, the **Theme** toolbar control sets `data-theme` for you, and every component story
-has a `Dark` variant so the accessibility checks run in both themes.
+In this Storybook, the **Theme** toolbar control sets `data-theme` for you (on docs pages, on each
+story's own wrapper). Every component has one representative `Dark` story, so axe runs on every story
+in light and on that one story in dark.
 
 ## Customising
 
