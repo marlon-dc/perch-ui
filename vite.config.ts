@@ -63,6 +63,8 @@ export default defineConfig({
         test: {
           name: 'browser',
           include: ['src/**/*.viewport.test.tsx'],
+          // Viewport and forced-colors emulation go through CDP per page; parallel files would race.
+          fileParallelism: false,
           browser: {
             enabled: true,
             headless: true,
