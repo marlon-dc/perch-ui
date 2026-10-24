@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatMoney } from './formatMoney';
+import { formatMoney, roundCents } from './formatMoney';
 
 describe('formatMoney', () => {
   it('formats positive amounts', () => {
@@ -21,6 +21,16 @@ describe('formatMoney', () => {
     expect(formatMoney(-8.345)).toBe('−₱8.35');
     expect(formatMoney(1.005)).toBe('₱1.01');
     expect(formatMoney(123456.785)).toBe('₱123,456.79');
+  });
+  it('handles values printed in exponent notation', () => {
+    expect(formatMoney(1e-7)).toBe('₱0.00');
+    expect(formatMoney(-1e-7)).toBe('₱0.00');
+    expect(formatMoney(5e-7)).toBe('₱0.00');
+    expect(formatMoney(1e21)).toBe('₱1,000,000,000,000,000,000,000.00');
+    for (const x of [1e-7, -1e-7, 5e-7, 1e21, -1e21]) {
+      expect(Number.isFinite(roundCents(x))).toBe(true);
+    }
+    expect(Object.is(roundCents(-1e-7), 0)).toBe(true);
   });
   it('handles large values', () => {
     expect(formatMoney(1e9)).toBe('₱1,000,000,000.00');

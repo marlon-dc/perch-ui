@@ -35,13 +35,16 @@ export const Colored: Story = {
       <Money amount={-250} colored />
       <Money amount={400} colored />
       <Money amount={0} colored />
+      <Money amount={1e-7} colored />
     </div>
   ),
   play: async ({ canvas }) => {
     await expect(canvas.getByText('−₱250.00')).toHaveClass('text-negative');
     await expect(canvas.getByText('₱400.00')).toHaveClass('text-positive');
-    await expect(canvas.getByText('₱0.00')).not.toHaveClass('text-negative');
-    await expect(canvas.getByText('₱0.00')).not.toHaveClass('text-positive');
+    for (const el of canvas.getAllByText('₱0.00')) {
+      await expect(el).not.toHaveClass('text-negative');
+      await expect(el).not.toHaveClass('text-positive');
+    }
   },
 };
 

@@ -10,7 +10,11 @@ const MINUS = '−';
 /** Round a magnitude to cents, half away from zero, using decimal-exponent shifting to avoid binary drift. */
 export function roundCents(amount: number): number {
   const abs = Math.abs(amount);
-  const rounded = Number(Math.round(Number(abs + 'e2')) + 'e-2');
+  if (!Number.isFinite(abs)) return NaN;
+  if (abs < 0.005) return 0;
+  // Beyond 1e15 there are no meaningful cents, and String(abs) may be in exponent form.
+  const rounded =
+    abs >= 1e15 ? Math.round(abs) : Number(Math.round(Number(abs + 'e2')) + 'e-2');
   return amount < 0 && rounded !== 0 ? -rounded : rounded;
 }
 
