@@ -119,3 +119,7 @@ src/
 
 Perch UI is a portfolio project and is not published to npm. A budget app will be its first consumer.
 All example data in the stories and docs is made up.
+
+## License
+
+MIT. See [LICENSE](./LICENSE).
