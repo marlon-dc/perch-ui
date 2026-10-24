@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
+import { List, ListRow } from '../List';
 import { Badge } from './Badge';
 
 const meta = {
@@ -41,6 +42,19 @@ export const AllTones: Story = {
       <Badge tone="negative">Negative</Badge>
     </div>
   ),
+};
+
+/** Inside a ListRow value (which uses the number font) a Badge keeps the UI font. */
+export const InListRowValue: Story = {
+  render: () => (
+    <List aria-label="Bills">
+      <ListRow title="Rent" value={<Badge tone="warning">Due soon</Badge>} />
+    </List>
+  ),
+  play: async ({ canvasElement }) => {
+    const badge = within(canvasElement).getByText('Due soon');
+    await expect(getComputedStyle(badge).fontFamily).toMatch(/^"?Plus Jakarta Sans/);
+  },
 };
 
 export const Dark: Story = { ...AllTones, globals: { theme: 'dark' } };
