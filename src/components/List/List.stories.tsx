@@ -7,6 +7,8 @@ import { List } from './List';
 import { ListRow } from './ListRow';
 import { ListSectionHeader } from './ListSectionHeader';
 
+const onSelectSpy = fn();
+
 const meta = {
   title: 'Components/Display/List',
   component: List,
@@ -79,42 +81,45 @@ export const States: Story = {
 
 export const Selectable: Story = {
   render: function Render() {
-    const onSelect = fn();
     const [paid, setPaid] = useState(false);
     return (
-      <>
-        <List aria-label="Selectable">
-          <ListRow
-            title="Rent"
-            selectLabel="Edit Rent"
-            onSelect={() => {
-              onSelect();
-              (window as unknown as { __selected?: number }).__selected =
-                ((window as unknown as { __selected?: number }).__selected ?? 0) + 1;
-            }}
-            done={paid}
-            trailing={<ConfirmToggle pressed={paid} onPressedChange={setPaid} label="Mark Rent paid" />}
-          />
-        </List>
-      </>
+      <List aria-label="Selectable">
+        <ListRow
+          title="Rent"
+          selectLabel="Edit Rent"
+          onSelect={onSelectSpy}
+          done={paid}
+          trailing={<ConfirmToggle pressed={paid} onPressedChange={setPaid} label="Mark Rent paid" />}
+        />
+      </List>
     );
   },
   play: async ({ canvasElement }) => {
-    const w = window as unknown as { __selected?: number };
-    w.__selected = 0;
+    onSelectSpy.mockClear();
     const canvas = within(canvasElement);
     const edit = canvas.getByRole('button', { name: 'Edit Rent' });
     const toggle = canvas.getByRole('button', { name: 'Mark Rent paid' });
-    await expect(edit).not.toBe(toggle);
     await expect(edit.contains(toggle)).toBe(false);
     await userEvent.click(edit);
-    await expect(w.__selected).toBe(1);
+    await expect(onSelectSpy).toHaveBeenCalledTimes(1);
     await userEvent.click(toggle);
-    await expect(w.__selected).toBe(1);
+    await expect(onSelectSpy).toHaveBeenCalledTimes(1);
     await expect(toggle).toHaveAttribute('aria-pressed', 'true');
     await userEvent.tab({ shift: true });
     await expect(edit).toHaveFocus();
     await expect(edit.getBoundingClientRect().height).toBeGreaterThanOrEqual(48);
+  },
+};
+
+/** `done` + `selectLabel` without a toggle: the label gains "(Done)" so AT still gets the state. */
+export const DoneSelectable: Story = {
+  render: () => (
+    <List aria-label="Done selectable">
+      <ListRow title="Rent" selectLabel="Edit Rent" done onSelect={fn()} />
+    </List>
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole('button', { name: 'Edit Rent (Done)' })).toBeVisible();
   },
 };
 

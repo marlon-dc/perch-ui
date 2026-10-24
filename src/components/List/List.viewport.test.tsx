@@ -14,5 +14,7 @@ test('ListRow LongContent neither overflows the page nor clips the value at 320p
   await expect.poll(() => document.documentElement.scrollWidth).toBeLessThanOrEqual(320);
   await expect.poll(() => value.scrollWidth).toBe(value.clientWidth);
   const rowRect = row.getBoundingClientRect();
+  await expect.poll(() => row.scrollWidth).toBe(row.clientWidth);
+  expect(value.getBoundingClientRect().left).toBeGreaterThanOrEqual(0);
   expect(value.getBoundingClientRect().right).toBeLessThanOrEqual(rowRect.right);
 });
