@@ -77,7 +77,14 @@ export function Select({
                       key={option.value}
                       value={option.value}
                       disabled={option.disabled}
-                      className="ctl-text-input flex min-h-(--pu-ctl-h) cursor-default items-center justify-between gap-2 rounded-(--pu-ctl-r) px-(--pu-ctl-px) outline-none select-none data-[disabled]:opacity-50 data-[highlighted]:bg-surface-2"
+                      className={cn(
+                        'ctl-text-input flex min-h-(--pu-ctl-h) cursor-default items-center justify-between gap-2 rounded-(--pu-ctl-r) px-(--pu-ctl-px) outline-none select-none data-[disabled]:opacity-50',
+                        // Highlight is not fill-only (surface-2 on surface is ~1.1:1): an inset accent outline (>=3:1).
+                        // outline-solid is needed because outline-none zeroes --tw-outline-style.
+                        'data-[highlighted]:bg-surface-2 data-[highlighted]:outline-2 data-[highlighted]:outline-solid data-[highlighted]:-outline-offset-2 data-[highlighted]:outline-accent',
+                        'forced-colors:data-[highlighted]:bg-[Highlight] forced-colors:data-[highlighted]:text-[HighlightText]',
+                        'forced-colors:data-[highlighted]:[forced-color-adjust:none]',
+                      )}
                     >
                       <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
                       <RadixSelect.ItemIndicator aria-hidden="true">

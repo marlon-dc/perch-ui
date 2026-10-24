@@ -32,6 +32,10 @@ export const Keyboard: Story = {
     const body = within(canvasElement.ownerDocument.body);
     await waitFor(() => expect(body.getByRole('listbox')).toBeVisible());
     await userEvent.keyboard('{ArrowDown}');
+    // The highlighted option needs a non-colour-only cue: an accent outline, not just a 1.1:1 fill.
+    const highlighted = body.getByRole('option', { name: 'Rent' });
+    await waitFor(() => expect(highlighted).toHaveAttribute('data-highlighted'));
+    await expect(getComputedStyle(highlighted).outlineStyle).not.toBe('none');
     await userEvent.keyboard('{Enter}');
     await expect(args.onValueChange).toHaveBeenCalledWith('rent');
     await waitFor(() => expect(trigger).toHaveTextContent('Rent'));
