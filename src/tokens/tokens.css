@@ -1,0 +1,89 @@
+/* Perch UI color tokens. Light and dark blocks declare identical names. */
+:root {
+  --pu-bg: #f5f1ea;
+  --pu-surface: #fffdf9;
+  --pu-surface-2: #f7f2ea;
+  --pu-ink: #2a231e;
+  --pu-muted: #685d54;
+  --pu-line: #e8e0d4;
+  --pu-line-strong: #8f8070;
+  --pu-accent: #1c6b58;
+  --pu-accent-ink: #ffffff;
+  --pu-positive: #1c6b58;
+  --pu-negative: #a8382c;
+  --pu-done-bg: #e1f0ea;
+  --pu-done-ink: #14513f;
+  --pu-warn-bg: #fbe9cf;
+  --pu-warn-ink: #6a4300;
+  --pu-cat-earn: #3f7d3a;
+  --pu-cat-ded: #9a6a0c;
+  --pu-cat-inflow: #1f6f86;
+  --pu-cat-exp: #a8455a;
+  --pu-tint-earn: #e4efdc;
+  --pu-tint-ded: #f8ebcc;
+  --pu-tint-inflow: #dcecf1;
+  --pu-tint-exp: #f6dfe2;
+  --pu-shadow: 0 1px 3px rgba(60,40,20,.08), 0 8px 24px rgba(60,40,20,.06);
+  --pu-scrim: rgba(30,20,10,.5);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pu-bg: #171310;
+    --pu-surface: #211c18;
+    --pu-surface-2: #2a241f;
+    --pu-ink: #f2ebe2;
+    --pu-muted: #b3a698;
+    --pu-line: #3a322b;
+    --pu-line-strong: #7d6f61;
+    --pu-accent: #5fc4a6;
+    --pu-accent-ink: #0f1a16;
+    --pu-positive: #6fd1b0;
+    --pu-negative: #ff9a8a;
+    --pu-done-bg: #18352c;
+    --pu-done-ink: #a8e3cf;
+    --pu-warn-bg: #3a2c12;
+    --pu-warn-ink: #f3d39a;
+    --pu-cat-earn: #8fcf86;
+    --pu-cat-ded: #e3b45a;
+    --pu-cat-inflow: #6cc3da;
+    --pu-cat-exp: #ee8fa2;
+    --pu-tint-earn: #22311f;
+    --pu-tint-ded: #3a2e14;
+    --pu-tint-inflow: #17303a;
+    --pu-tint-exp: #3a2026;
+    --pu-shadow: 0 1px 3px rgba(0,0,0,.4);
+    --pu-scrim: rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --pu-bg: #171310;
+  --pu-surface: #211c18;
+  --pu-surface-2: #2a241f;
+  --pu-ink: #f2ebe2;
+  --pu-muted: #b3a698;
+  --pu-line: #3a322b;
+  --pu-line-strong: #7d6f61;
+  --pu-accent: #5fc4a6;
+  --pu-accent-ink: #0f1a16;
+  --pu-positive: #6fd1b0;
+  --pu-negative: #ff9a8a;
+  --pu-done-bg: #18352c;
+  --pu-done-ink: #a8e3cf;
+  --pu-warn-bg: #3a2c12;
+  --pu-warn-ink: #f3d39a;
+  --pu-cat-earn: #8fcf86;
+  --pu-cat-ded: #e3b45a;
+  --pu-cat-inflow: #6cc3da;
+  --pu-cat-exp: #ee8fa2;
+  --pu-tint-earn: #22311f;
+  --pu-tint-ded: #3a2e14;
+  --pu-tint-inflow: #17303a;
+  --pu-tint-exp: #3a2026;
+  --pu-shadow: 0 1px 3px rgba(0,0,0,.4);
+  --pu-scrim: rgba(0,0,0,.6);
+  color-scheme: dark;
+}
