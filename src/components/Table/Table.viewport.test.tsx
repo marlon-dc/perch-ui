@@ -32,3 +32,30 @@ test('Table cell left border is hidden in forced colors except on partial cells'
     await forcedColors('none');
   }
 });
+
+test("Chrome's accessible name for a cell button has no stray space before the comma", async () => {
+  const screen = await render(<MonthGrid />);
+  await expect.element(screen.getByRole('region', { name: 'Month grid' })).toBeVisible();
+  // The test runs in an iframe of the runner page: read Chrome's AX tree of every frame.
+  type FrameTree = { frame: { id: string }; childFrames?: FrameTree[] };
+  type AXNode = { role?: { value?: string }; name?: { value?: string } };
+  const { frameTree } = (await cdp().send('Page.getFrameTree')) as { frameTree: FrameTree };
+  const frameIds: string[] = [];
+  const walk = (tree: FrameTree) => {
+    frameIds.push(tree.frame.id);
+    tree.childFrames?.forEach(walk);
+  };
+  walk(frameTree);
+  const nodes: AXNode[] = [];
+  for (const frameId of frameIds) {
+    const res = (await cdp().send('Accessibility.getFullAXTree', { frameId })) as {
+      nodes: AXNode[];
+    };
+    nodes.push(...res.nodes);
+  }
+  const names = nodes
+    .filter((n) => n.role?.value === 'button')
+    .map((n) => n.name?.value ?? '')
+    .filter((name) => name.includes('edit Rent'));
+  expect(names).toEqual(['₱12,000.00, edit Rent, Week 1', '₱0.00, edit Rent, Week 2']);
+});

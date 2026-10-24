@@ -201,8 +201,19 @@ export function TableCellButton({
         className,
       )}
     >
-      {children}
-      {actionLabel ? <span className="sr-only">, {actionLabel}</span> : null}
+      {actionLabel ? (
+        <>
+          {/* The name is one inline run ("12,000.00, edit Rent, Week 2"): concatenating the visible
+              content with a separate sr-only (out-of-flow) span makes browsers insert a space
+              before the comma. The visible copy is hidden from assistive tech instead. */}
+          <span aria-hidden="true">{children}</span>
+          <span className="sr-only">
+            {children}, {actionLabel}
+          </span>
+        </>
+      ) : (
+        children
+      )}
     </button>
   );
 }

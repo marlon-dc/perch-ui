@@ -211,7 +211,7 @@ export const MonthGrid: Story = {
       await expect(icon).toBeVisible();
       await expect(icon).toHaveAttribute('aria-hidden', 'true');
     }
-    await userEvent.click(canvas.getByRole('button', { name: /^₱0\.00\s*, edit Rent, Week 2$/ }));
+    await userEvent.click(canvas.getByRole('button', { name: /^₱0\.00, edit Rent, Week 2$/ }));
     await expect(onEdit).toHaveBeenCalled();
   },
 };
