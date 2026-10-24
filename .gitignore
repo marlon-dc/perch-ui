@@ -1,0 +1,5 @@
+.superpowers/
+.DS_Store
+node_modules/
+docs/superpowers/specs/
+docs/superpowers/plans/
