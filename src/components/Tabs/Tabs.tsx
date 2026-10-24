@@ -32,7 +32,7 @@ export const TabsTrigger = forwardRef<ElementRef<typeof RadixTabs.Trigger>, Tabs
       <RadixTabs.Trigger
         ref={ref}
         className={cn(
-          'box-border -mb-px inline-flex h-(--pu-ctl-h) cursor-pointer items-center whitespace-nowrap border-b-2 border-transparent',
+          'hit-area box-border -mb-px inline-flex h-(--pu-ctl-h) cursor-pointer items-center whitespace-nowrap border-b-2 border-transparent forced-colors:border-[Canvas]',
           'px-(--pu-ctl-px) text-(length:--pu-ctl-fs) font-medium text-muted',
           'focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent',
           'disabled:cursor-not-allowed disabled:opacity-50',

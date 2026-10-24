@@ -89,3 +89,16 @@ export const Keyboard: Story = {
 };
 
 export const Dark: Story = { ...Sizes, globals: { theme: 'dark' } };
+
+export const TouchTarget: Story = {
+  render: () => <Controlled size="s" />,
+  play: async ({ canvasElement }) => {
+    const tab = within(canvasElement).getByRole('tab', { name: 'Week' });
+    try {
+      document.documentElement.dataset.pointer = 'coarse';
+      await expect(getComputedStyle(tab, '::after').minHeight).toBe('44px');
+    } finally {
+      delete document.documentElement.dataset.pointer;
+    }
+  },
+};

@@ -29,11 +29,10 @@ export type SideNavItemProps = {
 
 export function SideNavItem({ icon, current, disabled, onClick, href, children, className }: SideNavItemProps) {
   const classes = cn(
-    'box-border flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-(--pu-ctl-r) border-l-[3px] border-transparent px-3',
-    'text-left text-[length:var(--pu-ctl-fs)] font-medium text-ink no-underline hover:bg-surface-2',
+    'box-border flex min-h-11 w-full items-center gap-3 rounded-(--pu-ctl-r) border-l-[3px] border-transparent px-3',
+    'text-left text-[length:var(--pu-ctl-fs)] font-medium text-ink no-underline forced-colors:border-[Canvas]',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
-    'disabled:cursor-not-allowed aria-disabled:cursor-not-allowed',
-    disabled && 'opacity-50',
+    disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-surface-2',
     // Inset accent bar is a left border so it survives forced-colors (box-shadow does not).
     current && 'border-accent bg-surface-2 forced-colors:border-[Highlight]',
     className,

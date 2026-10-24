@@ -49,7 +49,7 @@ export function SegmentedControl({
             value={o.value}
             aria-controls={undefined}
             className={cn(
-              'inline-flex h-[calc(var(--pu-ctl-h)-8px)] cursor-pointer items-center justify-center whitespace-nowrap',
+              'hit-area inline-flex h-[calc(var(--pu-ctl-h)-8px)] cursor-pointer items-center justify-center whitespace-nowrap',
               'rounded-[calc(var(--pu-ctl-r)-3px)] px-(--pu-ctl-px) text-(length:--pu-ctl-fs) font-medium text-muted',
               'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
               'data-[state=active]:bg-surface data-[state=active]:text-ink data-[state=active]:shadow-soft',
