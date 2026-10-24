@@ -27,3 +27,18 @@ test.each(['light', 'dark'] as const)('SegmentedControl borders keep >=3:1 in %s
     expect(ratio, `line-strong on ${bg}`).toBeGreaterThanOrEqual(3);
   }
 });
+
+// Switch: the off thumb (muted) sits on the surface-2 track; the on thumb (surface) on accent.
+test.each(['light', 'dark'] as const)(
+  'Switch thumb keeps >=3:1 against its track in %s',
+  (theme) => {
+    const tokens = parseThemeBlocks(readFileSync('src/tokens/tokens.css', 'utf8'))[theme];
+    for (const [fg, bg] of [
+      ['muted', 'surface-2'],
+      ['surface', 'accent'],
+    ] as const) {
+      const ratio = contrastRatio(tokens[fg]!, tokens[bg]!);
+      expect(ratio, `${fg} on ${bg}`).toBeGreaterThanOrEqual(3);
+    }
+  },
+);

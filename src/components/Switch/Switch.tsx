@@ -35,8 +35,9 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           aria-hidden="true"
           className={cn(
             'pointer-events-none absolute top-1/2 left-[3px] size-[calc(var(--pu-box)-8px)] -translate-y-1/2',
-            'rounded-full bg-surface shadow-soft forced-colors:bg-[CanvasText] motion-safe:transition-transform',
-            'peer-checked:translate-x-[calc(var(--pu-box)+2px)]',
+            // Off: muted thumb on the surface-2 track (surface would be ~1.1:1). On: surface on accent.
+            'rounded-full bg-muted shadow-soft forced-colors:bg-[CanvasText] motion-safe:transition-transform',
+            'peer-checked:translate-x-[calc(var(--pu-box)+2px)] peer-checked:bg-surface',
           )}
         />
       </span>

@@ -18,8 +18,20 @@ export const Toggle: Story = {
     const canvas = within(canvasElement);
     const sw = canvas.getByRole('switch', { name: 'Show empty items' });
     await expect(sw).not.toBeChecked();
+    // Thumb colours: muted on the surface-2 track when off, surface on accent when on (both >=3:1).
+    const thumb = sw.nextElementSibling as HTMLElement;
+    const color = (cls: string) => {
+      const probe = document.createElement('div');
+      probe.className = cls;
+      canvasElement.append(probe);
+      const value = getComputedStyle(probe).backgroundColor;
+      probe.remove();
+      return value;
+    };
+    await expect(getComputedStyle(thumb).backgroundColor).toBe(color('bg-muted'));
     await userEvent.click(sw);
     await expect(sw).toBeChecked();
+    await expect(getComputedStyle(thumb).backgroundColor).toBe(color('bg-surface'));
     await userEvent.keyboard(' ');
     await expect(sw).not.toBeChecked();
   },
