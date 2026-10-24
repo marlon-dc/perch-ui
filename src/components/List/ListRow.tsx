@@ -45,7 +45,9 @@ export function ListRow({
   const content = (
     <>
       <span className="flex min-w-0 flex-1 flex-col">
-        <span className={cn('text-(length:--pu-ctl-fs) font-medium [overflow-wrap:anywhere]', inkClass)}>
+        <span
+          className={cn('text-(length:--pu-ctl-fs) font-medium [overflow-wrap:anywhere]', inkClass)}
+        >
           {title}
           {done && doneLabel ? <span className="sr-only"> ({doneLabel})</span> : null}
         </span>
@@ -54,7 +56,14 @@ export function ListRow({
       {value !== undefined || valueSubtitle ? (
         <span data-slot="value" className="flex shrink-0 flex-col items-end whitespace-nowrap">
           {value !== undefined ? (
-            <span className={cn('font-num text-(length:--pu-ctl-fs) font-semibold tabular-nums', inkClass)}>{value}</span>
+            <span
+              className={cn(
+                'font-num text-(length:--pu-ctl-fs) font-semibold tabular-nums',
+                inkClass,
+              )}
+            >
+              {value}
+            </span>
           ) : null}
           {valueSubtitle ? (
             <span className={cn('font-num text-xs tabular-nums', mutedClass)}>{valueSubtitle}</span>
@@ -79,7 +88,9 @@ export function ListRow({
       {onSelect ? (
         <button
           type="button"
-          aria-label={selectLabel && done && doneLabel ? `${selectLabel} (${doneLabel})` : selectLabel}
+          aria-label={
+            selectLabel && done && doneLabel ? `${selectLabel} (${doneLabel})` : selectLabel
+          }
           onClick={onSelect}
           className={cn(
             body,

@@ -10,18 +10,17 @@ export type TabsListProps = ComponentPropsWithoutRef<typeof RadixTabs.List> & {
   size?: Responsive<Size>;
 };
 
-export const TabsList = forwardRef<ElementRef<typeof RadixTabs.List>, TabsListProps>(function TabsList(
-  { size, className, ...rest },
-  ref,
-) {
-  return (
-    <RadixTabs.List
-      ref={ref}
-      className={cn('flex gap-1 border-b border-line font-ui', resolveSize(size), className)}
-      {...rest}
-    />
-  );
-});
+export const TabsList = forwardRef<ElementRef<typeof RadixTabs.List>, TabsListProps>(
+  function TabsList({ size, className, ...rest }, ref) {
+    return (
+      <RadixTabs.List
+        ref={ref}
+        className={cn('flex gap-1 border-b border-line font-ui', resolveSize(size), className)}
+        {...rest}
+      />
+    );
+  },
+);
 
 export type TabsTriggerProps = ComponentPropsWithoutRef<typeof RadixTabs.Trigger>;
 

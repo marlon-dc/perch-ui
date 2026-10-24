@@ -27,7 +27,15 @@ export type SideNavItemProps = {
   className?: string;
 };
 
-export function SideNavItem({ icon, current, disabled, onClick, href, children, className }: SideNavItemProps) {
+export function SideNavItem({
+  icon,
+  current,
+  disabled,
+  onClick,
+  href,
+  children,
+  className,
+}: SideNavItemProps) {
   const classes = cn(
     'box-border flex min-h-11 w-full items-center gap-3 rounded-(--pu-ctl-r) border-l-[3px] border-transparent px-3',
     'text-left text-[length:var(--pu-ctl-fs)] font-medium text-ink no-underline forced-colors:border-[Canvas]',
@@ -39,7 +47,11 @@ export function SideNavItem({ icon, current, disabled, onClick, href, children, 
   );
   const content = (
     <>
-      {icon ? <span aria-hidden="true" className="inline-flex shrink-0">{icon}</span> : null}
+      {icon ? (
+        <span aria-hidden="true" className="inline-flex shrink-0">
+          {icon}
+        </span>
+      ) : null}
       <span>{children}</span>
     </>
   );
@@ -59,7 +71,13 @@ export function SideNavItem({ icon, current, disabled, onClick, href, children, 
     );
   }
   return (
-    <button type="button" disabled={disabled} onClick={onClick} aria-current={ariaCurrent} className={classes}>
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      aria-current={ariaCurrent}
+      className={classes}
+    >
       {content}
     </button>
   );

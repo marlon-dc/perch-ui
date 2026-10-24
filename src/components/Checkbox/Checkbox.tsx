@@ -52,9 +52,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
           )}
           {...rest}
         />
-        <CheckIcon
-          className="pointer-events-none absolute inset-0 m-auto size-[70%] text-accent-ink opacity-0 peer-checked:opacity-100"
-        />
+        <CheckIcon className="pointer-events-none absolute inset-0 m-auto size-[70%] text-accent-ink opacity-0 peer-checked:opacity-100" />
       </span>
       <span>{label}</span>
     </label>

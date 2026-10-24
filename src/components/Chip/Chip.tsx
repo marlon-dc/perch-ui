@@ -23,13 +23,18 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
         'disabled:cursor-not-allowed disabled:opacity-50',
         pressed && 'border-ink bg-ink text-bg',
-        pressed && 'forced-colors:border-[Highlight] forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:[forced-color-adjust:none]',
+        pressed &&
+          'forced-colors:border-[Highlight] forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:[forced-color-adjust:none]',
         resolveSize(size),
         className,
       )}
       {...rest}
     >
-      {icon ? <span aria-hidden="true" className="inline-flex shrink-0">{icon}</span> : null}
+      {icon ? (
+        <span aria-hidden="true" className="inline-flex shrink-0">
+          {icon}
+        </span>
+      ) : null}
       {children}
     </button>
   );

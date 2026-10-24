@@ -35,7 +35,11 @@ export type TableContainerProps = {
 };
 
 /** Scrollable region: focusable so keyboard users can scroll it. */
-export function TableContainer({ 'aria-label': ariaLabel, children, className }: TableContainerProps) {
+export function TableContainer({
+  'aria-label': ariaLabel,
+  children,
+  className,
+}: TableContainerProps) {
   return (
     // tabIndex is required (axe scrollable-region-focusable): keyboard users must be able to scroll.
     <div
@@ -158,7 +162,9 @@ export function TableCell({
     >
       {children}
       {tone === 'done' && doneLabel ? <span className="sr-only"> ({doneLabel})</span> : null}
-      {tone === 'partial' && partialLabel ? <span className="sr-only"> ({partialLabel})</span> : null}
+      {tone === 'partial' && partialLabel ? (
+        <span className="sr-only"> ({partialLabel})</span>
+      ) : null}
     </td>
   );
 }

@@ -21,7 +21,9 @@ test('Switch thumb is distinguishable from the track in forced colors', async ()
     const input = screen.getByRole('switch').element();
     const thumb = input.nextElementSibling as HTMLElement;
     await expect
-      .poll(() => getComputedStyle(thumb).backgroundColor !== getComputedStyle(input).backgroundColor)
+      .poll(
+        () => getComputedStyle(thumb).backgroundColor !== getComputedStyle(input).backgroundColor,
+      )
       .toBe(true);
   } finally {
     await forcedColors('none');

@@ -20,7 +20,9 @@ test('light and dark declare identical token names', () => {
 });
 
 test('dark media block cannot override an explicit light theme', () => {
-  const css = readFileSync('src/tokens/tokens.css', 'utf8');
-  expect(css).toMatch(/@media \(prefers-color-scheme: dark\)\s*{\s*:root:not\(\[data-theme="light"\]\)/);
+  const css = readFileSync('src/tokens/tokens.css', 'utf8').replaceAll("'", '"');
+  expect(css).toMatch(
+    /@media \(prefers-color-scheme: dark\)\s*{\s*:root:not\(\[data-theme="light"\]\)/,
+  );
   expect(css).toContain(':root[data-theme="dark"]');
 });

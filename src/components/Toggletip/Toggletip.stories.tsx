@@ -6,7 +6,10 @@ const meta = {
   title: 'Components/Overlays/Toggletip',
   component: Toggletip,
   tags: ['autodocs'],
-  args: { label: 'What does Forecast mean?', children: 'Forecast is what we expect to spend based on past months.' },
+  args: {
+    label: 'What does Forecast mean?',
+    children: 'Forecast is what we expect to spend based on past months.',
+  },
 } satisfies Meta<typeof Toggletip>;
 
 export default meta;
@@ -19,7 +22,9 @@ export const Default: Story = {
     </p>
   ),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole('button', { name: 'What does Forecast mean?' })).toBeVisible();
+    await expect(
+      within(canvasElement).getByRole('button', { name: 'What does Forecast mean?' }),
+    ).toBeVisible();
   },
 };
 
@@ -29,7 +34,9 @@ export const Open: Story = {
     const trigger = within(canvasElement).getByRole('button', { name: 'What does Forecast mean?' });
     await userEvent.click(trigger);
     const body = within(document.body);
-    await expect(await body.findByRole('dialog', { name: 'What does Forecast mean?' })).toBeVisible();
+    await expect(
+      await body.findByRole('dialog', { name: 'What does Forecast mean?' }),
+    ).toBeVisible();
     await expect(await body.findByText(/what we expect to spend/)).toBeVisible();
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(body.queryByText(/what we expect to spend/)).toBeNull());

@@ -42,9 +42,15 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('tablist', { name: 'Period' })).toBeVisible();
-    await expect(canvas.getByRole('tab', { name: 'Month' })).toHaveAttribute('aria-selected', 'true');
+    await expect(canvas.getByRole('tab', { name: 'Month' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
     await userEvent.click(canvas.getByRole('tab', { name: 'Year' }));
-    await expect(canvas.getByRole('tab', { name: 'Year' })).toHaveAttribute('aria-selected', 'true');
+    await expect(canvas.getByRole('tab', { name: 'Year' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
   },
 };
 
@@ -58,7 +64,8 @@ export const Sizes: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const h = (name: string) => canvas.getByRole('tablist', { name }).getBoundingClientRect().height;
+    const h = (name: string) =>
+      canvas.getByRole('tablist', { name }).getBoundingClientRect().height;
     await expect(h('Small')).toBe(28);
     await expect(h('Medium')).toBe(36);
     await expect(h('Large')).toBe(44);

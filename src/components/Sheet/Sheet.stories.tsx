@@ -25,7 +25,11 @@ function Demo({ initialOpen = false }: { initialOpen?: boolean }) {
         onOpenChange={setOpen}
         title="Edit item"
         description="Change the name or amount."
-        footer={<Button variant="primary" onClick={() => setOpen(false)}>Done</Button>}
+        footer={
+          <Button variant="primary" onClick={() => setOpen(false)}>
+            Done
+          </Button>
+        }
       >
         <TextField label="Name" defaultValue="Rent" />
       </Sheet>
@@ -52,7 +56,8 @@ export const FocusReturn: Story = {
       await expect(dialog).toBeVisible();
       await waitFor(() => expect(dialog.contains(document.activeElement)).toBe(true));
       await expect(
-        getComputedStyle(document.body).overflow === 'hidden' || document.body.hasAttribute('data-scroll-locked'),
+        getComputedStyle(document.body).overflow === 'hidden' ||
+          document.body.hasAttribute('data-scroll-locked'),
       ).toBe(true);
       if (how === 'escape') await userEvent.keyboard('{Escape}');
       else await userEvent.click(body.getByRole('button', { name: 'Close' }));
@@ -65,14 +70,18 @@ export const FocusReturn: Story = {
 export const WithoutDescription: Story = {
   args: { open: true, title: 'Edit item', children: <p>Nothing else to describe.</p> },
   play: async () => {
-    await expect(await within(document.body).findByRole('dialog', { name: 'Edit item' })).toBeVisible();
+    await expect(
+      await within(document.body).findByRole('dialog', { name: 'Edit item' }),
+    ).toBeVisible();
   },
 };
 
 export const Narrow: Story = {
   render: () => <Demo initialOpen />,
   play: async () => {
-    await expect(await within(document.body).findByRole('dialog', { name: 'Edit item' })).toBeVisible();
+    await expect(
+      await within(document.body).findByRole('dialog', { name: 'Edit item' }),
+    ).toBeVisible();
   },
 };
 

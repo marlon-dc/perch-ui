@@ -15,7 +15,15 @@ import {
 const meta = {
   title: 'Components/Display/Table',
   component: TableContainer,
-  subcomponents: { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell, TableCellButton },
+  subcomponents: {
+    Table,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableHeaderCell,
+    TableCell,
+    TableCellButton,
+  },
   tags: ['autodocs'],
   args: { 'aria-label': 'Month grid', children: null },
 } satisfies Meta<typeof TableContainer>;
@@ -32,63 +40,125 @@ function Grid() {
       <Table className="min-w-[640px]">
         <TableHead>
           <TableRow>
-            <TableHeaderCell sticky scope="col">Item</TableHeaderCell>
+            <TableHeaderCell sticky scope="col">
+              Item
+            </TableHeaderCell>
             {weeks.map((w) => (
-              <TableHeaderCell key={w} scope="col" className="text-right">{w}</TableHeaderCell>
+              <TableHeaderCell key={w} scope="col" className="text-right">
+                {w}
+              </TableHeaderCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow variant="group" tint="inflow">
-            <TableHeaderCell sticky scope="row">Income</TableHeaderCell>
+            <TableHeaderCell sticky scope="row">
+              Income
+            </TableHeaderCell>
             <TableCell colSpan={4} />
           </TableRow>
           <TableRow tint="inflow">
-            <TableHeaderCell sticky scope="row">Salary</TableHeaderCell>
-            <TableCell numeric tone="done"><Money amount={25000} /></TableCell>
-            <TableCell numeric><Money amount={0} /></TableCell>
-            <TableCell numeric tone="done"><Money amount={25000} /></TableCell>
-            <TableCell numeric><Money amount={0} /></TableCell>
+            <TableHeaderCell sticky scope="row">
+              Salary
+            </TableHeaderCell>
+            <TableCell numeric tone="done">
+              <Money amount={25000} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={0} />
+            </TableCell>
+            <TableCell numeric tone="done">
+              <Money amount={25000} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={0} />
+            </TableCell>
           </TableRow>
           <TableRow variant="group" tint="exp">
-            <TableHeaderCell sticky scope="row">Bills</TableHeaderCell>
+            <TableHeaderCell sticky scope="row">
+              Bills
+            </TableHeaderCell>
             <TableCell colSpan={4} />
           </TableRow>
           <TableRow tint="exp">
-            <TableHeaderCell sticky scope="row">Rent</TableHeaderCell>
+            <TableHeaderCell sticky scope="row">
+              Rent
+            </TableHeaderCell>
             <TableCell numeric>
-              <TableCellButton actionLabel="edit Rent, Week 1"><Money amount={12000} /></TableCellButton>
+              <TableCellButton actionLabel="edit Rent, Week 1">
+                <Money amount={12000} />
+              </TableCellButton>
             </TableCell>
             <TableCell numeric>
-              <TableCellButton actionLabel="edit Rent, Week 2" onClick={onEdit}><Money amount={0} /></TableCellButton>
+              <TableCellButton actionLabel="edit Rent, Week 2" onClick={onEdit}>
+                <Money amount={0} />
+              </TableCellButton>
             </TableCell>
-            <TableCell numeric tone="partial"><Money amount={500} /></TableCell>
-            <TableCell numeric><Money amount={0} /></TableCell>
+            <TableCell numeric tone="partial">
+              <Money amount={500} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={0} />
+            </TableCell>
           </TableRow>
           <TableRow tint="exp">
-            <TableHeaderCell sticky scope="row">Electricity</TableHeaderCell>
-            <TableCell numeric><Money amount={0} /></TableCell>
-            <TableCell numeric><Money amount={2450} /></TableCell>
-            <TableCell numeric><Money amount={0} /></TableCell>
-            <TableCell numeric><Money amount={0} /></TableCell>
+            <TableHeaderCell sticky scope="row">
+              Electricity
+            </TableHeaderCell>
+            <TableCell numeric>
+              <Money amount={0} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={2450} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={0} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={0} />
+            </TableCell>
           </TableRow>
           <TableRow tint="exp">
-            <TableHeaderCell sticky scope="row">Groceries</TableHeaderCell>
-            <TableCell numeric><Money amount={1800} /></TableCell>
-            <TableCell numeric><Money amount={1800} /></TableCell>
-            <TableCell numeric><Money amount={1800} /></TableCell>
-            <TableCell numeric><Money amount={1800} /></TableCell>
+            <TableHeaderCell sticky scope="row">
+              Groceries
+            </TableHeaderCell>
+            <TableCell numeric>
+              <Money amount={1800} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={1800} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={1800} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={1800} />
+            </TableCell>
           </TableRow>
           <TableRow variant="summary">
-            <TableHeaderCell sticky scope="row">Left over</TableHeaderCell>
-            <TableCell numeric><Money amount={11200} /></TableCell>
-            <TableCell numeric><Money amount={-4250} /></TableCell>
-            <TableCell numeric><Money amount={22700} /></TableCell>
-            <TableCell numeric><Money amount={-1800} /></TableCell>
+            <TableHeaderCell sticky scope="row">
+              Left over
+            </TableHeaderCell>
+            <TableCell numeric>
+              <Money amount={11200} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={-4250} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={22700} />
+            </TableCell>
+            <TableCell numeric>
+              <Money amount={-1800} />
+            </TableCell>
           </TableRow>
           <TableRow variant="total">
-            <TableHeaderCell sticky scope="row">Total</TableHeaderCell>
-            <TableCell numeric><Money amount={27850} /></TableCell>
+            <TableHeaderCell sticky scope="row">
+              Total
+            </TableHeaderCell>
+            <TableCell numeric>
+              <Money amount={27850} />
+            </TableCell>
             <TableCell numeric />
             <TableCell numeric />
             <TableCell numeric />

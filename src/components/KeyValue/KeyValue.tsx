@@ -25,9 +25,16 @@ export function KeyValue({ items }: KeyValueProps) {
               total && 'mt-1 border-t border-line-strong pt-3',
             )}
           >
-            <dt className={cn('min-w-0 [overflow-wrap:anywhere]', total ? 'font-bold text-ink' : 'text-[14px] text-muted')}>
+            <dt
+              className={cn(
+                'min-w-0 [overflow-wrap:anywhere]',
+                total ? 'font-bold text-ink' : 'text-[14px] text-muted',
+              )}
+            >
               {item.label}
-              {item.note ? <span className="block text-[12px] font-normal text-muted">{item.note}</span> : null}
+              {item.note ? (
+                <span className="block text-[12px] font-normal text-muted">{item.note}</span>
+              ) : null}
             </dt>
             <dd
               className={cn(

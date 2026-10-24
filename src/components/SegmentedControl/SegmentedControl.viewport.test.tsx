@@ -19,7 +19,10 @@ test('selected segment is distinguishable from unselected in forced colors', asy
     const selected = screen.getByRole('tab', { name: 'Month' }).element();
     const other = screen.getByRole('tab', { name: 'Week' }).element();
     await expect
-      .poll(() => getComputedStyle(selected).backgroundColor !== getComputedStyle(other).backgroundColor)
+      .poll(
+        () =>
+          getComputedStyle(selected).backgroundColor !== getComputedStyle(other).backgroundColor,
+      )
       .toBe(true);
   } finally {
     await forcedColors('none');

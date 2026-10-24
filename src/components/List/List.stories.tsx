@@ -66,7 +66,9 @@ export const States: Story = {
         title="Electricity"
         done
         value={<Money amount={2450} symbol />}
-        trailing={<ConfirmToggle pressed onPressedChange={() => {}} label="Mark Electricity paid" />}
+        trailing={
+          <ConfirmToggle pressed onPressedChange={() => {}} label="Mark Electricity paid" />
+        }
       />
       <ListRow title="Streaming" done doneLabel="Paid" value={<Money amount={500} symbol />} />
     </List>
@@ -89,7 +91,9 @@ export const Selectable: Story = {
           selectLabel="Edit Rent"
           onSelect={onSelectSpy}
           done={paid}
-          trailing={<ConfirmToggle pressed={paid} onPressedChange={setPaid} label="Mark Rent paid" />}
+          trailing={
+            <ConfirmToggle pressed={paid} onPressedChange={setPaid} label="Mark Rent paid" />
+          }
         />
       </List>
     );
@@ -119,14 +123,21 @@ export const DoneSelectable: Story = {
     </List>
   ),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole('button', { name: 'Edit Rent (Done)' })).toBeVisible();
+    await expect(
+      within(canvasElement).getByRole('button', { name: 'Edit Rent (Done)' }),
+    ).toBeVisible();
   },
 };
 
 export const SelectableWithValue: Story = {
   render: () => (
     <List aria-label="Selectable with value">
-      <ListRow title="Rent" subtitle="Due on the 1st" value={<Money amount={12000} symbol />} onSelect={fn()} />
+      <ListRow
+        title="Rent"
+        subtitle="Due on the 1st"
+        value={<Money amount={12000} symbol />}
+        onSelect={fn()}
+      />
     </List>
   ),
   play: async ({ canvasElement }) => {

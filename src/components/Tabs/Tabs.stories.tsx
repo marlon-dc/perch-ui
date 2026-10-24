@@ -18,7 +18,9 @@ const demo = (size?: 's' | 'm' | 'l', label = 'Sections') => (
       <TabsTrigger value="bills">Bills</TabsTrigger>
       <TabsTrigger value="income">Income</TabsTrigger>
       <TabsTrigger value="savings">Savings</TabsTrigger>
-      <TabsTrigger value="archive" disabled>Archive</TabsTrigger>
+      <TabsTrigger value="archive" disabled>
+        Archive
+      </TabsTrigger>
     </TabsList>
     <TabsContent value="bills">Rent and electricity</TabsContent>
     <TabsContent value="income">Salary and side jobs</TabsContent>
@@ -30,7 +32,10 @@ export const Default: Story = {
   render: () => demo(),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('tab', { name: 'Bills' })).toHaveAttribute('aria-selected', 'true');
+    await expect(canvas.getByRole('tab', { name: 'Bills' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
     await expect(canvas.getByRole('tabpanel')).toHaveTextContent('Rent and electricity');
   },
 };
@@ -46,7 +51,9 @@ export const Sizes: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const h = (list: string) =>
-      within(canvas.getByRole('tablist', { name: list })).getAllByRole('tab')[0]!.getBoundingClientRect().height;
+      within(canvas.getByRole('tablist', { name: list }))
+        .getAllByRole('tab')[0]!
+        .getBoundingClientRect().height;
     await expect(h('Small')).toBe(28);
     await expect(h('Medium')).toBe(36);
     await expect(h('Large')).toBe(44);
@@ -58,7 +65,10 @@ export const States: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('tab', { name: 'Archive' })).toBeDisabled();
-    await expect(canvas.getByRole('tab', { name: 'Income' })).toHaveAttribute('aria-selected', 'false');
+    await expect(canvas.getByRole('tab', { name: 'Income' })).toHaveAttribute(
+      'aria-selected',
+      'false',
+    );
   },
 };
 
@@ -68,7 +78,10 @@ export const Keyboard: Story = {
     const canvas = within(canvasElement);
     canvas.getByRole('tab', { name: 'Bills' }).focus();
     await userEvent.keyboard('{ArrowRight}');
-    await expect(canvas.getByRole('tab', { name: 'Income' })).toHaveAttribute('aria-selected', 'true');
+    await expect(canvas.getByRole('tab', { name: 'Income' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
     await expect(canvas.getByRole('tabpanel')).toHaveTextContent('Salary and side jobs');
   },
 };

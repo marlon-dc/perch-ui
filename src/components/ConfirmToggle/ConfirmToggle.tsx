@@ -44,7 +44,10 @@ export function ConfirmToggle({ pressed, onPressedChange, label, size }: Confirm
       )}
     >
       <CheckIcon
-        className={cn('size-[65%]', pressed ? 'text-done-bg opacity-100 forced-colors:text-[HighlightText]' : 'opacity-0')}
+        className={cn(
+          'size-[65%]',
+          pressed ? 'text-done-bg opacity-100 forced-colors:text-[HighlightText]' : 'opacity-0',
+        )}
       />
     </button>
   );

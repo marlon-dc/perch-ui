@@ -32,10 +32,12 @@ function blockAfter(css: string, opener: string): string {
 }
 
 /** Reads the `:root` (light) and `:root[data-theme="dark"]` (dark) token blocks. */
-export function parseThemeBlocks(css: string): {
+export function parseThemeBlocks(source: string): {
   light: Record<string, string>;
   dark: Record<string, string>;
 } {
+  // Attribute-selector quote style is a formatting choice; compare with double quotes.
+  const css = source.replaceAll("'", '"');
   return {
     light: declarations(blockAfter(css, ':root {')),
     dark: declarations(blockAfter(css, ':root[data-theme="dark"] {')),

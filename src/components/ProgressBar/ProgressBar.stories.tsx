@@ -29,8 +29,14 @@ export const Clamp: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('progressbar', { name: 'Over' })).toHaveAttribute('aria-valuenow', '100');
-    await expect(canvas.getByRole('progressbar', { name: 'Under' })).toHaveAttribute('aria-valuenow', '0');
+    await expect(canvas.getByRole('progressbar', { name: 'Over' })).toHaveAttribute(
+      'aria-valuenow',
+      '100',
+    );
+    await expect(canvas.getByRole('progressbar', { name: 'Under' })).toHaveAttribute(
+      'aria-valuenow',
+      '0',
+    );
   },
 };
 
@@ -43,7 +49,8 @@ export const Sizes: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const h = (n: string) => canvas.getByRole('progressbar', { name: n }).getBoundingClientRect().height;
+    const h = (n: string) =>
+      canvas.getByRole('progressbar', { name: n }).getBoundingClientRect().height;
     await expect(h('Small')).toBe(8); // 6px + 1px borders
     await expect(h('Medium')).toBe(10);
   },

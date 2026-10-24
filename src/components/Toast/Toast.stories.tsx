@@ -39,7 +39,9 @@ export const Show: Story = {
     await expect(visible.closest('[role="region"]')).not.toBeNull();
     // Radix also renders a visually hidden polite live region that announces "<label> Saved".
     await waitFor(() =>
-      expect(document.querySelector('[role="status"][aria-live="polite"]')?.textContent).toMatch(/Saved/),
+      expect(document.querySelector('[role="status"][aria-live="polite"]')?.textContent).toMatch(
+        /Saved/,
+      ),
     );
   },
 };

@@ -39,7 +39,12 @@ export const Default: Story = {
 
 export const States: Story = {
   render,
-  args: { label: 'Category', hint: 'Pick something', error: 'Category is required', required: true },
+  args: {
+    label: 'Category',
+    hint: 'Pick something',
+    error: 'Category is required',
+    required: true,
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText(/Category/);

@@ -24,7 +24,10 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('heading', { level: 2, name: /Fixed bills/ })).toBeVisible();
-    await expect(canvas.getByRole('button', { name: /Fixed bills/ })).toHaveAttribute('aria-expanded', 'true');
+    await expect(canvas.getByRole('button', { name: /Fixed bills/ })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
   },
 };
 
@@ -61,8 +64,13 @@ export const States: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('button', { name: 'Closed by default' })).toHaveAttribute('aria-expanded', 'false');
-    await expect(canvas.getByRole('heading', { level: 3, name: 'Third-level heading' })).toBeVisible();
+    await expect(canvas.getByRole('button', { name: 'Closed by default' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+    await expect(
+      canvas.getByRole('heading', { level: 3, name: 'Third-level heading' }),
+    ).toBeVisible();
   },
 };
 

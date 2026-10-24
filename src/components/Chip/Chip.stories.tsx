@@ -63,14 +63,21 @@ export const Toggle: Story = {
 export const States: Story = {
   render: () => (
     <div className="flex items-center gap-3">
-      <Chip pressed={false} icon={<PlusIcon />}>Rent</Chip>
-      <Chip pressed icon={<PlusIcon />}>Savings</Chip>
+      <Chip pressed={false} icon={<PlusIcon />}>
+        Rent
+      </Chip>
+      <Chip pressed icon={<PlusIcon />}>
+        Savings
+      </Chip>
       <Chip disabled>Archived</Chip>
     </div>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('button', { name: 'Savings' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(canvas.getByRole('button', { name: 'Savings' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
     await expect(canvas.getByRole('button', { name: 'Archived' })).toBeDisabled();
   },
 };

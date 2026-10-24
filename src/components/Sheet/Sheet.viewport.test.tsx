@@ -16,7 +16,10 @@ test('Sheet is a bottom sheet at 375px and a centered dialog at 1024px', async (
   await expect
     .poll(() => {
       const r = dialog.getBoundingClientRect();
-      return { bottomAnchored: Math.round(r.bottom) === 800, centerX: Math.round(r.left + r.width / 2) };
+      return {
+        bottomAnchored: Math.round(r.bottom) === 800,
+        centerX: Math.round(r.left + r.width / 2),
+      };
     })
     .toEqual({ bottomAnchored: false, centerX: 512 });
 });

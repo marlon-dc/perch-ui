@@ -40,7 +40,10 @@ export function Money({
       className={cn(
         'font-num tabular-nums',
         sizeClass[size],
-        colored && Number.isFinite(amount) && rounded !== 0 && (rounded > 0 ? 'text-positive' : 'text-negative'),
+        colored &&
+          Number.isFinite(amount) &&
+          rounded !== 0 &&
+          (rounded > 0 ? 'text-positive' : 'text-negative'),
         className,
       )}
     >

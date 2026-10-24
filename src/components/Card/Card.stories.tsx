@@ -30,7 +30,8 @@ export const Paddings: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const pad = (n: string) => getComputedStyle(canvas.getByRole('group', { name: `padding ${n}` })).paddingLeft;
+    const pad = (n: string) =>
+      getComputedStyle(canvas.getByRole('group', { name: `padding ${n}` })).paddingLeft;
     await expect(pad('none')).toBe('0px');
     await expect(pad('s')).toBe('12px');
     await expect(pad('m')).toBe('16px');
@@ -44,7 +45,9 @@ export const AsSection: Story = {
     </Card>
   ),
   play: async ({ canvasElement }) => {
-    await expect(within(canvasElement).getByRole('region', { name: 'Savings goals' })).toBeVisible();
+    await expect(
+      within(canvasElement).getByRole('region', { name: 'Savings goals' }),
+    ).toBeVisible();
   },
 };
 

@@ -32,8 +32,7 @@ export const Sizes: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const height = (name: string) =>
-      canvas.getByLabelText(name).getBoundingClientRect().height;
+    const height = (name: string) => canvas.getByLabelText(name).getBoundingClientRect().height;
     await expect(height('Size S')).toBe(28);
     await expect(height('Size M')).toBe(36);
     await expect(height('Size L')).toBe(44);

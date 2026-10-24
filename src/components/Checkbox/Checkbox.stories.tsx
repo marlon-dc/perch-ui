@@ -35,7 +35,8 @@ export const Sizes: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const w = (name: string) => canvas.getByRole('checkbox', { name }).getBoundingClientRect().width;
+    const w = (name: string) =>
+      canvas.getByRole('checkbox', { name }).getBoundingClientRect().width;
     await expect(w('Size S')).toBe(16);
     await expect(w('Size M')).toBe(18);
     await expect(w('Size L')).toBe(20);

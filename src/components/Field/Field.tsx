@@ -15,7 +15,9 @@ export function Field({ label, hint, error, required, children }: FieldProps) {
   const errorId = `${uid}-error`;
   const hasHint = hint !== undefined && hint !== null && hint !== false;
   const hasError = error !== undefined && error !== null && error !== false;
-  const describedBy = [hasHint ? hintId : null, hasError ? errorId : null].filter(Boolean).join(' ');
+  const describedBy = [hasHint ? hintId : null, hasError ? errorId : null]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className="flex flex-col gap-1.5 font-ui">
