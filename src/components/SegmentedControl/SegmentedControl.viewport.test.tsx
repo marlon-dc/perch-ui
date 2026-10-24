@@ -28,3 +28,19 @@ test('selected segment is distinguishable from unselected in forced colors', asy
     await forcedColors('none');
   }
 });
+
+test('unselected segment border is hidden (Canvas) in forced colors', async () => {
+  await forcedColors('active');
+  try {
+    const screen = await render(<Default />);
+    const other = screen.getByRole('tab', { name: 'Week' }).element();
+    const probe = document.createElement('div');
+    probe.style.backgroundColor = 'Canvas';
+    document.body.append(probe);
+    const canvas = getComputedStyle(probe).backgroundColor;
+    probe.remove();
+    await expect.poll(() => getComputedStyle(other).borderTopColor).toBe(canvas);
+  } finally {
+    await forcedColors('none');
+  }
+});

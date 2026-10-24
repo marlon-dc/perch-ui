@@ -17,3 +17,13 @@ test.each(['light', 'dark'] as const)('ConfirmToggle ring/fill keeps >=3:1 in %s
     expect(ratio, `${fg} on ${bg}`).toBeGreaterThanOrEqual(3);
   }
 });
+
+// SegmentedControl: the selected segment's line-strong border sits on the surface-2 track, and the
+// line-strong track border sits on the page (bg) or a card (surface).
+test.each(['light', 'dark'] as const)('SegmentedControl borders keep >=3:1 in %s', (theme) => {
+  const tokens = parseThemeBlocks(readFileSync('src/tokens/tokens.css', 'utf8'))[theme];
+  for (const bg of ['surface-2', 'surface', 'bg']) {
+    const ratio = contrastRatio(tokens['line-strong']!, tokens[bg]!);
+    expect(ratio, `line-strong on ${bg}`).toBeGreaterThanOrEqual(3);
+  }
+});

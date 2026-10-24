@@ -46,6 +46,19 @@ export const Default: Story = {
       'aria-selected',
       'true',
     );
+    // The selected segment has a >=3:1 line-strong border (not just a 1.1:1 fill); the track too.
+    const active = getComputedStyle(canvas.getByRole('tab', { name: 'Month' }));
+    const idle = getComputedStyle(canvas.getByRole('tab', { name: 'Week' }));
+    const track = getComputedStyle(canvas.getByRole('tablist', { name: 'Period' }));
+    await expect(active.borderTopWidth).toBe('1px');
+    await expect(active.borderTopColor).toBe(track.borderTopColor);
+    await expect(idle.borderTopColor).toBe('rgba(0, 0, 0, 0)');
+    const probe = document.createElement('div');
+    probe.className = 'border-line-strong';
+    canvasElement.append(probe);
+    const lineStrong = getComputedStyle(probe).borderTopColor;
+    probe.remove();
+    await expect(track.borderTopColor).toBe(lineStrong);
     await userEvent.click(canvas.getByRole('tab', { name: 'Year' }));
     await expect(canvas.getByRole('tab', { name: 'Year' })).toHaveAttribute(
       'aria-selected',

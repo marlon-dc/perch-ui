@@ -38,7 +38,7 @@ export function SegmentedControl({
       <RadixTabs.List
         aria-label={ariaLabel}
         className={cn(
-          'box-border flex h-(--pu-ctl-h) items-center gap-[2px] rounded-(--pu-ctl-r) border border-line',
+          'box-border flex h-(--pu-ctl-h) items-center gap-[2px] rounded-(--pu-ctl-r) border border-line-strong',
           'bg-surface-2 p-[3px] font-ui',
           fullWidth ? 'w-full' : 'inline-flex',
         )}
@@ -50,9 +50,12 @@ export function SegmentedControl({
             aria-controls={undefined}
             className={cn(
               'hit-area inline-flex h-[calc(var(--pu-ctl-h)-8px)] cursor-pointer items-center justify-center whitespace-nowrap',
+              // Every segment has a 1px border (border-box, so heights are unchanged): transparent when idle,
+              // line-strong (>=3:1) when selected, so the selection is not a fill-only cue.
+              'border border-transparent forced-colors:border-[Canvas]',
               'rounded-[calc(var(--pu-ctl-r)-3px)] px-(--pu-ctl-px) text-(length:--pu-ctl-fs) font-medium text-muted',
               'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
-              'data-[state=active]:bg-surface data-[state=active]:text-ink data-[state=active]:shadow-soft',
+              'data-[state=active]:border-line-strong data-[state=active]:bg-surface data-[state=active]:text-ink data-[state=active]:shadow-soft',
               'forced-colors:data-[state=active]:bg-[Highlight] forced-colors:data-[state=active]:text-[HighlightText]',
               'forced-colors:data-[state=active]:[forced-color-adjust:none]',
               fullWidth && 'flex-1',
