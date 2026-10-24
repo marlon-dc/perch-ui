@@ -87,3 +87,29 @@
   --pu-scrim: rgba(0,0,0,.6);
   color-scheme: dark;
 }
+
+/* Density and touch tokens (theme-independent). */
+:root {
+  --pu-radius-container: 16px;
+  --pu-input-font-min-touch: 16px;
+  --pu-size-s-h: 28px;
+  --pu-size-s-px: 10px;
+  --pu-size-s-fs: 12px;
+  --pu-size-s-r: 8px;
+  --pu-size-s-row: 40px;
+  --pu-size-m-h: 36px;
+  --pu-size-m-px: 14px;
+  --pu-size-m-fs: 14px;
+  --pu-size-m-r: 10px;
+  --pu-size-m-row: 48px;
+  --pu-size-l-h: 44px;
+  --pu-size-l-px: 18px;
+  --pu-size-l-fs: 15px;
+  --pu-size-l-r: 12px;
+  --pu-size-l-row: 56px;
+  --pu-ctl-h: var(--pu-size-m-h);
+  --pu-ctl-px: var(--pu-size-m-px);
+  --pu-ctl-fs: var(--pu-size-m-fs);
+  --pu-ctl-r: var(--pu-size-m-r);
+  --pu-row-h: var(--pu-size-m-row);
+}

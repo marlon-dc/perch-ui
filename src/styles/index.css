@@ -34,3 +34,65 @@
   --breakpoint-m: 768px;
   --breakpoint-l: 1024px;
 }
+
+@utility density-s {
+  --pu-ctl-h: var(--pu-size-s-h);
+  --pu-ctl-px: var(--pu-size-s-px);
+  --pu-ctl-fs: var(--pu-size-s-fs);
+  --pu-ctl-r: var(--pu-size-s-r);
+  --pu-row-h: var(--pu-size-s-row);
+}
+
+@utility density-m {
+  --pu-ctl-h: var(--pu-size-m-h);
+  --pu-ctl-px: var(--pu-size-m-px);
+  --pu-ctl-fs: var(--pu-size-m-fs);
+  --pu-ctl-r: var(--pu-size-m-r);
+  --pu-row-h: var(--pu-size-m-row);
+}
+
+@utility density-l {
+  --pu-ctl-h: var(--pu-size-l-h);
+  --pu-ctl-px: var(--pu-size-l-px);
+  --pu-ctl-fs: var(--pu-size-l-fs);
+  --pu-ctl-r: var(--pu-size-l-r);
+  --pu-row-h: var(--pu-size-l-row);
+}
+
+@utility hit-area {
+  position: relative;
+  @media (pointer: coarse) {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+  :root[data-pointer='coarse'] &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@utility ctl-text-input {
+  font-size: var(--pu-ctl-fs);
+  @media (pointer: coarse) {
+    font-size: max(var(--pu-ctl-fs), var(--pu-input-font-min-touch));
+  }
+  :root[data-pointer='coarse'] & {
+    font-size: max(var(--pu-ctl-fs), var(--pu-input-font-min-touch));
+  }
+}
