@@ -53,4 +53,8 @@ export const States: Story = {
   ),
 };
 
+States.play = async ({ canvasElement }) => {
+  await expect(within(canvasElement).getByRole('checkbox', { name: 'Disabled' })).toBeDisabled();
+};
+
 export const Dark: Story = { ...States, globals: { theme: 'dark' } };

@@ -38,11 +38,13 @@ export function ConfirmToggle({ pressed, onPressedChange, label, size }: Confirm
         'hit-area inline-flex shrink-0 items-center justify-center rounded-full border-[1.6px] transition-colors',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
         ringSize(size),
-        pressed ? 'border-done-ink bg-done-ink' : 'border-muted bg-transparent',
+        pressed
+          ? 'border-done-ink bg-done-ink forced-colors:border-[Highlight] forced-colors:bg-[Highlight]'
+          : 'border-muted bg-transparent forced-colors:border-[CanvasText]',
       )}
     >
       <CheckIcon
-        className={cn('size-[65%]', pressed ? 'text-done-bg' : 'text-transparent')}
+        className={cn('size-[65%]', pressed ? 'text-done-bg opacity-100 forced-colors:text-[HighlightText]' : 'opacity-0')}
       />
     </button>
   );

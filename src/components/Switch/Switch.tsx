@@ -27,7 +27,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           className={cn(
             'peer h-(--pu-box) w-[calc(var(--pu-box)*2)] shrink-0 appearance-none rounded-full border',
             'border-line-strong bg-surface-2 checked:border-accent checked:bg-accent cursor-[inherit]',
-            'transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+            'forced-colors:border-[CanvasText] forced-colors:checked:bg-[Highlight] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
           )}
           {...rest}
         />
@@ -35,7 +35,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           aria-hidden="true"
           className={cn(
             'pointer-events-none absolute top-1/2 left-[3px] size-[calc(var(--pu-box)-8px)] -translate-y-1/2',
-            'rounded-full bg-surface shadow-soft motion-safe:transition-transform',
+            'rounded-full bg-surface shadow-soft forced-colors:bg-[CanvasText] motion-safe:transition-transform',
             'peer-checked:translate-x-[calc(var(--pu-box)+2px)]',
           )}
         />
