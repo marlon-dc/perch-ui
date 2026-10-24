@@ -5,3 +5,6 @@ export * from './components/Text';
 export * from './components/Money';
 export * from './components/Icon';
 export * from './components/Button';
+export * from './components/Field';
+export * from './components/TextField';
+export * from './components/Select';
