@@ -18,6 +18,7 @@ export function Toggletip({ label, children }: ToggletipProps) {
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
+          aria-label={label}
           sideOffset={6}
           collisionPadding={8}
           className="z-50 max-w-[min(18rem,calc(100vw-1rem))] rounded-lg bg-ink px-3 py-2 font-ui text-[13px] leading-snug text-bg shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"

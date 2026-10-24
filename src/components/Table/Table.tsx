@@ -125,6 +125,8 @@ export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement> & {
   tone?: 'done' | 'partial';
   /** Visually hidden text added to `done` cells so the state is not colour-only. */
   doneLabel?: string;
+  /** Visually hidden text added to `partial` cells so the state is not colour/bar-only. */
+  partialLabel?: string;
 };
 
 export function TableCell({
@@ -132,6 +134,7 @@ export function TableCell({
   numeric,
   tone,
   doneLabel = 'Paid',
+  partialLabel = 'Partly paid',
   className,
   children,
   ...rest
@@ -155,25 +158,39 @@ export function TableCell({
     >
       {children}
       {tone === 'done' && doneLabel ? <span className="sr-only"> ({doneLabel})</span> : null}
+      {tone === 'partial' && partialLabel ? <span className="sr-only"> ({partialLabel})</span> : null}
     </td>
   );
 }
 
+export type TableCellButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  /**
+   * Action text appended (visually hidden) to the visible content to form the accessible name,
+   * e.g. "edit Rent, Week 2" gives "12,000.00, edit Rent, Week 2". Keeps the visible text in the name (WCAG 2.5.3).
+   */
+  actionLabel?: string;
+};
+
 export function TableCellButton({
   className,
   type = 'button',
+  actionLabel,
+  children,
   ...rest
-}: ButtonHTMLAttributes<HTMLButtonElement>) {
+}: TableCellButtonProps) {
   return (
     <button
       type={type}
       {...rest}
       className={cn(
-        '-mx-3 -my-2 block w-[calc(100%+1.5rem)] cursor-pointer px-3 py-2 text-right',
+        'hit-area -mx-3 -my-2 block w-[calc(100%+1.5rem)] cursor-pointer px-3 py-2 text-right',
         'hover:outline-2 hover:-outline-offset-2 hover:outline-accent',
         'focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent',
         className,
       )}
-    />
+    >
+      {children}
+      {actionLabel ? <span className="sr-only">, {actionLabel}</span> : null}
+    </button>
   );
 }

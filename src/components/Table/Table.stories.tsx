@@ -57,10 +57,10 @@ function Grid() {
           <TableRow tint="exp">
             <TableHeaderCell sticky scope="row">Rent</TableHeaderCell>
             <TableCell numeric>
-              <TableCellButton aria-label="Edit Rent, column 1: 12,000.00"><Money amount={12000} /></TableCellButton>
+              <TableCellButton actionLabel="edit Rent, Week 1"><Money amount={12000} /></TableCellButton>
             </TableCell>
             <TableCell numeric>
-              <TableCellButton aria-label="Edit Rent, column 2: 0.00" onClick={onEdit}><Money amount={0} /></TableCellButton>
+              <TableCellButton actionLabel="edit Rent, Week 2" onClick={onEdit}><Money amount={0} /></TableCellButton>
             </TableCell>
             <TableCell numeric tone="partial"><Money amount={500} /></TableCell>
             <TableCell numeric><Money amount={0} /></TableCell>
@@ -118,7 +118,8 @@ export const MonthGrid: Story = {
       await expect(getComputedStyle(cell).position).toBe('sticky');
       await expect(getComputedStyle(cell).backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
     }
-    await userEvent.click(canvas.getByRole('button', { name: /^Edit Rent, column 2/ }));
+    await expect(canvas.getByRole('cell', { name: /₱500\.00 \(Partly paid\)/ })).toBeVisible();
+    await userEvent.click(canvas.getByRole('button', { name: /^₱0\.00\s*, edit Rent, Week 2$/ }));
     await expect(onEdit).toHaveBeenCalled();
   },
 };
