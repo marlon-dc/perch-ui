@@ -118,9 +118,11 @@ export const DangerConfirm: Story = {
     await expect(args.onClick).not.toHaveBeenCalled();
     await expect(button).toHaveTextContent('Tap again to delete');
     await expect(button).toHaveAttribute('data-armed');
+    await expect(canvas.getByRole('status')).toHaveTextContent('Tap again to delete');
     await userEvent.click(button);
     await expect(args.onClick).toHaveBeenCalledTimes(1);
     await expect(button).not.toHaveAttribute('data-armed');
+    await expect(canvas.getByRole('status')).toBeEmptyDOMElement();
   },
 };
 
@@ -138,6 +140,7 @@ export const IconButtons: Story = {
         onClick={args.onClick}
         variant="ghost"
       />
+      <IconButton label="Syncing" icon={<PlusIcon />} loading onClick={args.onClick} />
       <IconButton
         label="Add"
         icon={<PlusIcon />}
@@ -153,6 +156,9 @@ export const IconButtons: Story = {
     await expect(next).toBeInTheDocument();
     const rect = next.getBoundingClientRect();
     await expect(rect.width).toBe(rect.height);
+    const loading = canvas.getByRole('button', { name: 'Syncing' });
+    await expect(loading).toHaveAttribute('aria-busy', 'true');
+    await expect(loading.querySelector('svg')).toBeNull();
   },
 };
 

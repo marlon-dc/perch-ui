@@ -94,39 +94,45 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   };
 
   const isArmed = armed && !!confirm;
-  const effectiveVariant = variant;
 
   return (
-    <button
-      ref={ref}
-      type={type}
-      className={cn(
-        resolveSize(size),
-        buttonStyles({ variant: effectiveVariant, fullWidth }),
-        isArmed && 'bg-negative text-surface border-transparent hover:bg-negative',
-        className,
-      )}
-      data-armed={isArmed ? '' : undefined}
-      aria-busy={loading ? 'true' : undefined}
-      aria-disabled={loading ? 'true' : undefined}
-      onClick={handleClick}
-      onBlur={(event) => {
-        setArmed(false);
-        onBlur?.(event);
-      }}
-      {...rest}
-    >
-      {loading ? (
-        <span
-          aria-hidden="true"
-          className="size-[1em] shrink-0 rounded-full border-2 border-current border-t-transparent motion-safe:animate-spin"
-        />
-      ) : icon ? (
-        <span aria-hidden="true" className="inline-flex shrink-0">
-          {icon}
+    <>
+      <button
+        ref={ref}
+        type={type}
+        className={cn(
+          resolveSize(size),
+          buttonStyles({ variant, fullWidth }),
+          isArmed && 'bg-negative text-surface border-transparent hover:bg-negative',
+          className,
+        )}
+        data-armed={isArmed ? '' : undefined}
+        aria-busy={loading ? 'true' : undefined}
+        aria-disabled={loading ? 'true' : undefined}
+        onClick={handleClick}
+        onBlur={(event) => {
+          setArmed(false);
+          onBlur?.(event);
+        }}
+        {...rest}
+      >
+        {loading ? (
+          <span
+            aria-hidden="true"
+            className="size-[1em] shrink-0 rounded-full border-2 border-current border-t-transparent motion-safe:animate-spin"
+          />
+        ) : icon ? (
+          <span aria-hidden="true" className="inline-flex shrink-0">
+            {icon}
+          </span>
+        ) : null}
+        {isArmed ? confirm.label : children}
+      </button>
+      {confirm ? (
+        <span role="status" className="sr-only">
+          {isArmed ? confirm.label : ''}
         </span>
       ) : null}
-      {isArmed ? confirm.label : children}
-    </button>
+    </>
   );
 });
