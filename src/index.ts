@@ -17,3 +17,7 @@ export * from './components/KeyValue';
 export * from './components/Badge';
 export * from './components/ProgressBar';
 export * from './components/EmptyState';
+export * from './components/SegmentedControl';
+export * from './components/Chip';
+export * from './components/Tabs';
+export * from './components/SideNav';
