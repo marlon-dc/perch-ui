@@ -23,6 +23,15 @@ export default defineConfig({
       {
         extends: true,
         plugins: [storybookTest({ configDir: path.join(dirname, '.storybook') })],
+        optimizeDeps: {
+          include: [
+            '@radix-ui/react-select',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-popover',
+            '@radix-ui/react-tabs',
+            '@radix-ui/react-toast',
+          ],
+        },
         test: {
           name: 'storybook',
           browser: {
@@ -44,6 +53,11 @@ export default defineConfig({
             'vitest-browser-react',
             '@storybook/react-vite',
             'storybook/test',
+            '@radix-ui/react-select',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-popover',
+            '@radix-ui/react-tabs',
+            '@radix-ui/react-toast',
           ],
         },
         test: {
