@@ -18,6 +18,8 @@ export function ListSectionHeader({ children, trailing, className, ref }: ListSe
       role="listitem"
       ref={ref}
       className={cn(
+        // Same 4px transparent left border as ListRow, so header text lines up with row titles.
+        'border-l-4 border-l-transparent forced-colors:border-l-[Canvas]',
         'flex items-center justify-between gap-3 bg-surface-2 px-4 py-2 text-[12px] font-semibold tracking-wider text-muted uppercase',
         className,
       )}

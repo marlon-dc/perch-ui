@@ -45,6 +45,9 @@ export const Default: Story = {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('list', { name: 'Bills' })).toBeVisible();
     await expect(canvas.getAllByRole('listitem')).toHaveLength(4);
+    // Section header text lines up with row titles (both have the 4px left border).
+    const left = (text: string) => canvas.getByText(text).getBoundingClientRect().left;
+    await expect(left('This month')).toBe(left('Rent'));
   },
 };
 
