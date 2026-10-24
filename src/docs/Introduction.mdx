@@ -38,8 +38,8 @@ Sized controls come in three sizes, **S**, **M** and **L**, on a 4px grid. There
 Perch UI is not on npm yet. Inside this repo, import from `src/index.ts`; the budget app will consume it later as a workspace or git dependency.
 
 ```tsx
-// path is relative to a file inside this repo
-import { Button, Card, KeyValue, Money, PlusIcon } from '../src/index';
+// path is for a file in the repo root; from src/docs it would be '../index'
+import { Button, Card, KeyValue, Money, PlusIcon } from './src';
 
 <Card>
   <KeyValue items={[{ label: 'Rent', value: <Money amount={12000} symbol /> }]} />

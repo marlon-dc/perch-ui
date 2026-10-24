@@ -5,3 +5,4 @@ docs/superpowers/specs/
 docs/superpowers/plans/
 storybook-static/
 coverage/
+.vitest/
