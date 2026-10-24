@@ -16,6 +16,12 @@ describe('formatMoney', () => {
   it('rounds half away from zero', () => {
     expect(formatMoney(0.005)).toBe('₱0.01');
   });
+  it('rounds half away from zero despite binary representation', () => {
+    expect(formatMoney(8.345)).toBe('₱8.35');
+    expect(formatMoney(-8.345)).toBe('−₱8.35');
+    expect(formatMoney(1.005)).toBe('₱1.01');
+    expect(formatMoney(123456.785)).toBe('₱123,456.79');
+  });
   it('handles large values', () => {
     expect(formatMoney(1e9)).toBe('₱1,000,000,000.00');
   });

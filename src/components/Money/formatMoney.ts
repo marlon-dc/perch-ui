@@ -7,13 +7,21 @@ export interface FormatMoneyOptions {
 
 const MINUS = '−';
 
+/** Round a magnitude to cents, half away from zero, using decimal-exponent shifting to avoid binary drift. */
+export function roundCents(amount: number): number {
+  const abs = Math.abs(amount);
+  const rounded = Number(Math.round(Number(abs + 'e2')) + 'e-2');
+  return amount < 0 && rounded !== 0 ? -rounded : rounded;
+}
+
 export function formatMoney(amount: number, opts: FormatMoneyOptions = {}): string {
   const { currency = 'PHP', locale = 'en-PH', symbol = true } = opts;
   if (!Number.isFinite(amount)) return '—';
 
-  // Round half away from zero to cents; a rounded zero is never negative.
-  const abs = Math.round((Math.abs(amount) + Number.EPSILON) * 100) / 100;
-  const negative = amount < 0 && abs !== 0;
+  // A rounded zero is never negative.
+  const rounded = roundCents(amount);
+  const abs = Math.abs(rounded);
+  const negative = rounded < 0;
 
   const formatter = new Intl.NumberFormat(
     locale,

@@ -40,7 +40,8 @@ export const Colored: Story = {
   play: async ({ canvas }) => {
     await expect(canvas.getByText('−₱250.00')).toHaveClass('text-negative');
     await expect(canvas.getByText('₱400.00')).toHaveClass('text-positive');
-    await expect(canvas.getByText('₱0.00')).not.toHaveClass('text-negative', 'text-positive');
+    await expect(canvas.getByText('₱0.00')).not.toHaveClass('text-negative');
+    await expect(canvas.getByText('₱0.00')).not.toHaveClass('text-positive');
   },
 };
 

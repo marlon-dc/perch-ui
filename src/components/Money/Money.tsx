@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import { cn } from '../../lib/cn';
-import { formatMoney } from './formatMoney';
+import { formatMoney, roundCents } from './formatMoney';
 
 export type MoneySize = 'xs' | 's' | 'm' | 'l' | 'xl';
 
@@ -33,14 +33,14 @@ export function Money({
   ...rest
 }: MoneyProps) {
   const text = formatMoney(amount, { symbol, currency, locale });
-  const rounded = Math.round(Math.abs(amount) * 100) / 100;
+  const rounded = roundCents(amount);
   return (
     <span
       {...rest}
       className={cn(
         'font-num tabular-nums',
         sizeClass[size],
-        colored && Number.isFinite(amount) && rounded !== 0 && (amount > 0 ? 'text-positive' : 'text-negative'),
+        colored && Number.isFinite(amount) && rounded !== 0 && (rounded > 0 ? 'text-positive' : 'text-negative'),
         className,
       )}
     >
