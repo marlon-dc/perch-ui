@@ -15,7 +15,7 @@ Every component targets **WCAG 2.1 level AA in both themes**.
 - Visible labels are part of the accessible name (WCAG 2.5.3 Label in Name).
 - `prefers-reduced-motion` turns off animation.
 - Layouts are designed to reflow on narrow screens. The only automated check is that a ListRow with long content does not overflow or clip at 320px width; 200% zoom is not tested.
-- Touch targets: interactive controls under 44 by 44px get an invisible 44px hit area on coarse pointers, beyond what AA requires. Play functions simulate coarse pointers on the components that rely on it.
+- Touch targets: interactive controls under 44 by 44px get an invisible 44px hit area on coarse pointers, beyond what AA requires. Play functions simulate coarse pointers on the components that rely on it. Two documented exceptions: TextField, whose bordered box is the visible target (28px tall at S) and which relies instead on the 16px touch font and its usual full-width layout; and LinkButton, an inline text link sized by the surrounding line.
 
 ## How it is enforced
 

@@ -169,4 +169,25 @@ export const LongContent: Story = {
   ),
 };
 
+/** On coarse pointers the select button of an S row (40px) gets a hit area of at least 44px. */
+export const HitArea: Story = {
+  render: () => (
+    <List aria-label="Hit area">
+      <ListRow size="s" title="Rent" selectLabel="Edit Rent" onSelect={fn()} />
+    </List>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const target = canvas.getByRole('button', { name: 'Edit Rent' });
+    try {
+      document.documentElement.dataset.pointer = 'coarse';
+      const after = getComputedStyle(target, '::after');
+      await expect(after.minWidth).toBe('44px');
+      await expect(after.minHeight).toBe('44px');
+    } finally {
+      delete document.documentElement.dataset.pointer;
+    }
+  },
+};
+
 export const Dark: Story = { ...States, globals: { theme: 'dark' } };

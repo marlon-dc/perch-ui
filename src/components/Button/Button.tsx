@@ -14,7 +14,8 @@ import { resolveSize, type Responsive, type Size } from '../../lib/size';
 
 export const buttonStyles = cva(
   [
-    'inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap select-none',
+    // hit-area sets position: relative; a consumer's `fixed`/`absolute` class is emitted later and wins.
+    'hit-area inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap select-none',
     'h-(--pu-ctl-h) px-(--pu-ctl-px) text-(length:--pu-ctl-fs) rounded-(--pu-ctl-r)',
     'font-ui font-semibold border transition-colors',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',

@@ -12,7 +12,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   return (
     <label
       className={cn(
-        'inline-flex min-h-(--pu-ctl-h) cursor-pointer items-center gap-2 font-ui text-ink',
+        'hit-area inline-flex min-h-(--pu-ctl-h) cursor-pointer items-center gap-2 font-ui text-ink',
         'text-(length:--pu-ctl-fs) has-disabled:cursor-not-allowed has-disabled:opacity-50',
         resolveSize(size),
         boxSize(size),

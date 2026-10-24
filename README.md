@@ -33,6 +33,7 @@ Any sized component takes a single size or an object keyed by breakpoint (`base`
 Touch rules, on coarse pointers (`@media (pointer: coarse)`):
 
 - Interactive controls smaller than 44 by 44px get an invisible 44px hit area, without changing how they look.
+  Two documented exceptions: TextField, whose bordered box is the visible target (28px tall at S) and which relies instead on the 16px touch font and its usual full-width layout; and LinkButton, an inline text link sized by the surrounding line.
 - Text-entry controls render their text at `max(var(--pu-ctl-fs), 16px)`. This is the one exception to
   "values scale together": iOS Safari zooms the page when a focused input's font is under 16px.
   Height, padding and radius still follow S, M and L.

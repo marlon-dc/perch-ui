@@ -58,4 +58,21 @@ States.play = async ({ canvasElement }) => {
   await expect(within(canvasElement).getByRole('checkbox', { name: 'Disabled' })).toBeDisabled();
 };
 
+/** On coarse pointers the whole label row gets a hit area of at least 44px tall. */
+export const HitArea: Story = {
+  args: { size: 's' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const target = canvas.getByText('Include in budget').closest('label')!;
+    try {
+      document.documentElement.dataset.pointer = 'coarse';
+      const after = getComputedStyle(target, '::after');
+      await expect(after.minWidth).toBe('44px');
+      await expect(after.minHeight).toBe('44px');
+    } finally {
+      delete document.documentElement.dataset.pointer;
+    }
+  },
+};
+
 export const Dark: Story = { ...States, globals: { theme: 'dark' } };

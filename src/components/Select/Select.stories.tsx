@@ -77,4 +77,21 @@ export const States: Story = {
   },
 };
 
+/** On coarse pointers an S trigger (28px) gets an invisible hit area of at least 44px. */
+export const HitArea: Story = {
+  args: { size: 's' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const target = canvas.getByRole('combobox', { name: 'Category' });
+    try {
+      document.documentElement.dataset.pointer = 'coarse';
+      const after = getComputedStyle(target, '::after');
+      await expect(after.minWidth).toBe('44px');
+      await expect(after.minHeight).toBe('44px');
+    } finally {
+      delete document.documentElement.dataset.pointer;
+    }
+  },
+};
+
 export const Dark: Story = { ...States, globals: { theme: 'dark' } };

@@ -162,4 +162,21 @@ export const IconButtons: Story = {
   },
 };
 
+/** On coarse pointers an S button gets an invisible 44 by 44px hit area. */
+export const HitArea: Story = {
+  args: { size: 's' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const target = canvas.getByRole('button', { name: 'Add expense' });
+    try {
+      document.documentElement.dataset.pointer = 'coarse';
+      const after = getComputedStyle(target, '::after');
+      await expect(after.minWidth).toBe('44px');
+      await expect(after.minHeight).toBe('44px');
+    } finally {
+      delete document.documentElement.dataset.pointer;
+    }
+  },
+};
+
 export const Dark: Story = { ...Variants, globals: { theme: 'dark' } };

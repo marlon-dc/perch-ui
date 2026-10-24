@@ -50,7 +50,7 @@ export function Select({
               aria-describedby={describedBy}
               aria-invalid={invalid ? 'true' : undefined}
               className={cn(
-                'ctl-text-input flex h-(--pu-ctl-h) w-full items-center justify-between gap-2 rounded-(--pu-ctl-r) border bg-surface px-(--pu-ctl-px) text-left font-ui text-ink',
+                'hit-area ctl-text-input flex h-(--pu-ctl-h) w-full items-center justify-between gap-2 rounded-(--pu-ctl-r) border bg-surface px-(--pu-ctl-px) text-left font-ui text-ink',
                 invalid ? 'border-negative' : 'border-line-strong',
                 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
                 'disabled:cursor-not-allowed disabled:opacity-50',

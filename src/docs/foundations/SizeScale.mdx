@@ -41,6 +41,8 @@ On touch devices (`@media (pointer: coarse)`), any interactive control smaller t
 invisible hit area that extends it to at least 44 by 44px, without changing how it looks. WCAG 2.1 AA sets
 no minimum target size, so this goes beyond the standard. The `hit-area` utility provides it.
 
+Two documented exceptions: TextField, whose bordered box is the visible target (28px tall at S) and which relies instead on the 16px touch font and its usual full-width layout; and LinkButton, an inline text link sized by the surrounding line.
+
 ## The 16px input exception
 
 iOS Safari zooms the page when a focused input's font is under 16px. So on coarse pointers, text inside

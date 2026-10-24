@@ -100,7 +100,8 @@ export function ListRow({
           onClick={onSelect}
           className={cn(
             body,
-            'cursor-pointer self-stretch',
+            // hit-area: an S row is 40px tall; coarse pointers get at least 44px.
+            'hit-area cursor-pointer self-stretch',
             'focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent',
           )}
         >
