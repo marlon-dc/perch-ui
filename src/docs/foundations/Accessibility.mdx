@@ -22,7 +22,7 @@ Every component targets **WCAG 2.1 level AA in both themes**.
 - **axe on every story, in both themes.** The Storybook a11y addon runs axe on each story and the test runner fails on any violation (`a11y.test = 'error'`). Because every component has a `Dark` story, both themes are covered.
 - **Contrast unit tests.** Every documented foreground and background token pair is checked in both themes. The Colors page shows the same numbers live.
 - **Play functions** exercise keyboard interaction, roles and states.
-- **Browser viewport tests** cover: responsive `size` on Button and a Sheet that changes layout by width; the 320px ListRow check above; and forced-colors state visibility for Switch, ConfirmToggle, SegmentedControl, Tabs and SideNav.
+- **Browser viewport tests** cover: responsive `size` on Button and a Sheet that changes layout by width; the 320px ListRow check above; and forced-colors state visibility for Switch, ConfirmToggle, SegmentedControl, Tabs, SideNav and Table.
 
 These prose pages are not axe-tested; only the live components on them are (the color swatches and contrast table have their own story, Foundations/ColorsDemo, for that reason). Automated checks catch a fraction of problems, so the interaction patterns are also designed up front around
 native semantics.

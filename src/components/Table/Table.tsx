@@ -150,7 +150,8 @@ export function TableCell({
       {...rest}
       className={cn(
         // Same 3px left border on every cell: `partial` shows an accent bar without layout shift.
-        'border-l-[3px] border-l-transparent px-3 py-2 whitespace-nowrap',
+        // Forced colors turns `transparent` into CanvasText, so the idle border is set to Canvas there.
+        'border-l-[3px] border-l-transparent forced-colors:border-l-[Canvas] px-3 py-2 whitespace-nowrap',
         BORDER_B,
         bg,
         sticky && STICKY,
