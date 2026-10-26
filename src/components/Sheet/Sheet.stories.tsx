@@ -37,14 +37,14 @@ function Demo({ initialOpen = false }: { initialOpen?: boolean }) {
         open={open}
         onOpenChange={setOpen}
         title="Edit item"
-        description="Change the name or amount."
+        description="Change the name or estimate."
         footer={
           <Button variant="primary" onClick={() => setOpen(false)}>
             Done
           </Button>
         }
       >
-        <TextField label="Name" defaultValue="Rent" />
+        <TextField label="Name" defaultValue="Design review" />
       </Sheet>
     </>
   );

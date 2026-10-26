@@ -36,7 +36,7 @@ const nav = (
         Overview
       </SideNavItem>
       <SideNavItem icon={<ListIcon />} current>
-        Budget
+        Projects
       </SideNavItem>
       <SideNavSeparator />
       <SideNavItem icon={<SlidersIcon />} href="#settings">
@@ -68,7 +68,7 @@ export const Current: Story = {
   render: () => nav,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('button', { name: 'Budget' })).toHaveAttribute(
+    await expect(canvas.getByRole('button', { name: 'Projects' })).toHaveAttribute(
       'aria-current',
       'page',
     );
@@ -77,7 +77,7 @@ export const Current: Story = {
     await expect(help).toHaveAttribute('aria-disabled', 'true');
     await expect(help.tagName).not.toBe('A');
     await expect(
-      canvas.getByRole('button', { name: 'Budget' }).getBoundingClientRect().height,
+      canvas.getByRole('button', { name: 'Projects' }).getBoundingClientRect().height,
     ).toBeGreaterThanOrEqual(44);
   },
 };

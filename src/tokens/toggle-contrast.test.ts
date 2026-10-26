@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { contrastRatio, parseThemeBlocks } from './contrast';
 
-// ConfirmToggle sits on `surface` and on `done-bg` (done ledger rows).
+// ConfirmToggle sits on `surface` and on `done-bg` (done list rows).
 const PAIRS = [
   ['muted', 'surface'],
   ['muted', 'done-bg'],

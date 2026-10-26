@@ -10,13 +10,13 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `A small, non-interactive label for a status such as "Due soon" or "Over budget". Tones are neutral, accent, warning, positive and negative, and each pairs text and fill at 4.5:1 or better.
+        component: `A small, non-interactive label for a status such as "Due soon" or "Blocked". Tones are neutral, accent, warning, positive and negative, and each pairs text and fill at 4.5:1 or better.
 
 **Keyboard:** none; a Badge is not focusable.
 
 **Semantics:** a plain \`<span>\`; the text is the meaning, so screen readers read it inline. In forced colors it keeps a CanvasText border.
 
-**Do** write the status in words. **Don't** rely on tone alone (for example a red Badge with only an amount).`,
+**Do** write the status in words. **Don't** rely on tone alone (for example a red Badge with only a number).`,
       },
     },
   },
@@ -47,8 +47,8 @@ export const AllTones: Story = {
 /** Inside a ListRow value (which uses the number font) a Badge keeps the UI font. */
 export const InListRowValue: Story = {
   render: () => (
-    <List aria-label="Bills">
-      <ListRow title="Rent" value={<Badge tone="warning">Due soon</Badge>} />
+    <List aria-label="Tasks">
+      <ListRow title="Design review" value={<Badge tone="warning">Due soon</Badge>} />
     </List>
   ),
   play: async ({ canvasElement }) => {

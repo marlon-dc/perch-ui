@@ -25,14 +25,14 @@ const GROUPS: ReadonlyArray<{ title: string; tokens: string[] }> = [
   {
     title: 'Categories',
     tokens: [
-      'cat-earn',
-      'cat-ded',
-      'cat-inflow',
-      'cat-exp',
-      'tint-earn',
-      'tint-ded',
-      'tint-inflow',
-      'tint-exp',
+      'cat-green',
+      'cat-amber',
+      'cat-teal',
+      'cat-rose',
+      'tint-green',
+      'tint-amber',
+      'tint-teal',
+      'tint-rose',
     ],
   },
 ];

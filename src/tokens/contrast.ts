@@ -48,8 +48,8 @@ export function parseThemeBlocks(source: string): {
 }
 
 const SURFACES = ['bg', 'surface', 'surface-2'];
-const TINTS = ['tint-earn', 'tint-ded', 'tint-inflow', 'tint-exp'];
-const CATS = ['cat-earn', 'cat-ded', 'cat-inflow', 'cat-exp'];
+const TINTS = ['tint-green', 'tint-amber', 'tint-teal', 'tint-rose'];
+const CATS = ['cat-green', 'cat-amber', 'cat-teal', 'cat-rose'];
 
 export const CONTRAST_PAIRS: ReadonlyArray<ContrastPair> = [
   ...SURFACES.flatMap((bg) =>

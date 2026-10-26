@@ -32,6 +32,6 @@ test('Switch thumb is distinguishable from the track in forced colors', async ()
 
 test('ConfirmToggle check is hidden when off', async () => {
   const screen = await render(<States />);
-  const off = screen.getByRole('button', { name: 'Mark Rent paid' }).element();
+  const off = screen.getByRole('button', { name: 'Mark Design review done' }).element();
   expect(getComputedStyle(off.querySelector('svg')!).opacity).toBe('0');
 });

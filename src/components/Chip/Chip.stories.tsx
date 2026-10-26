@@ -21,7 +21,7 @@ const meta = {
       },
     },
   },
-  args: { children: 'Groceries' },
+  args: { children: 'Research' },
 } satisfies Meta<typeof Chip>;
 
 export default meta;
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const chip = canvas.getByRole('button', { name: 'Groceries' });
+    const chip = canvas.getByRole('button', { name: 'Research' });
     await expect(chip).toBeVisible();
     await expect(chip).not.toHaveAttribute('aria-pressed');
   },
@@ -77,17 +77,17 @@ export const States: Story = {
   render: () => (
     <div className="flex items-center gap-3">
       <Chip pressed={false} icon={<PlusIcon />}>
-        Rent
+        Design
       </Chip>
       <Chip pressed icon={<PlusIcon />}>
-        Savings
+        Writing
       </Chip>
       <Chip disabled>Archived</Chip>
     </div>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('button', { name: 'Savings' })).toHaveAttribute(
+    await expect(canvas.getByRole('button', { name: 'Writing' })).toHaveAttribute(
       'aria-pressed',
       'true',
     );

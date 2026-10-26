@@ -10,17 +10,17 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `A round check button for marking an item done, such as a bill as paid. Sizes are S, M and L; \`disabled\` blocks toggling.
+        component: `A round check button for marking an item done, such as a task as done. Sizes are S, M and L; \`disabled\` blocks toggling.
 
 **Keyboard:** Tab to focus, Enter or Space to toggle.
 
-**Semantics:** a \`<button>\` with \`aria-pressed\` and a required \`label\` as its accessible name (include the item, e.g. "Mark Rent paid"). The check is visible only when pressed, and the ring and fill keep 3:1 on surface and done backgrounds. On coarse pointers it gets a 44px hit area.
+**Semantics:** a \`<button>\` with \`aria-pressed\` and a required \`label\` as its accessible name (include the item, e.g. "Mark Design review done"). The check is visible only when pressed, and the ring and fill keep 3:1 on surface and done backgrounds. On coarse pointers it gets a 44px hit area.
 
 **Do** name the item in \`label\`. **Don't** use a generic label like "Done" when several toggles share a screen.`,
       },
     },
   },
-  args: { label: 'Mark Rent paid', pressed: false, onPressedChange: fn() },
+  args: { label: 'Mark Design review done', pressed: false, onPressedChange: fn() },
 } satisfies Meta<typeof ConfirmToggle>;
 
 export default meta;
@@ -42,7 +42,7 @@ export const Toggle: Story = {
   },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const btn = canvas.getByRole('button', { name: 'Mark Rent paid' });
+    const btn = canvas.getByRole('button', { name: 'Mark Design review done' });
     await expect(btn).toHaveAttribute('aria-pressed', 'false');
     await userEvent.click(btn);
     await expect(args.onPressedChange).toHaveBeenCalledWith(true);
@@ -70,13 +70,13 @@ export const States: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <div className="bg-surface p-3">
-        <ConfirmToggle label="Mark Rent paid" pressed={false} onPressedChange={() => {}} />
+        <ConfirmToggle label="Mark Design review done" pressed={false} onPressedChange={() => {}} />
       </div>
       <div className="bg-done-bg p-3">
-        <ConfirmToggle label="Mark Electricity paid" pressed onPressedChange={() => {}} />
+        <ConfirmToggle label="Mark Release notes done" pressed onPressedChange={() => {}} />
       </div>
       <div className="bg-done-bg p-3">
-        <ConfirmToggle label="Mark Groceries paid" pressed={false} onPressedChange={() => {}} />
+        <ConfirmToggle label="Mark Bug fixes done" pressed={false} onPressedChange={() => {}} />
       </div>
     </div>
   ),
@@ -86,7 +86,7 @@ export const HitArea: Story = {
   args: { size: 's' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const btn = canvas.getByRole('button', { name: 'Mark Rent paid' });
+    const btn = canvas.getByRole('button', { name: 'Mark Design review done' });
     try {
       document.documentElement.dataset.pointer = 'coarse';
       await expect(getComputedStyle(btn, '::after').minWidth).toBe('44px');
@@ -100,7 +100,7 @@ export const HitArea: Story = {
 export const Disabled: Story = {
   args: { disabled: true },
   play: async ({ canvasElement, args }) => {
-    const btn = within(canvasElement).getByRole('button', { name: 'Mark Rent paid' });
+    const btn = within(canvasElement).getByRole('button', { name: 'Mark Design review done' });
     await expect(btn).toBeDisabled();
     await userEvent.click(btn);
     await expect(args.onPressedChange).not.toHaveBeenCalled();

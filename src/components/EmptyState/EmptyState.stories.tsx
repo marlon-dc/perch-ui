@@ -21,9 +21,9 @@ const meta = {
     },
   },
   args: {
-    title: 'No bills yet',
-    description: 'Add your first bill to start tracking what is due this month.',
-    action: <Button>Add bill</Button>,
+    title: 'No tasks yet',
+    description: 'Add your first task to start tracking what is due this week.',
+    action: <Button>Add task</Button>,
   },
 } satisfies Meta<typeof EmptyState>;
 
@@ -33,8 +33,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByText('No bills yet')).toBeVisible();
-    await expect(canvas.getByRole('button', { name: 'Add bill' })).toBeVisible();
+    await expect(canvas.getByText('No tasks yet')).toBeVisible();
+    await expect(canvas.getByRole('button', { name: 'Add task' })).toBeVisible();
   },
 };
 

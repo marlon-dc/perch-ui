@@ -20,9 +20,9 @@ test('ResponsiveSize is L (44px) on a phone and S (28px) at 1024px', async () =>
 test('a consumer `fixed` class (floating action button) still wins over hit-area', async () => {
   const screen = await render(
     <Button className="fixed right-4 bottom-4" variant="primary">
-      Add expense
+      Add task
     </Button>,
   );
-  const button = screen.getByRole('button', { name: 'Add expense' }).element();
+  const button = screen.getByRole('button', { name: 'Add task' }).element();
   await expect.poll(() => getComputedStyle(button).position).toBe('fixed');
 });

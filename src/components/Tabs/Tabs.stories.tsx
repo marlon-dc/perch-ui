@@ -26,18 +26,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const demo = (size?: 's' | 'm' | 'l', label = 'Sections') => (
-  <Tabs defaultValue="bills">
+  <Tabs defaultValue="overview">
     <TabsList aria-label={label} size={size}>
-      <TabsTrigger value="bills">Bills</TabsTrigger>
-      <TabsTrigger value="income">Income</TabsTrigger>
-      <TabsTrigger value="savings">Savings</TabsTrigger>
+      <TabsTrigger value="overview">Overview</TabsTrigger>
+      <TabsTrigger value="activity">Activity</TabsTrigger>
+      <TabsTrigger value="settings">Settings</TabsTrigger>
       <TabsTrigger value="archive" disabled>
         Archive
       </TabsTrigger>
     </TabsList>
-    <TabsContent value="bills">Rent and electricity</TabsContent>
-    <TabsContent value="income">Salary and side jobs</TabsContent>
-    <TabsContent value="savings">Emergency fund</TabsContent>
+    <TabsContent value="overview">Project summary</TabsContent>
+    <TabsContent value="activity">Recent changes</TabsContent>
+    <TabsContent value="settings">Notifications and access</TabsContent>
   </Tabs>
 );
 
@@ -45,11 +45,11 @@ export const Default: Story = {
   render: () => demo(),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('tab', { name: 'Bills' })).toHaveAttribute(
+    await expect(canvas.getByRole('tab', { name: 'Overview' })).toHaveAttribute(
       'aria-selected',
       'true',
     );
-    await expect(canvas.getByRole('tabpanel')).toHaveTextContent('Rent and electricity');
+    await expect(canvas.getByRole('tabpanel')).toHaveTextContent('Project summary');
   },
 };
 
@@ -78,7 +78,7 @@ export const States: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('tab', { name: 'Archive' })).toBeDisabled();
-    await expect(canvas.getByRole('tab', { name: 'Income' })).toHaveAttribute(
+    await expect(canvas.getByRole('tab', { name: 'Activity' })).toHaveAttribute(
       'aria-selected',
       'false',
     );
@@ -89,13 +89,13 @@ export const Keyboard: Story = {
   render: () => demo(),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    canvas.getByRole('tab', { name: 'Bills' }).focus();
+    canvas.getByRole('tab', { name: 'Overview' }).focus();
     await userEvent.keyboard('{ArrowRight}');
-    await expect(canvas.getByRole('tab', { name: 'Income' })).toHaveAttribute(
+    await expect(canvas.getByRole('tab', { name: 'Activity' })).toHaveAttribute(
       'aria-selected',
       'true',
     );
-    await expect(canvas.getByRole('tabpanel')).toHaveTextContent('Salary and side jobs');
+    await expect(canvas.getByRole('tabpanel')).toHaveTextContent('Recent changes');
   },
 };
 
@@ -104,7 +104,7 @@ export const Dark: Story = { ...Sizes, globals: { theme: 'dark' } };
 export const TouchTarget: Story = {
   render: () => demo('s'),
   play: async ({ canvasElement }) => {
-    const tab = within(canvasElement).getByRole('tab', { name: 'Bills' });
+    const tab = within(canvasElement).getByRole('tab', { name: 'Overview' });
     try {
       document.documentElement.dataset.pointer = 'coarse';
       await expect(getComputedStyle(tab, '::after').minHeight).toBe('44px');

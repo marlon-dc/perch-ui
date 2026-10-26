@@ -25,7 +25,7 @@ function SizeRow({ size }: { size: Size }) {
     >
       <Button size={size}>Save</Button>
       <div className="w-40">
-        <TextField label="Amount" size={size} numeric placeholder="0.00" />
+        <TextField label="Estimate" size={size} numeric placeholder="0" />
       </div>
       <div className="w-40">
         <Select
@@ -33,12 +33,12 @@ function SizeRow({ size }: { size: Size }) {
           size={size}
           placeholder="Choose"
           options={[
-            { value: 'rent', label: 'Rent' },
-            { value: 'groceries', label: 'Groceries' },
+            { value: 'design', label: 'Design' },
+            { value: 'research', label: 'Research' },
           ]}
         />
       </div>
-      <Chip size={size}>Groceries</Chip>
+      <Chip size={size}>Research</Chip>
       <SegmentedControl
         aria-label={`View, size ${size.toUpperCase()}`}
         size={size}
@@ -75,9 +75,9 @@ export const AlignedRow: Story = {
       const outer: Record<string, HTMLElement> = {
         Button: row.getByRole('button', { name: 'Save' }),
         // TextField's visible box is the bordered wrapper around the input.
-        TextField: row.getByRole('textbox', { name: 'Amount' }).parentElement!,
+        TextField: row.getByRole('textbox', { name: 'Estimate' }).parentElement!,
         Select: row.getByRole('combobox', { name: 'Category' }),
-        Chip: row.getByRole('button', { name: 'Groceries' }),
+        Chip: row.getByRole('button', { name: 'Research' }),
         SegmentedControl: row.getByRole('tablist'),
       };
       for (const [name, el] of Object.entries(outer)) {

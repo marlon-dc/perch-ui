@@ -16,7 +16,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `Brief, non-blocking confirmations such as "Expense saved". Wrap the app in ToastProvider and call \`useToast().show(message)\`; each toast closes after \`durationMs\` (4 seconds by default) and can be swiped down to dismiss.
+        component: `Brief, non-blocking confirmations such as "Changes saved". Wrap the app in ToastProvider and call \`useToast().show(message)\`; each toast closes after \`durationMs\` (4 seconds by default) and can be swiped down to dismiss.
 
 **Keyboard:** F8 moves focus to the toast region; Escape dismisses the focused toast. Toasts pause while hovered or focused.
 

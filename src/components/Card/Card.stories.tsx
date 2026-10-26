@@ -53,14 +53,12 @@ export const Paddings: Story = {
 
 export const AsSection: Story = {
   render: () => (
-    <Card as="section" aria-label="Savings goals">
-      Savings goals
+    <Card as="section" aria-label="Team goals">
+      Team goals
     </Card>
   ),
   play: async ({ canvasElement }) => {
-    await expect(
-      within(canvasElement).getByRole('region', { name: 'Savings goals' }),
-    ).toBeVisible();
+    await expect(within(canvasElement).getByRole('region', { name: 'Team goals' })).toBeVisible();
   },
 };
 

@@ -9,7 +9,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `A labelled text input with hint, error, optional prefix (such as ₱) and a \`numeric\` mode that right-aligns digits and opens the decimal keypad. Sizes follow S, M and L.
+        component: `A labelled text input with hint, error, optional prefix (such as $ or #) and a \`numeric\` mode that right-aligns digits and opens the decimal keypad. Sizes follow S, M and L.
 
 **Keyboard:** Tab to focus; standard text editing.
 
@@ -26,12 +26,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { label: 'Description', hint: 'What was it for?', placeholder: 'Groceries' },
+  args: { label: 'Description', hint: 'What is this task about?', placeholder: 'Design review' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText('Description');
-    await userEvent.type(input, 'Rent');
-    await expect(input).toHaveValue('Rent');
+    await userEvent.type(input, 'Write docs');
+    await expect(input).toHaveValue('Write docs');
   },
 };
 
@@ -53,22 +53,22 @@ export const Sizes: Story = {
 };
 
 export const WithError: Story = {
-  args: { label: 'Amount', error: 'Enter an amount', hint: 'In pesos' },
+  args: { label: 'Estimate', error: 'Enter an estimate', hint: 'In hours' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByLabelText('Amount');
+    const input = canvas.getByLabelText('Estimate');
     await expect(input).toHaveAttribute('aria-invalid', 'true');
     const ids = (input.getAttribute('aria-describedby') ?? '').split(' ');
     const texts = ids.map((id) => canvasElement.ownerDocument.getElementById(id)?.textContent);
-    await expect(texts).toContain('Enter an amount');
+    await expect(texts).toContain('Enter an estimate');
   },
 };
 
 export const Numeric: Story = {
-  args: { label: 'Amount', numeric: true, prefix: '₱' },
+  args: { label: 'Price', numeric: true, prefix: '$' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByLabelText('Amount');
+    const input = canvas.getByLabelText('Price');
     await expect(input).toHaveAttribute('inputmode', 'decimal');
     await userEvent.type(input, '1,234.50');
     await expect(input).toHaveValue('1,234.50');

@@ -22,7 +22,7 @@ const meta = {
       },
     },
   },
-  args: { onClick: fn(), children: 'Add expense' },
+  args: { onClick: fn(), children: 'Add task' },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -32,7 +32,7 @@ export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     await userEvent.tab();
-    const button = canvas.getByRole('button', { name: 'Add expense' });
+    const button = canvas.getByRole('button', { name: 'Add task' });
     await expect(button).toHaveFocus();
     await userEvent.keyboard('{Enter}');
     await expect(args.onClick).toHaveBeenCalledTimes(1);
@@ -121,7 +121,7 @@ export const Loading: Story = {
 export const DangerConfirm: Story = {
   args: {
     variant: 'danger',
-    children: 'Delete Rent',
+    children: 'Delete task',
     confirm: { label: 'Tap again to delete' },
   },
   play: async ({ canvasElement, args }) => {
@@ -180,7 +180,7 @@ export const HitArea: Story = {
   args: { size: 's' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const target = canvas.getByRole('button', { name: 'Add expense' });
+    const target = canvas.getByRole('button', { name: 'Add task' });
     try {
       document.documentElement.dataset.pointer = 'coarse';
       const after = getComputedStyle(target, '::after');

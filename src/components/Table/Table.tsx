@@ -9,13 +9,13 @@ import { cn } from '../../lib/cn';
 import { CheckIcon } from '../Icon';
 
 type Variant = 'default' | 'group' | 'summary' | 'total';
-type Tint = 'earn' | 'ded' | 'inflow' | 'exp';
+type Tint = 'green' | 'amber' | 'teal' | 'rose';
 
 const TINT_BG: Record<Tint, string> = {
-  earn: 'bg-tint-earn',
-  ded: 'bg-tint-ded',
-  inflow: 'bg-tint-inflow',
-  exp: 'bg-tint-exp',
+  green: 'bg-tint-green',
+  amber: 'bg-tint-amber',
+  teal: 'bg-tint-teal',
+  rose: 'bg-tint-rose',
 };
 
 /** Opaque row background; sticky cells reuse it so scrolled cells never show through. */
@@ -138,8 +138,8 @@ export function TableCell({
   sticky,
   numeric,
   tone,
-  doneLabel = 'Paid',
-  partialLabel = 'Partly paid',
+  doneLabel = 'Done',
+  partialLabel = 'Partial',
   className,
   children,
   ...rest
@@ -178,7 +178,7 @@ export function TableCell({
 export type TableCellButtonProps = ComponentPropsWithRef<'button'> & {
   /**
    * Action text appended (visually hidden) to the visible content to form the accessible name,
-   * e.g. "edit Rent, Week 2" gives "12,000.00, edit Rent, Week 2". Keeps the visible text in the name (WCAG 2.5.3).
+   * e.g. "edit API work, Week 2" gives "12, edit API work, Week 2". Keeps the visible text in the name (WCAG 2.5.3).
    */
   actionLabel?: string;
 };
@@ -203,7 +203,7 @@ export function TableCellButton({
     >
       {actionLabel ? (
         <>
-          {/* The name is one inline run ("12,000.00, edit Rent, Week 2"): concatenating the visible
+          {/* The name is one inline run ("12, edit API work, Week 2"): concatenating the visible
               content with a separate sr-only (out-of-flow) span makes browsers insert a space
               before the comma. The visible copy is hidden from assistive tech instead. */}
           <span aria-hidden="true">{children}</span>

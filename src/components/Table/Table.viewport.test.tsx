@@ -4,7 +4,7 @@ import { render } from 'vitest-browser-react';
 import { composeStories } from '@storybook/react-vite';
 import * as stories from './Table.stories';
 
-const { MonthGrid } = composeStories(stories);
+const { Grid } = composeStories(stories);
 
 async function forcedColors(value: 'active' | 'none') {
   await cdp().send('Emulation.setEmulatedMedia', {
@@ -15,12 +15,12 @@ async function forcedColors(value: 'active' | 'none') {
 test('Table cell left border is hidden in forced colors except on partial cells', async () => {
   await forcedColors('active');
   try {
-    const screen = await render(<MonthGrid />);
+    const screen = await render(<Grid />);
     const plain = screen
-      .getByRole('row', { name: /^Electricity/ })
+      .getByRole('row', { name: /^Testing/ })
       .element()
       .querySelector('td')!;
-    const partial = screen.getByRole('cell', { name: /\(Partly paid\)$/ }).element();
+    const partial = screen.getByRole('cell', { name: /\(Partial\)$/ }).element();
     const probe = document.createElement('div');
     probe.style.backgroundColor = 'Canvas';
     document.body.append(probe);
@@ -34,8 +34,8 @@ test('Table cell left border is hidden in forced colors except on partial cells'
 });
 
 test("Chrome's accessible name for a cell button has no stray space before the comma", async () => {
-  const screen = await render(<MonthGrid />);
-  await expect.element(screen.getByRole('region', { name: 'Month grid' })).toBeVisible();
+  const screen = await render(<Grid />);
+  await expect.element(screen.getByRole('region', { name: 'Weekly progress' })).toBeVisible();
   // The test runs in an iframe of the runner page: read Chrome's AX tree of every frame.
   type FrameTree = { frame: { id: string }; childFrames?: FrameTree[] };
   type AXNode = { role?: { value?: string }; name?: { value?: string } };
@@ -56,6 +56,6 @@ test("Chrome's accessible name for a cell button has no stray space before the c
   const names = nodes
     .filter((n) => n.role?.value === 'button')
     .map((n) => n.name?.value ?? '')
-    .filter((name) => name.includes('edit Rent'));
-  expect(names).toEqual(['₱12,000.00, edit Rent, Week 1', '₱0.00, edit Rent, Week 2']);
+    .filter((name) => name.includes('edit API work'));
+  expect(names).toEqual(['12, edit API work, Week 1', '0, edit API work, Week 2']);
 });

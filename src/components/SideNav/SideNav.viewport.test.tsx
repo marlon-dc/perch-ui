@@ -16,7 +16,7 @@ test('SideNav active marker is visible and inactive marker is hidden in forced c
   await forcedColors('active');
   try {
     const screen = await render(<Current />);
-    const active = getComputedStyle(screen.getByRole('button', { name: 'Budget' }).element());
+    const active = getComputedStyle(screen.getByRole('button', { name: 'Projects' }).element());
     const inactiveEl = screen.getByRole('button', { name: 'Overview' }).element();
     const inactive = getComputedStyle(inactiveEl);
     const probe = document.createElement('div');

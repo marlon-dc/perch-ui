@@ -20,7 +20,7 @@ const meta = {
       },
     },
   },
-  args: { children: 'Groceries this week' },
+  args: { children: 'Tasks this week' },
 } satisfies Meta<typeof Text>;
 
 export default meta;
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   play: async ({ canvas }) => {
-    await expect(canvas.getByText('Groceries this week').tagName).toBe('P');
+    await expect(canvas.getByText('Tasks this week').tagName).toBe('P');
   },
 };
 

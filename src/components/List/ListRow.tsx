@@ -22,7 +22,7 @@ export type ListRowProps = {
   onSelect?: () => void;
   /**
    * Accessible name of the select button. Must contain the row's visible text (WCAG 2.5.3 Label in
-   * Name), e.g. "Edit Rent" for a row whose visible text is "Rent". When the row also shows a
+   * Name), e.g. "Edit Design review" for a row whose visible text is "Design review". When the row also shows a
    * value or subtitle, omit it and let the name come from the content.
    * When `done`, " (Done)" (the `doneLabel`) is appended so the state survives the override.
    * Without `selectLabel` the name comes from the row content.

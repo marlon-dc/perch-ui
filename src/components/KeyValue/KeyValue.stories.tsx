@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { Money } from '../Money';
+import { Numeric } from '../Numeric';
 import { KeyValue } from './KeyValue';
 
 const meta = {
@@ -22,10 +22,10 @@ const meta = {
   },
   args: {
     items: [
-      { label: 'Rent', value: <Money amount={12000} symbol /> },
-      { label: 'Electricity', note: 'Estimated', value: <Money amount={2450.5} symbol /> },
-      { label: 'Streaming', value: <Money amount={500} symbol /> },
-      { label: 'Total', emphasis: 'total', value: <Money amount={14950.5} symbol size="xl" /> },
+      { label: 'Design', value: <Numeric value={12} /> },
+      { label: 'Engineering', note: 'Estimated', value: <Numeric value={24.5} /> },
+      { label: 'Research', value: <Numeric value={5} /> },
+      { label: 'Total', emphasis: 'total', value: <Numeric value={41.5} size="xl" /> },
     ],
   },
 } satisfies Meta<typeof KeyValue>;

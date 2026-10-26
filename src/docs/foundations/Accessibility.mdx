@@ -11,7 +11,7 @@ Every component targets **WCAG 2.1 level AA in both themes**.
 - Text contrast is at least 4.5:1 (3:1 for large text). Control borders, focus rings and meaningful icons are at least 3:1.
 - Everything is keyboard operable, with a visible `:focus-visible` ring in the accent color.
 - Roles, names and states are correct: `aria-pressed`, `aria-expanded`, `aria-selected`, `aria-current`, live regions.
-- Color is never the only signal. A done row or table cell also shows a check and a hidden "Done" (or "Paid") label; negative money also has a minus sign. In Windows High Contrast (forced colors), state falls back to system colors.
+- Color is never the only signal. A done row or table cell also shows a check and a hidden "Done" label (configurable); negative numbers also have a minus sign. In Windows High Contrast (forced colors), state falls back to system colors.
 - Visible labels are part of the accessible name (WCAG 2.5.3 Label in Name).
 - `prefers-reduced-motion` turns off animation.
 - Layouts are designed to reflow on narrow screens. The only automated check is that a ListRow with long content does not overflow or clip at 320px width; 200% zoom is not tested.

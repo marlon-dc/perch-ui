@@ -19,7 +19,7 @@ const meta = {
       },
     },
   },
-  args: { label: 'Include in budget' },
+  args: { label: 'Include in report' },
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
@@ -28,9 +28,9 @@ type Story = StoryObj<typeof meta>;
 export const Toggle: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const box = canvas.getByRole('checkbox', { name: 'Include in budget' });
+    const box = canvas.getByRole('checkbox', { name: 'Include in report' });
     await expect(box).not.toBeChecked();
-    await userEvent.click(canvas.getByText('Include in budget'));
+    await userEvent.click(canvas.getByText('Include in report'));
     await expect(box).toBeChecked();
     box.focus();
     await userEvent.keyboard(' ');
@@ -76,7 +76,7 @@ export const HitArea: Story = {
   args: { size: 's' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const target = canvas.getByText('Include in budget').closest('label')!;
+    const target = canvas.getByText('Include in report').closest('label')!;
     try {
       document.documentElement.dataset.pointer = 'coarse';
       const after = getComputedStyle(target, '::after');

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { ConfirmToggle } from '../ConfirmToggle';
-import { Money } from '../Money';
+import { Numeric } from '../Numeric';
 import { List } from './List';
 import { ListRow } from './ListRow';
 import { ListSectionHeader } from './ListSectionHeader';
@@ -23,7 +23,7 @@ const meta = {
 
 **Semantics:** \`role="list"\` with \`role="listitem"\` rows (section headers are list items too). Done rows show a visible check, add hidden "(Done)" text and, in forced colors, a Highlight left border; with a trailing ConfirmToggle the toggle carries the visible check.
 
-**Do** let the row content name a selectable row, or give a \`selectLabel\` that contains the visible title ("Edit Rent"). **Don't** put a button inside \`value\`; use \`trailing\`.`,
+**Do** let the row content name a selectable row, or give a \`selectLabel\` that contains the visible title ("Edit Design review"). **Don't** put a button inside \`value\`; use \`trailing\`.`,
       },
     },
   },
@@ -34,29 +34,29 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <List aria-label="Bills">
-      <ListSectionHeader trailing={<Money amount={14950} symbol />}>This month</ListSectionHeader>
-      <ListRow title="Rent" subtitle="Due on the 1st" value={<Money amount={12000} symbol />} />
-      <ListRow title="Electricity" subtitle="Estimated" value={<Money amount={2450} symbol />} />
-      <ListRow title="Streaming" value={<Money amount={500} symbol />} />
+    <List aria-label="Tasks">
+      <ListSectionHeader trailing={<Numeric value={21} />}>This sprint</ListSectionHeader>
+      <ListRow title="Design review" subtitle="Due Friday" value={<Numeric value={12} />} />
+      <ListRow title="Release notes" subtitle="Draft" value={<Numeric value={6} />} />
+      <ListRow title="Bug fixes" value={<Numeric value={3} />} />
     </List>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByRole('list', { name: 'Bills' })).toBeVisible();
+    await expect(canvas.getByRole('list', { name: 'Tasks' })).toBeVisible();
     await expect(canvas.getAllByRole('listitem')).toHaveLength(4);
     // Section header text lines up with row titles (both have the 4px left border).
     const left = (text: string) => canvas.getByText(text).getBoundingClientRect().left;
-    await expect(left('This month')).toBe(left('Rent'));
+    await expect(left('This sprint')).toBe(left('Design review'));
   },
 };
 
 export const Sizes: Story = {
   render: () => (
     <List aria-label="Row sizes">
-      <ListRow size="s" title="Size S" value={<Money amount={100} />} />
-      <ListRow size="m" title="Size M" value={<Money amount={200} />} />
-      <ListRow size="l" title="Size L" value={<Money amount={300} />} />
+      <ListRow size="s" title="Size S" value={<Numeric value={100} />} />
+      <ListRow size="m" title="Size M" value={<Numeric value={200} />} />
+      <ListRow size="l" title="Size L" value={<Numeric value={300} />} />
     </List>
   ),
   play: async ({ canvasElement }) => {
@@ -78,46 +78,50 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <List aria-label="States">
-      <ListRow title="Rent" value={<Money amount={12000} symbol />} />
+      <ListRow title="Design review" value={<Numeric value={12} />} />
       <ListRow
-        title="Electricity"
+        title="Release notes"
         done
-        value={<Money amount={2450} symbol />}
+        value={<Numeric value={6} />}
         trailing={
-          <ConfirmToggle pressed onPressedChange={() => {}} label="Mark Electricity paid" />
+          <ConfirmToggle pressed onPressedChange={() => {}} label="Mark Release notes done" />
         }
       />
-      <ListRow title="Streaming" done doneLabel="Paid" value={<Money amount={500} symbol />} />
+      <ListRow title="Bug fixes" done doneLabel="Complete" value={<Numeric value={3} />} />
     </List>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText('(Done)')).toBeInTheDocument();
-    await expect(canvas.getByText('(Paid)')).toBeInTheDocument();
+    await expect(canvas.getByText('(Complete)')).toBeInTheDocument();
     await expect(canvas.queryAllByText('(Done)')).toHaveLength(1);
     const row = (name: string) => canvas.getByText(name).closest('[role="listitem"]')!;
     const doneIcon = (name: string) => row(name).querySelector('[data-slot="done-icon"]');
     // A done row without a trailing control shows a visible check.
-    await expect(doneIcon('Streaming')).toBeVisible();
-    await expect(doneIcon('Streaming')).toHaveAttribute('aria-hidden', 'true');
+    await expect(doneIcon('Bug fixes')).toBeVisible();
+    await expect(doneIcon('Bug fixes')).toHaveAttribute('aria-hidden', 'true');
     // With a trailing ConfirmToggle, the pressed toggle carries the visible check instead.
-    await expect(doneIcon('Electricity')).toBeNull();
-    await expect(doneIcon('Rent')).toBeNull();
+    await expect(doneIcon('Release notes')).toBeNull();
+    await expect(doneIcon('Design review')).toBeNull();
   },
 };
 
 export const Selectable: Story = {
   render: function Render() {
-    const [paid, setPaid] = useState(false);
+    const [done, setDone] = useState(false);
     return (
       <List aria-label="Selectable">
         <ListRow
-          title="Rent"
-          selectLabel="Edit Rent"
+          title="Design review"
+          selectLabel="Edit Design review"
           onSelect={onSelectSpy}
-          done={paid}
+          done={done}
           trailing={
-            <ConfirmToggle pressed={paid} onPressedChange={setPaid} label="Mark Rent paid" />
+            <ConfirmToggle
+              pressed={done}
+              onPressedChange={setDone}
+              label="Mark Design review done"
+            />
           }
         />
       </List>
@@ -126,8 +130,8 @@ export const Selectable: Story = {
   play: async ({ canvasElement }) => {
     onSelectSpy.mockClear();
     const canvas = within(canvasElement);
-    const edit = canvas.getByRole('button', { name: 'Edit Rent' });
-    const toggle = canvas.getByRole('button', { name: 'Mark Rent paid' });
+    const edit = canvas.getByRole('button', { name: 'Edit Design review' });
+    const toggle = canvas.getByRole('button', { name: 'Mark Design review done' });
     await expect(edit.contains(toggle)).toBe(false);
     await userEvent.click(edit);
     await expect(onSelectSpy).toHaveBeenCalledTimes(1);
@@ -144,12 +148,12 @@ export const Selectable: Story = {
 export const DoneSelectable: Story = {
   render: () => (
     <List aria-label="Done selectable">
-      <ListRow title="Rent" selectLabel="Edit Rent" done onSelect={fn()} />
+      <ListRow title="Design review" selectLabel="Edit Design review" done onSelect={fn()} />
     </List>
   ),
   play: async ({ canvasElement }) => {
     await expect(
-      within(canvasElement).getByRole('button', { name: 'Edit Rent (Done)' }),
+      within(canvasElement).getByRole('button', { name: 'Edit Design review (Done)' }),
     ).toBeVisible();
   },
 };
@@ -158,16 +162,16 @@ export const SelectableWithValue: Story = {
   render: () => (
     <List aria-label="Selectable with value">
       <ListRow
-        title="Rent"
-        subtitle="Due on the 1st"
-        value={<Money amount={12000} symbol />}
+        title="Design review"
+        subtitle="Due Friday"
+        value={<Numeric value={12} />}
         onSelect={fn()}
       />
     </List>
   ),
   play: async ({ canvasElement }) => {
     const btn = within(canvasElement).getByRole('button');
-    await expect(btn).toHaveAccessibleName(/Rent.*12,000/);
+    await expect(btn).toHaveAccessibleName(/Design review.*12/);
     await userEvent.tab();
     await expect(btn).toHaveFocus();
   },
@@ -177,9 +181,9 @@ export const LongContent: Story = {
   render: () => (
     <List aria-label="Long content">
       <ListRow
-        title="Quarterly property association dues and community maintenance fee"
-        subtitle="Includes the late fee"
-        value={<Money amount={123456789} symbol />}
+        title="Migrate the reporting pipeline to the new event schema and backfill history"
+        subtitle="Blocked on data access"
+        value={<Numeric value={123456789} />}
       />
     </List>
   ),
@@ -189,12 +193,12 @@ export const LongContent: Story = {
 export const HitArea: Story = {
   render: () => (
     <List aria-label="Hit area">
-      <ListRow size="s" title="Rent" selectLabel="Edit Rent" onSelect={fn()} />
+      <ListRow size="s" title="Design review" selectLabel="Edit Design review" onSelect={fn()} />
     </List>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const target = canvas.getByRole('button', { name: 'Edit Rent' });
+    const target = canvas.getByRole('button', { name: 'Edit Design review' });
     try {
       document.documentElement.dataset.pointer = 'coarse';
       const after = getComputedStyle(target, '::after');
@@ -210,12 +214,17 @@ export const HitArea: Story = {
 export const Disabled: Story = {
   render: () => (
     <List aria-label="Disabled">
-      <ListRow title="Rent" selectLabel="Edit Rent" onSelect={onSelectSpy} disabled />
+      <ListRow
+        title="Design review"
+        selectLabel="Edit Design review"
+        onSelect={onSelectSpy}
+        disabled
+      />
     </List>
   ),
   play: async ({ canvasElement }) => {
     onSelectSpy.mockClear();
-    const edit = within(canvasElement).getByRole('button', { name: 'Edit Rent' });
+    const edit = within(canvasElement).getByRole('button', { name: 'Edit Design review' });
     await expect(edit).toBeDisabled();
     await userEvent.click(edit);
     await expect(onSelectSpy).not.toHaveBeenCalled();

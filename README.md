@@ -2,7 +2,7 @@
 
 > Live Storybook: _coming soon_
 
-Perch UI is a small React design system for dense, calm, money-focused screens. It is written in
+Perch UI is a small React design system for dense, calm, data-rich screens. It is written in
 TypeScript with Tailwind CSS v4, ships a warm light theme and a matching dark theme, and targets
 WCAG 2.1 AA in both. The Storybook is the documentation and the test suite at once: every story is also
 an automated check, with axe running on every story in the light theme and on one representative Dark
@@ -107,7 +107,7 @@ Other scripts: `pnpm lint`, `pnpm typecheck`, `pnpm build-storybook` (outputs to
 ```
 src/
   components/   one folder per component: Name.tsx, Name.stories.tsx, index.ts
-  docs/         Introduction, foundations pages and composed patterns
+  docs/         Introduction and foundations pages
   lib/          size resolution (resolveSize), cn helper
   styles/       Tailwind entry and utilities (hit-area, density classes)
   tokens/       color and density tokens, contrast checks
@@ -117,7 +117,7 @@ src/
 
 ## Status
 
-Perch UI is a portfolio project and is not published to npm. A budget app will be its first consumer.
+Perch UI is a portfolio project and is not published to npm.
 All example data in the stories and docs is made up.
 
 ## License

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { Heading, Text, Money } from '../../index';
+import { Heading, Text, Numeric } from '../../index';
 
 <Meta title="Foundations/Typography" />
 
@@ -8,7 +8,7 @@ import { Heading, Text, Money } from '../../index';
 Two typefaces, both self-hosted through `@fontsource`:
 
 - **Plus Jakarta Sans** (400, 500, 600, 700) for UI text, utility `font-ui`.
-- **JetBrains Mono** (400, 500, 600) for numbers and money, utility `font-num`, always with `font-variant-numeric: tabular-nums` so columns of figures line up.
+- **JetBrains Mono** (400, 500, 600) for numbers, utility `font-num`, always with `font-variant-numeric: tabular-nums` so columns of figures line up.
 
 ## Headings
 
@@ -35,19 +35,19 @@ Two typefaces, both self-hosted through `@fontsource`:
   <Text variant="eyebrow">Eyebrow label</Text>
 </div>
 
-## Money
+## Numbers
 
-`Money` renders in the mono face with tabular figures. The default currency is the peso (`en-PH`); both are configurable. Negative amounts use a true minus sign (U+2212), not a hyphen.
+`Numeric` renders figures in the mono face with tabular digits, so columns line up. It formats decimals, currency and percentages through `Intl.NumberFormat` (locale and currency are configurable), rounds half away from zero, and uses a true minus sign (U+2212), not a hyphen.
 
 <div className="flex flex-col gap-2 rounded-2xl border border-line bg-surface p-4">
-  <Money amount={12000} symbol size="xl" />
-  <Money amount={2450.5} symbol />
-  <Money amount={-1800} symbol colored />
-  <Money amount={5000} symbol colored />
-  <Money amount={1234.5} currency="USD" locale="en-US" symbol />
+  <Numeric value={12480} size="xl" />
+  <Numeric value={2450.5} />
+  <Numeric value={-18} colored />
+  <Numeric value={0.42} format="percent" colored />
+  <Numeric value={1234.5} format="currency" currency="EUR" locale="en-IE" />
 </div>
 
 ```tsx
-<Money amount={-1800} symbol colored />;
-formatMoney(12000, { symbol: true }); // "₱12,000.00"
+<Numeric value={-18} colored />;
+formatNumber(0.42, { format: 'percent' }); // "42%"
 ```

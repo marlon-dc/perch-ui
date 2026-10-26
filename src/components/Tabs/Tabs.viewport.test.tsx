@@ -16,8 +16,8 @@ test('Tabs active marker is visible and inactive marker is hidden in forced colo
   await forcedColors('active');
   try {
     const screen = await render(<Default />);
-    const active = getComputedStyle(screen.getByRole('tab', { name: 'Bills' }).element());
-    const inactiveEl = screen.getByRole('tab', { name: 'Income' }).element();
+    const active = getComputedStyle(screen.getByRole('tab', { name: 'Overview' }).element());
+    const inactiveEl = screen.getByRole('tab', { name: 'Activity' }).element();
     const inactive = getComputedStyle(inactiveEl);
     const probe = document.createElement('div');
     probe.style.backgroundColor = 'Canvas';

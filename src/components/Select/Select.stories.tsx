@@ -4,10 +4,10 @@ import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { Select } from './Select';
 
 const options = [
-  { value: 'groceries', label: 'Groceries' },
-  { value: 'rent', label: 'Rent' },
-  { value: 'electricity', label: 'Electricity' },
-  { value: 'salary', label: 'Salary', disabled: true },
+  { value: 'design', label: 'Design' },
+  { value: 'research', label: 'Research' },
+  { value: 'writing', label: 'Writing' },
+  { value: 'archived', label: 'Archived', disabled: true },
 ];
 
 const meta = {
@@ -47,12 +47,12 @@ export const Keyboard: Story = {
     await waitFor(() => expect(body.getByRole('listbox')).toBeVisible());
     await userEvent.keyboard('{ArrowDown}');
     // The highlighted option needs a non-colour-only cue: an accent outline, not just a 1.1:1 fill.
-    const highlighted = body.getByRole('option', { name: 'Rent' });
+    const highlighted = body.getByRole('option', { name: 'Research' });
     await waitFor(() => expect(highlighted).toHaveAttribute('data-highlighted'));
     await expect(getComputedStyle(highlighted).outlineStyle).not.toBe('none');
     await userEvent.keyboard('{Enter}');
-    await expect(args.onValueChange).toHaveBeenCalledWith('rent');
-    await waitFor(() => expect(trigger).toHaveTextContent('Rent'));
+    await expect(args.onValueChange).toHaveBeenCalledWith('research');
+    await waitFor(() => expect(trigger).toHaveTextContent('Research'));
   },
 };
 
@@ -80,7 +80,7 @@ export const States: Story = {
       <Select {...args} label="Normal" />
       <Select {...args} label="Disabled" disabled />
       <Select {...args} label="Invalid" error="Pick a category" />
-      <Select {...args} label="Chosen" defaultValue="rent" />
+      <Select {...args} label="Chosen" defaultValue="research" />
     </div>
   ),
   play: async ({ canvasElement }) => {
@@ -113,8 +113,8 @@ export const RefAndName: Story = {
   render: function Render(args) {
     const ref = useRef<HTMLButtonElement>(null);
     return (
-      <form aria-label="Budget form" onSubmit={(event) => event.preventDefault()}>
-        <Select {...args} ref={ref} name="category" defaultValue="rent" />
+      <form aria-label="Task form" onSubmit={(event) => event.preventDefault()}>
+        <Select {...args} ref={ref} name="category" defaultValue="research" />
         <button type="button" onClick={() => ref.current?.focus()}>
           Focus category
         </button>
@@ -125,8 +125,8 @@ export const RefAndName: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Focus category' }));
     await expect(canvas.getByRole('combobox', { name: 'Category' })).toHaveFocus();
-    const form = canvas.getByRole('form', { name: 'Budget form' }) as HTMLFormElement;
-    await expect(new FormData(form).get('category')).toBe('rent');
+    const form = canvas.getByRole('form', { name: 'Task form' }) as HTMLFormElement;
+    await expect(new FormData(form).get('category')).toBe('research');
   },
 };
 

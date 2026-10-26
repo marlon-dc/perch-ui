@@ -40,11 +40,11 @@ const render: Story['render'] = (args) => (
 
 export const Default: Story = {
   render,
-  args: { label: 'Category', hint: 'Pick something like Groceries' },
+  args: { label: 'Category', hint: 'Pick something like Design' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText('Category');
-    const hint = canvas.getByText('Pick something like Groceries');
+    const hint = canvas.getByText('Pick something like Design');
     await expect(input).toHaveAttribute('aria-describedby', hint.id);
     await expect(input).not.toHaveAttribute('aria-invalid');
   },

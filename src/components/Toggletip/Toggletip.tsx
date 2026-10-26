@@ -5,7 +5,7 @@ import { IconButton } from '../Button';
 import { InfoIcon } from '../Icon';
 
 export type ToggletipProps = {
-  /** Accessible name of the trigger button, e.g. "What does Forecast mean?". */
+  /** Accessible name of the trigger button, e.g. "What does Velocity mean?". */
   label: string;
   /** Tip text. */
   children: ReactNode;

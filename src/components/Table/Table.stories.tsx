@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
-import { Money } from '../Money';
+import { Numeric } from '../Numeric';
 import {
   Table,
   TableBody,
@@ -28,17 +28,17 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: `A dense, horizontally scrollable grid for month-by-week figures. TableContainer is a focusable, named region; rows support group, summary and total variants and category tints; cells support sticky row headers, numeric alignment and done or partial tones. TableCellButton makes a cell editable.
+        component: `A dense, horizontally scrollable grid for figures across columns, such as weeks. TableContainer is a focusable, named region; rows support group, summary and total variants and category tints; cells support sticky row headers, numeric alignment and done or partial tones. TableCellButton makes a cell editable.
 
 **Keyboard:** Tab to the region and scroll it with the arrow keys; Tab again reaches cell buttons, which activate with Enter or Space.
 
-**Semantics:** a native \`<table>\` with \`th scope\` headers. Done cells show a visible check plus hidden "(Paid)" text, and partial cells an accent bar plus hidden "(Partly paid)". A cell button's name keeps the visible amount and appends an \`actionLabel\` such as "edit Rent, Week 2".
+**Semantics:** a native \`<table>\` with \`th scope\` headers. Done cells show a visible check plus hidden "(Done)" text, and partial cells an accent bar plus hidden "(Partial)"; both labels are configurable. A cell button's name keeps the visible value and appends an \`actionLabel\` such as "edit API work, Week 2".
 
 **Do** give every row a row header. **Don't** rely on row tint to convey meaning; it is grouping only.`,
       },
     },
   },
-  args: { 'aria-label': 'Month grid', children: null },
+  args: { 'aria-label': 'Weekly progress', children: null },
 } satisfies Meta<typeof TableContainer>;
 
 export default meta;
@@ -47,14 +47,14 @@ type Story = StoryObj<typeof meta>;
 const onEdit = fn();
 const weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 
-function Grid() {
+function WeeklyGrid() {
   return (
-    <TableContainer aria-label="Month grid">
+    <TableContainer aria-label="Weekly progress">
       <Table className="min-w-[640px]">
         <TableHead>
           <TableRow>
             <TableHeaderCell sticky scope="col">
-              Item
+              Task
             </TableHeaderCell>
             {weeks.map((w) => (
               <TableHeaderCell key={w} scope="col" className="text-right">
@@ -64,105 +64,105 @@ function Grid() {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow variant="group" tint="inflow">
+          <TableRow variant="group" tint="teal">
             <TableHeaderCell sticky scope="row">
-              Income
+              Design
             </TableHeaderCell>
             <TableCell colSpan={4} />
           </TableRow>
-          <TableRow tint="inflow">
+          <TableRow tint="teal">
             <TableHeaderCell sticky scope="row">
-              Salary
+              Wireframes
             </TableHeaderCell>
             <TableCell numeric tone="done">
-              <Money amount={25000} />
+              <Numeric value={8} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={0} />
+              <Numeric value={0} />
             </TableCell>
             <TableCell numeric tone="done">
-              <Money amount={25000} />
+              <Numeric value={6} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={0} />
+              <Numeric value={0} />
             </TableCell>
           </TableRow>
-          <TableRow variant="group" tint="exp">
+          <TableRow variant="group" tint="rose">
             <TableHeaderCell sticky scope="row">
-              Bills
+              Engineering
             </TableHeaderCell>
             <TableCell colSpan={4} />
           </TableRow>
-          <TableRow tint="exp">
+          <TableRow tint="rose">
             <TableHeaderCell sticky scope="row">
-              Rent
+              API work
             </TableHeaderCell>
             <TableCell numeric>
-              <TableCellButton actionLabel="edit Rent, Week 1">
-                <Money amount={12000} />
+              <TableCellButton actionLabel="edit API work, Week 1">
+                <Numeric value={12} />
               </TableCellButton>
             </TableCell>
             <TableCell numeric>
-              <TableCellButton actionLabel="edit Rent, Week 2" onClick={onEdit}>
-                <Money amount={0} />
+              <TableCellButton actionLabel="edit API work, Week 2" onClick={onEdit}>
+                <Numeric value={0} />
               </TableCellButton>
             </TableCell>
             <TableCell numeric tone="partial">
-              <Money amount={500} />
+              <Numeric value={5} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={0} />
-            </TableCell>
-          </TableRow>
-          <TableRow tint="exp">
-            <TableHeaderCell sticky scope="row">
-              Electricity
-            </TableHeaderCell>
-            <TableCell numeric>
-              <Money amount={0} />
-            </TableCell>
-            <TableCell numeric>
-              <Money amount={2450} />
-            </TableCell>
-            <TableCell numeric>
-              <Money amount={0} />
-            </TableCell>
-            <TableCell numeric>
-              <Money amount={0} />
+              <Numeric value={0} />
             </TableCell>
           </TableRow>
-          <TableRow tint="exp">
+          <TableRow tint="rose">
             <TableHeaderCell sticky scope="row">
-              Groceries
+              Testing
             </TableHeaderCell>
             <TableCell numeric>
-              <Money amount={1800} />
+              <Numeric value={0} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={1800} />
+              <Numeric value={4} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={1800} />
+              <Numeric value={0} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={1800} />
+              <Numeric value={0} />
+            </TableCell>
+          </TableRow>
+          <TableRow tint="rose">
+            <TableHeaderCell sticky scope="row">
+              Code review
+            </TableHeaderCell>
+            <TableCell numeric>
+              <Numeric value={3} />
+            </TableCell>
+            <TableCell numeric>
+              <Numeric value={3} />
+            </TableCell>
+            <TableCell numeric>
+              <Numeric value={3} />
+            </TableCell>
+            <TableCell numeric>
+              <Numeric value={3} />
             </TableCell>
           </TableRow>
           <TableRow variant="summary">
             <TableHeaderCell sticky scope="row">
-              Left over
+              Change vs plan
             </TableHeaderCell>
             <TableCell numeric>
-              <Money amount={11200} />
+              <Numeric value={4} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={-4250} />
+              <Numeric value={-2} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={22700} />
+              <Numeric value={3} />
             </TableCell>
             <TableCell numeric>
-              <Money amount={-1800} />
+              <Numeric value={-1} />
             </TableCell>
           </TableRow>
           <TableRow variant="total">
@@ -170,7 +170,7 @@ function Grid() {
               Total
             </TableHeaderCell>
             <TableCell numeric>
-              <Money amount={27850} />
+              <Numeric value={44} />
             </TableCell>
             <TableCell numeric />
             <TableCell numeric />
@@ -183,27 +183,27 @@ function Grid() {
 }
 
 export const Default: Story = {
-  render: () => <Grid />,
+  render: () => <WeeklyGrid />,
   play: async ({ canvasElement }) => {
     await expect(within(canvasElement).getByRole('table')).toBeVisible();
   },
 };
 
-export const MonthGrid: Story = {
-  render: () => <Grid />,
+export const Grid: Story = {
+  render: () => <WeeklyGrid />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const region = canvas.getByRole('region', { name: 'Month grid' });
+    const region = canvas.getByRole('region', { name: 'Weekly progress' });
     region.focus();
     await expect(region).toHaveFocus();
-    for (const name of ['Salary', 'Rent', 'Groceries']) {
+    for (const name of ['Wireframes', 'API work', 'Code review']) {
       const cell = canvas.getByRole('rowheader', { name });
       await expect(getComputedStyle(cell).position).toBe('sticky');
       await expect(getComputedStyle(cell).backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
     }
-    await expect(canvas.getByRole('cell', { name: /₱500\.00 \(Partly paid\)/ })).toBeVisible();
+    await expect(canvas.getByRole('cell', { name: /^5 \(Partial\)$/ })).toBeVisible();
     // Done is not colour-only: every done cell shows a visible (aria-hidden) check.
-    const doneCells = canvas.getAllByRole('cell', { name: /\(Paid\)$/ });
+    const doneCells = canvas.getAllByRole('cell', { name: /\(Done\)$/ });
     await expect(doneCells).toHaveLength(2);
     for (const cell of doneCells) {
       const icon = cell.querySelector('[data-slot="done-icon"]');
@@ -211,9 +211,9 @@ export const MonthGrid: Story = {
       await expect(icon).toBeVisible();
       await expect(icon).toHaveAttribute('aria-hidden', 'true');
     }
-    await userEvent.click(canvas.getByRole('button', { name: /^₱0\.00, edit Rent, Week 2$/ }));
+    await userEvent.click(canvas.getByRole('button', { name: /^0, edit API work, Week 2$/ }));
     await expect(onEdit).toHaveBeenCalled();
   },
 };
 
-export const Dark: Story = { ...MonthGrid, globals: { theme: 'dark' } };
+export const Dark: Story = { ...Grid, globals: { theme: 'dark' } };
