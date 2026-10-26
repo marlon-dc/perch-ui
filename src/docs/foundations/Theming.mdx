@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Theming" />
+
+# Theming
+
+Tokens are CSS custom properties on `:root` (and on any element with `data-theme`). Dark mode follows the operating system's
+`prefers-color-scheme` unless you override it with a `data-theme` attribute on `<html>`.
+
+| Setting                     | Result                        |
+| --------------------------- | ----------------------------- |
+| no attribute                | follows the system preference |
+| `<html data-theme="light">` | always light                  |
+| `<html data-theme="dark">`  | always dark                   |
+
+`data-theme` also works on any element: `<section data-theme="dark">` themes just that subtree
+(its background still needs `bg-bg` or `bg-surface`). Portalled overlays such as Select, Sheet and
+Toast render at the end of `<body>`, so they follow the theme on `<html>`, not on a subtree.
+
+```ts
+// Force a theme
+document.documentElement.dataset.theme = 'dark';
+// Back to the system preference
+delete document.documentElement.dataset.theme;
+```
+
+Both themes declare identical token names, so components never branch on the theme; they only use
+`bg-surface`, `text-ink`, `border-line-strong` and friends. Tailwind's theme maps to the same variables.
+
+In this Storybook, the **Theme** toolbar control sets `data-theme` for you (on docs pages, on each
+story's own wrapper). Every component has one representative `Dark` story, so axe runs on every story
+in light and on that one story in dark.
+
+## Customising
+
+Override any `--pu-*` variable at or below `:root` to rebrand. Re-run the contrast unit tests afterwards;
+they check every documented pair, and the table on the Colors page updates itself.

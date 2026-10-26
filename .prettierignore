@@ -1,0 +1,6 @@
+node_modules
+storybook-static
+coverage
+pnpm-lock.yaml
+.superpowers
+docs/superpowers

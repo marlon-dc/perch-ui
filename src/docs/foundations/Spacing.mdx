@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Spacing" />
+
+# Spacing, radius and shadow
+
+## The 4px unit
+
+Everything sits on a 4px grid. Tailwind's spacing steps are already multiples of 4, so `p-1` is 4px, `p-3` is 12px and `p-4` is 16px.
+
+<div className="flex flex-col gap-2 rounded-2xl border border-line bg-surface p-4">
+  {[1, 2, 3, 4, 6, 8].map((n) => (
+    <div key={n} className="flex items-center gap-3 text-[13px]">
+      <code className="w-24 font-num text-muted">{`${n * 4}px (${n})`}</code>
+      <div className="h-3 rounded-sm bg-accent" style={{ width: n * 4 }} />
+    </div>
+  ))}
+</div>
+
+## Radius
+
+Controls take their radius from the size scale (8, 10 or 12px). Containers such as Card, List and Sheet use a fixed 16px (`--pu-radius-container`) that does not change with size. Pills and chips are fully round.
+
+<div className="flex flex-wrap items-end gap-4 rounded-2xl border border-line bg-surface p-4 text-[13px] text-ink">
+  {[
+    ['S', 8],
+    ['M', 10],
+    ['L', 12],
+    ['Container', 16],
+    ['Pill', 9999],
+  ].map(([name, r]) => (
+    <div key={name} className="flex flex-col items-center gap-2">
+      <div
+        className="size-16 border-2 border-line-strong bg-surface-2"
+        style={{ borderRadius: r }}
+      />
+      <span>{`${name}${r === 9999 ? '' : ` ${r}px`}`}</span>
+    </div>
+  ))}
+</div>
+
+## Shadow
+
+One soft, warm shadow (`shadow-soft`, from `--pu-shadow`) lifts cards and overlays. In dark mode it becomes a tighter, darker shadow. Surfaces are also separated by a `line` border, so elevation is never the only cue.
+
+<div className="rounded-2xl bg-bg p-6">
+  <div className="shadow-soft rounded-(--pu-radius-container) border border-line bg-surface p-4 text-[14px] text-ink">
+    A card with <code>shadow-soft</code>
+  </div>
+</div>

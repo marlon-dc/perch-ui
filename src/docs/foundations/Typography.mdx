@@ -1,0 +1,53 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Heading, Text, Numeric } from '../../index';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+Two typefaces, both self-hosted through `@fontsource`:
+
+- **Plus Jakarta Sans** (400, 500, 600, 700) for UI text, utility `font-ui`.
+- **JetBrains Mono** (400, 500, 600) for numbers, utility `font-num`, always with `font-variant-numeric: tabular-nums` so columns of figures line up.
+
+## Headings
+
+<div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4">
+  <Heading level={1}>Heading 1, 28px</Heading>
+  <Heading level={2}>Heading 2, 22px</Heading>
+  <Heading level={3}>Heading 3, 18px</Heading>
+  <Heading level={4}>Heading 4, 15px</Heading>
+</div>
+
+`Heading` picks the element from `level`; use `as` when the visual level and the document outline differ.
+
+## Text
+
+<div className="flex flex-col gap-2 rounded-2xl border border-line bg-surface p-4">
+  <Text size="l">Large body, 16px</Text>
+  <Text size="m">Medium body, 14px (default)</Text>
+  <Text size="s" tone="muted">
+    Small muted, 13px
+  </Text>
+  <Text size="xs" tone="muted">
+    Extra small muted, 12px
+  </Text>
+  <Text variant="eyebrow">Eyebrow label</Text>
+</div>
+
+## Numbers
+
+`Numeric` renders figures in the mono face with tabular digits, so columns line up. It formats decimals, currency and percentages through `Intl.NumberFormat` (locale and currency are configurable), rounds half away from zero, and uses a true minus sign (U+2212), not a hyphen.
+
+<div className="flex flex-col gap-2 rounded-2xl border border-line bg-surface p-4">
+  <Numeric value={12480} size="xl" />
+  <Numeric value={2450.5} />
+  <Numeric value={-18} colored />
+  <Numeric value={0.42} format="percent" colored />
+  <Numeric value={1234.5} format="currency" currency="EUR" locale="en-IE" />
+</div>
+
+```tsx
+<Numeric value={-18} colored />;
+formatNumber(0.42, { format: 'percent' }); // "42%"
+```

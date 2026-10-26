@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Perch UI
+
+Perch UI is a small React design system for dense, calm, data-rich screens. It is written in
+TypeScript with Tailwind CSS v4, ships in a warm light theme and a matching dark theme, and targets
+WCAG 2.1 AA in both.
+
+This Storybook is the documentation and the test suite at once: every story is also an automated
+check. The accessibility checker (axe) runs on every story in the light theme and on one
+representative Dark story per component.
+
+## Why density
+
+In data-heavy interfaces, rows of inputs, chips and buttons drift out of alignment because each one was tuned separately. Perch UI makes height, padding, font size and radius move together, so compact desktop versus thumb-friendly mobile is one `size` prop, not a restyle.
+
+See Foundations, Size scale for the aligned-row demo, which is the proof: within each size, every control is the same height.
+
+Sized controls come in three sizes, **S**, **M** and **L**, on a 4px grid. There is no separate "touch" size. Any sized component takes a single size or a per-breakpoint object:
+
+```tsx
+<Button size="m" />
+<Button size={{ base: 'l', m: 'm' }} />
+```
+
+## What is in the box
+
+- **Foundations**: color tokens with live contrast ratios, typography, spacing, radius and shadow,
+  the size scale, theming and the accessibility approach.
+- **Components**: primitives, actions, inputs, navigation, display and overlays. Each page shows
+  every size, variant and state, plus a representative story in the dark theme.
+
+## Using it
+
+Perch UI is not on npm yet. Inside this repo, import from `src/index.ts`; apps can consume it later as a workspace or git dependency.
+
+```tsx
+// path is for a file in the repo root; from src/docs it would be '../index'
+import { Button, Card, KeyValue, Numeric, PlusIcon } from './src';
+
+<Card>
+  <KeyValue items={[{ label: 'Open tasks', value: <Numeric value={12} /> }]} />
+  <Button size="l" icon={<PlusIcon />}>
+    Add
+  </Button>
+</Card>;
+```
+
+Use the **Theme** toolbar control to flip between light and dark on any page.

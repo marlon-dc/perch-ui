@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/jetbrains-mono';
+@import '../tokens/tokens.css';
+
+@theme inline {
+  --color-bg: var(--pu-bg);
+  --color-surface: var(--pu-surface);
+  --color-surface-2: var(--pu-surface-2);
+  --color-ink: var(--pu-ink);
+  --color-muted: var(--pu-muted);
+  --color-line: var(--pu-line);
+  --color-line-strong: var(--pu-line-strong);
+  --color-accent: var(--pu-accent);
+  --color-accent-ink: var(--pu-accent-ink);
+  --color-positive: var(--pu-positive);
+  --color-negative: var(--pu-negative);
+  --color-done-bg: var(--pu-done-bg);
+  --color-done-ink: var(--pu-done-ink);
+  --color-warn-bg: var(--pu-warn-bg);
+  --color-warn-ink: var(--pu-warn-ink);
+  --color-cat-green: var(--pu-cat-green);
+  --color-cat-amber: var(--pu-cat-amber);
+  --color-cat-teal: var(--pu-cat-teal);
+  --color-cat-rose: var(--pu-cat-rose);
+  --color-tint-green: var(--pu-tint-green);
+  --color-tint-amber: var(--pu-tint-amber);
+  --color-tint-teal: var(--pu-tint-teal);
+  --color-tint-rose: var(--pu-tint-rose);
+  --color-scrim: var(--pu-scrim);
+  --font-ui: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+  --font-num: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --shadow-soft: var(--pu-shadow);
+  --breakpoint-m: 768px;
+  --breakpoint-l: 1024px;
+}
+
+@utility density-s {
+  --pu-ctl-h: var(--pu-size-s-h);
+  --pu-ctl-px: var(--pu-size-s-px);
+  --pu-ctl-fs: var(--pu-size-s-fs);
+  --pu-ctl-r: var(--pu-size-s-r);
+  --pu-row-h: var(--pu-size-s-row);
+}
+
+@utility density-m {
+  --pu-ctl-h: var(--pu-size-m-h);
+  --pu-ctl-px: var(--pu-size-m-px);
+  --pu-ctl-fs: var(--pu-size-m-fs);
+  --pu-ctl-r: var(--pu-size-m-r);
+  --pu-row-h: var(--pu-size-m-row);
+}
+
+@utility density-l {
+  --pu-ctl-h: var(--pu-size-l-h);
+  --pu-ctl-px: var(--pu-size-l-px);
+  --pu-ctl-fs: var(--pu-size-l-fs);
+  --pu-ctl-r: var(--pu-size-l-r);
+  --pu-row-h: var(--pu-size-l-row);
+}
+
+@utility hit-area {
+  position: relative;
+  @media (pointer: coarse) {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+  :root[data-pointer='coarse'] &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@utility ctl-text-input {
+  font-size: var(--pu-ctl-fs);
+  @media (pointer: coarse) {
+    font-size: max(var(--pu-ctl-fs), var(--pu-input-font-min-touch));
+  }
+  :root[data-pointer='coarse'] & {
+    font-size: max(var(--pu-ctl-fs), var(--pu-input-font-min-touch));
+  }
+}
+
+@keyframes pu-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pu-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes pu-slide-up {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

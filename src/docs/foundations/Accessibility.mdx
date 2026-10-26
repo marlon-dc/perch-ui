@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Accessibility" />
+
+# Accessibility
+
+Every component targets **WCAG 2.1 level AA in both themes**.
+
+## The bar
+
+- Text contrast is at least 4.5:1 (3:1 for large text). Control borders, focus rings and meaningful icons are at least 3:1.
+- Everything is keyboard operable, with a visible `:focus-visible` ring in the accent color.
+- Roles, names and states are correct: `aria-pressed`, `aria-expanded`, `aria-selected`, `aria-current`, live regions.
+- Color is never the only signal. A done row or table cell also shows a check and a hidden "Done" label (configurable); negative numbers also have a minus sign. In Windows High Contrast (forced colors), state falls back to system colors.
+- Visible labels are part of the accessible name (WCAG 2.5.3 Label in Name).
+- `prefers-reduced-motion` turns off animation.
+- Layouts are designed to reflow on narrow screens. The only automated check is that a ListRow with long content does not overflow or clip at 320px width; 200% zoom is not tested.
+- Touch targets: interactive controls under 44 by 44px get an invisible 44px hit area on coarse pointers, beyond what AA requires. Play functions simulate coarse pointers on the components that rely on it. Two documented exceptions: TextField, whose bordered box is the visible target (28px tall at S) and which relies instead on the 16px touch font and its usual full-width layout; and LinkButton, an inline text link sized by the surrounding line.
+
+## How it is enforced
+
+- **axe on every story in light, and on one representative Dark story per component.** The Storybook a11y addon runs axe on each story and the test runner fails on any violation (`a11y.test = 'error'`). Every component has one `Dark` story (usually its States or Variants story), so the dark theme is checked on each component, not on every story.
+- **Contrast unit tests.** Every documented foreground and background token pair is checked in both themes. The Colors page shows the same numbers live.
+- **Play functions** exercise keyboard interaction, roles and states.
+- **Browser viewport tests** cover: responsive `size` on Button and a Sheet that changes layout by width; the 320px ListRow check above; and forced-colors state visibility for Switch, ConfirmToggle, SegmentedControl, Tabs, SideNav and Table.
+
+These prose pages are not axe-tested; only the live components on them are (the color swatches and contrast table have their own story, Foundations/ColorsDemo, for that reason). Automated checks catch a fraction of problems, so the interaction patterns are also designed up front around
+native semantics.
+
+## Radix for the hard parts
+
+Where correct accessible behavior is genuinely difficult, Perch UI uses Radix UI primitives: Dialog (Sheet),
+Popover (Toggletip), Toast, Select, and Tabs (Tabs and SegmentedControl). They handle focus management, typeahead,
+dismissal and ARIA wiring. Everything else is hand-built on native elements.
